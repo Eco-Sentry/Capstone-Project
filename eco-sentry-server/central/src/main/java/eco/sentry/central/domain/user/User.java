@@ -1,8 +1,12 @@
 package eco.sentry.central.domain.user;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "custom_user")
 public class User {
     
     @Id

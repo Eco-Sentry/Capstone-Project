@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 public class SensorStandard {
     @Id
     @GeneratedValue
-    long sensorId;
+    long id;
 
     private Instant startDateTime;
     float longitude, latitude;
@@ -32,7 +32,7 @@ public class SensorStandard {
         return latitude;
     }
     public long getId(){
-        return sensorId;
+        return id;
     }
 }
 

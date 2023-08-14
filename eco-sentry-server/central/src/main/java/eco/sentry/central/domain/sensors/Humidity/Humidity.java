@@ -7,6 +7,10 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Humidity extends SensorStandard{
+    @Id
+    @GeneratedValue
+    long id;
+    
     float humidityReading;
 
     public Humidity(float longitude, float latitude, float humidityReading) {
