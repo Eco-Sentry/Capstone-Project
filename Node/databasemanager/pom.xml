@@ -8,15 +8,19 @@
 		<version>3.1.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>ecosentry.control</groupId>
-	<artifactId>registration</artifactId>
+	<groupId>ecosentry.node</groupId>
+	<artifactId>databasemanager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>registration</name>
+	<name>databasemanager</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>20</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-cassandra</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
