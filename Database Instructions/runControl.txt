@@ -1,0 +1,21 @@
+# CREATE DATABASE
+initdb /opt/homebrew/Cellar/postgresql@14/14.9/data -E utf8
+/Users/byronbanzhaf/Documents/Github Repositories/Capstone-Project
+initdb "/Users/byronbanzhaf/Documents/Github Repositories/Capstone-Project/Database" -E utf8
+
+# RUN DATABASE
+pg_ctl -D "/Users/byronbanzhaf/Documents/Github Repositories/Capstone-Project/Database" -l "/Users/byronbanzhaf/Documents/Github Repositories/Capstone-Project/DatabaseLog/pg_logfile.log" start
+
+# KILL ALL POSTGRES SERVICES
+sudo pkill -u postgres
+
+
+# CONNECT TO DATABASE esusers
+psql -U byronbanzhaf -h localhost -p 5433 -d postgres
+\c esusers
+
+# CREATE THE USER FOR THE SPRING SERVICE
+CREATE USER ecoadmin WITH PASSWORD 'ecosentry';
+ALTER ROLE ecoadmin SET client_encoding TO 'utf8';
+ALTER ROLE ecoadmin SET default_transaction_isolation TO 'read committed';
+ALTER ROLE ecoadmin SET timezone TO 'UTC';

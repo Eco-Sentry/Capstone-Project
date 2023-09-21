@@ -1,0 +1,102 @@
+2023-09-21 10:40:36.394 AEST [15658] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 10:40:36.395 AEST [15658] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 10:40:36.395 AEST [15658] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 10:40:36.395 AEST [15658] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 10:40:36.395 AEST [15658] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 10:40:36.395 AEST [15658] WARNING:  could not create listen socket for "localhost"
+2023-09-21 10:40:36.395 AEST [15658] FATAL:  could not create any TCP/IP sockets
+2023-09-21 10:40:36.396 AEST [15658] LOG:  database system is shut down
+2023-09-21 11:57:40.328 AEST [16632] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 11:57:40.329 AEST [16632] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 11:57:40.329 AEST [16632] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 11:57:40.329 AEST [16632] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 11:57:40.329 AEST [16632] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 11:57:40.329 AEST [16632] WARNING:  could not create listen socket for "localhost"
+2023-09-21 11:57:40.329 AEST [16632] FATAL:  could not create any TCP/IP sockets
+2023-09-21 11:57:40.330 AEST [16632] LOG:  database system is shut down
+2023-09-21 12:07:55.293 AEST [17750] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 12:07:55.294 AEST [17750] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 12:07:55.294 AEST [17750] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:07:55.294 AEST [17750] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 12:07:55.294 AEST [17750] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:07:55.294 AEST [17750] WARNING:  could not create listen socket for "localhost"
+2023-09-21 12:07:55.294 AEST [17750] FATAL:  could not create any TCP/IP sockets
+2023-09-21 12:07:55.294 AEST [17750] LOG:  database system is shut down
+2023-09-21 12:17:26.198 AEST [17991] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 12:17:26.198 AEST [17991] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 12:17:26.198 AEST [17991] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:17:26.198 AEST [17991] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 12:17:26.198 AEST [17991] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:17:26.198 AEST [17991] WARNING:  could not create listen socket for "localhost"
+2023-09-21 12:17:26.198 AEST [17991] FATAL:  could not create any TCP/IP sockets
+2023-09-21 12:17:26.198 AEST [17991] LOG:  database system is shut down
+2023-09-21 12:19:29.031 AEST [18034] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 12:19:29.032 AEST [18034] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 12:19:29.032 AEST [18034] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:19:29.032 AEST [18034] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 12:19:29.032 AEST [18034] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:19:29.032 AEST [18034] WARNING:  could not create listen socket for "localhost"
+2023-09-21 12:19:29.032 AEST [18034] FATAL:  could not create any TCP/IP sockets
+2023-09-21 12:19:29.033 AEST [18034] LOG:  database system is shut down
+2023-09-21 12:28:43.876 AEST [18191] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 12:28:43.877 AEST [18191] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 12:28:43.877 AEST [18191] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:28:43.877 AEST [18191] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 12:28:43.877 AEST [18191] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:28:43.877 AEST [18191] WARNING:  could not create listen socket for "localhost"
+2023-09-21 12:28:43.877 AEST [18191] FATAL:  could not create any TCP/IP sockets
+2023-09-21 12:28:43.877 AEST [18191] LOG:  database system is shut down
+2023-09-21 12:34:22.399 AEST [18319] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 12:34:22.400 AEST [18319] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 12:34:22.400 AEST [18319] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:34:22.400 AEST [18319] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 12:34:22.400 AEST [18319] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:34:22.400 AEST [18319] WARNING:  could not create listen socket for "localhost"
+2023-09-21 12:34:22.400 AEST [18319] FATAL:  could not create any TCP/IP sockets
+2023-09-21 12:34:22.400 AEST [18319] LOG:  database system is shut down
+2023-09-21 12:41:39.697 AEST [18480] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 12:41:39.698 AEST [18480] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 12:41:39.698 AEST [18480] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:41:39.698 AEST [18480] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 12:41:39.698 AEST [18480] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:41:39.698 AEST [18480] WARNING:  could not create listen socket for "localhost"
+2023-09-21 12:41:39.698 AEST [18480] FATAL:  could not create any TCP/IP sockets
+2023-09-21 12:41:39.698 AEST [18480] LOG:  database system is shut down
+2023-09-21 12:43:57.521 AEST [18574] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 12:43:57.522 AEST [18574] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 12:43:57.522 AEST [18574] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:43:57.522 AEST [18574] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 12:43:57.522 AEST [18574] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:43:57.522 AEST [18574] WARNING:  could not create listen socket for "localhost"
+2023-09-21 12:43:57.522 AEST [18574] FATAL:  could not create any TCP/IP sockets
+2023-09-21 12:43:57.522 AEST [18574] LOG:  database system is shut down
+2023-09-21 12:44:31.242 AEST [18586] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 12:44:31.243 AEST [18586] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-09-21 12:44:31.243 AEST [18586] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:44:31.243 AEST [18586] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-09-21 12:44:31.243 AEST [18586] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-09-21 12:44:31.243 AEST [18586] WARNING:  could not create listen socket for "localhost"
+2023-09-21 12:44:31.243 AEST [18586] FATAL:  could not create any TCP/IP sockets
+2023-09-21 12:44:31.243 AEST [18586] LOG:  database system is shut down
+2023-09-21 12:46:36.012 AEST [18621] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-21 12:46:36.013 AEST [18621] LOG:  listening on IPv6 address "::1", port 5433
+2023-09-21 12:46:36.013 AEST [18621] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2023-09-21 12:46:36.014 AEST [18621] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5433"
+2023-09-21 12:46:36.019 AEST [18622] LOG:  database system was shut down at 2023-09-21 10:16:27 AEST
+2023-09-21 12:46:36.021 AEST [18621] LOG:  database system is ready to accept connections
+2023-09-21 12:49:27.241 AEST [18671] FATAL:  role "postgres" does not exist
+2023-09-21 13:00:59.787 AEST [18740] ERROR:  syntax error at or near "psql" at character 1
+2023-09-21 13:00:59.787 AEST [18740] STATEMENT:  psql -U byronbanzhaf -h localhost -p 5433 -d postgres
+	SELECT usename FROM pg_user;
+2023-09-21 13:48:55.266 AEST [23936] ERROR:  syntax error at or near "user" at character 22
+2023-09-21 13:48:55.266 AEST [23936] STATEMENT:  drop table if exists user cascade
+2023-09-21 13:48:55.272 AEST [23936] ERROR:  syntax error at or near "user" at character 14
+2023-09-21 13:48:55.272 AEST [23936] STATEMENT:  create table user (id bigserial not null, email varchar(255), f_name varchar(255), l_name varchar(255), phone varchar(255), primary key (id))
+2023-09-21 13:50:55.783 AEST [23936] ERROR:  syntax error at or near "user" at character 22
+2023-09-21 13:50:55.783 AEST [23936] STATEMENT:  drop table if exists user cascade
+2023-09-21 13:50:57.300 AEST [24580] ERROR:  syntax error at or near "user" at character 22
+2023-09-21 13:50:57.300 AEST [24580] STATEMENT:  drop table if exists user cascade
+2023-09-21 13:50:57.306 AEST [24580] ERROR:  syntax error at or near "user" at character 14
+2023-09-21 13:50:57.306 AEST [24580] STATEMENT:  create table user (id bigserial not null, email varchar(255), f_name varchar(255), l_name varchar(255), phone varchar(255), primary key (id))
+2023-09-21 13:52:44.931 AEST [24580] ERROR:  syntax error at or near "user" at character 22
+2023-09-21 13:52:44.931 AEST [24580] STATEMENT:  drop table if exists user cascade
