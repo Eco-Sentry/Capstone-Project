@@ -29,26 +29,6 @@ public class User {
         this.userType = userType;
     }
 
-    // Mutators
-    public void setId(Long id){
-        this.id = id;
-    }
-    public void setFName(String fName){
-        this.fName = fName;
-    }
-    public void setLName(String lName){
-        this.lName = lName;
-    }
-    public void setEmail(String email){
-        this.email = email;
-    }
-    public void setPhone(String phone){
-        this.phone = phone;
-    }
-    public void setUserType(UserType userType){
-        this.userType = userType;
-    }
-
     // Accessors
     public Long getId(){
         return id;
@@ -68,4 +48,23 @@ public class User {
     public UserType getUserType(){
         return userType;
     }
+
+    // Mutators
+    public void setFName(String fName){
+        this.fName = fName;
+    }
+    public void setLName(String lName){
+        this.lName = lName;
+    }
+    public void setEmail(String email){
+        this.email = email;
+    }
+    public void setPhone(String phone){
+        this.phone = phone;
+    }
+    public void setUserType(UserType userType){
+        this.userType = userType;
+    }
+
+
 }

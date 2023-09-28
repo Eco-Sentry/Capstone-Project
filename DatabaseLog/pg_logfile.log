@@ -100,3 +100,13 @@
 2023-09-21 13:50:57.306 AEST [24580] STATEMENT:  create table user (id bigserial not null, email varchar(255), f_name varchar(255), l_name varchar(255), phone varchar(255), primary key (id))
 2023-09-21 13:52:44.931 AEST [24580] ERROR:  syntax error at or near "user" at character 22
 2023-09-21 13:52:44.931 AEST [24580] STATEMENT:  drop table if exists user cascade
+2023-09-23 00:30:59.216 AEST [18621] LOG:  received smart shutdown request
+2023-09-23 00:30:59.221 AEST [18621] LOG:  background worker "logical replication launcher" (PID 18628) exited with exit code 1
+2023-09-23 00:30:59.221 AEST [18623] LOG:  shutting down
+2023-09-23 00:30:59.255 AEST [18621] LOG:  database system is shut down
+2023-09-27 12:03:10.940 AEST [8396] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-09-27 12:03:10.942 AEST [8396] LOG:  listening on IPv6 address "::1", port 5433
+2023-09-27 12:03:10.942 AEST [8396] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2023-09-27 12:03:10.942 AEST [8396] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5433"
+2023-09-27 12:03:10.944 AEST [8397] LOG:  database system was shut down at 2023-09-23 00:30:59 AEST
+2023-09-27 12:03:10.947 AEST [8396] LOG:  database system is ready to accept connections
