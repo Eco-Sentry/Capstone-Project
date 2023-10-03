@@ -1,1 +1,1 @@
-C:/Program Files/PostgreSQL/14/bin/postgres.exe "-D" "C:/Users/nicho/OneDrive/Documents/GitHub/Capstone-Project/Database"
+/opt/homebrew/Cellar/postgresql@14/14.9/bin/postgres "-D" "/Users/byronbanzhaf/Documents/Github Repositories/Capstone-Project/Database"
