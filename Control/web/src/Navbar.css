@@ -1,0 +1,26 @@
+nav {
+    background-color: transparent; 
+    padding: 10px; 
+    border: 2px solid white;
+    border-radius: 10px;
+  }
+  
+  ul {
+    list-style-type: none; /* Remove bullet points from the list */
+    padding: 0;
+  }
+  
+  li {
+    display: inline; /* Display list items horizontally */
+    margin-right: 20px; /* Margin between list items */
+  }
+  
+  a {
+    text-decoration: none; /* Remove underlines from links */
+    color: black; 
+  }
+  
+  a:hover {
+    text-decoration: underline greenyellow; /* Underline links on hover */
+    color: pink;
+  }
