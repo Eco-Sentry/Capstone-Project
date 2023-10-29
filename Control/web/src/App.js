@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './Navbar';
 import Login from './login';
+import Contact from './contact';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <header className="App-header">
           <Navbar />
           <Routes>
+            <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/"/>
           </Routes>
