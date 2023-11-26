@@ -1,26 +1,30 @@
 nav {
-    background-color: transparent; 
-    padding: 10px; 
-    border: 2px solid white;
-    border-radius: 10px;
+    background-color: lightgray; 
+    align-self:normal;
+    display: flex;
+    align-items: center;
+    vertical-align: center;
   }
   
   ul {
     list-style-type: none; /* Remove bullet points from the list */
-    padding: 0;
+    width: 100%;  /*Keeps the text centered*/
   }
   
   li {
     display: inline; /* Display list items horizontally */
-    margin-right: 20px; /* Margin between list items */
+    margin-right: 5%; /* Margin between list items */
+    font-family: Helvetica;
+    font-size: 100%;
+    vertical-align: middle;
   }
   
   a {
     text-decoration: none; /* Remove underlines from links */
-    color: black; 
+    color: black;
   }
   
   a:hover {
-    text-decoration: underline greenyellow; /* Underline links on hover */
-    color: pink;
+    text-decoration: underline blue; /* Underline links on hover */
+    color: blue;
   }

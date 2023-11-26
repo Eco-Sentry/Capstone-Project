@@ -1,6 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
+import logo from './logo192.png';         //logo192 is only placeholder
 
 // import styled from 'styled-components';
 
@@ -31,7 +32,11 @@ function Navbar() {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About</Link></li>
         <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/login">Login</Link></li> {/* Add this link */}
+        <li><Link to="/dashboard">Dashboard</Link></li>
+        <li><img src={logo} alt="logo" class="center" height={60} width={60} style={{ alignSelf: 'center'}}/> </li>
+        <li><Link to="/contact">Account</Link></li>
+        <li><Link to="/contact">Products & Services</Link></li>
+        <li><Link to="/login">Login</Link></li>
       </ul>
     </nav>
   );
