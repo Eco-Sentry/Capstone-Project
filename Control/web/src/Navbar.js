@@ -29,13 +29,13 @@ function Navbar() {
   return (
     <nav>
       <ul>
-        <li><Link to="/">Home</Link></li>
+        <li><Link to="/home">Home</Link></li>
         <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/contact">Contact us</Link></li>
         <li><Link to="/dashboard">Dashboard</Link></li>
         <li><img src={logo} alt="logo" class="center" height={60} width={60} style={{ alignSelf: 'center'}}/> </li>
-        <li><Link to="/contact">Account</Link></li>
-        <li><Link to="/contact">Products & Services</Link></li>
+        <li><Link to="/account">Account</Link></li>
+        <li><Link to="/products_and_services">Products & Services</Link></li>
         <li><Link to="/login">Login</Link></li>
       </ul>
     </nav>
