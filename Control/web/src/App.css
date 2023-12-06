@@ -54,19 +54,44 @@
 
 
 /* About page divs */
+.about-page{
+  height: 100vh;
+}
+
 .container-about {
   margin: 0 auto;
   height: 100%;
   padding: auto;
 }
 
+.about-welcome-table{
+  table-layout: fixed ;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  height: 300px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding: 0;
+}
+
+.welcome-table-c1{
+  width: 35%;
+  padding: 10px;
+}
+
+.welcome-table-c2{
+  width: 65%;
+  padding: 10px;
+}
+
 .welcome-text-box {
   border-radius: 5px;
   background-color: #FEF9EF;
-  width: 25%;
-  height: 100%;
-  padding: 20px;
-  margin: 50px;
+  width: 90%;
+  height: 400px;
+  padding: 0;
+  margin: 5px;
   color: black;
   box-shadow: 0 0 10px 5px #113947;
 }
@@ -77,7 +102,7 @@
   width: 85%;
   height: 90%;
   padding: 20px;
-  margin: 50px;
+  margin: auto;
   color: black;
   box-shadow: 0 0 10px 5px #113947;
 }
@@ -98,7 +123,6 @@
 
 .center-table {
   table-layout: fixed ;
-  width: 100% ;
   margin-left: auto;
   margin-right: auto;
   width: 90%;
