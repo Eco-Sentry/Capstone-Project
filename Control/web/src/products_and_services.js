@@ -1,6 +1,6 @@
 function ProductsAndServices() {
     return (
-        <div>
+        <div className='body'>
             <div>
                 <h2>OUR PRODUCTS AND SERVICES</h2>
             </div>

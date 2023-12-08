@@ -1,3 +1,52 @@
+/* -------------------- GENERAL -------------------- */
+
+/* The body will contain all other divs */
 .body {
+    padding-top: 4%;
+
     margin-left: 5%;
+    margin-right: 5%;
+    overflow: hidden;
+  }
+
+  .button {
+    transition-duration: 0.5s;
+    background-color: #216984;
+    width: 7%;
+    height: 50px;
+    font-size: 75%;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+  }
+
+
+/* -------------------- HOME -------------------- */
+
+
+
+
+/* -------------------- ACCOUNT -------------------- */
+
+.profilePic {
+    margin-left: 15%;
+    width: 20%;
+    color: black;
+    background-color: white;
+    float: left;
+}
+
+.accountInfo {
+    margin-right: 15%;
+    width: 40%;
+    border-radius: 20px;
+    padding: 5px;
+    color: black;
+    background-color: white;
+    vertical-align: top;
+    float: right;
+
+    text-align: left;
+    font-family: Helvetica;
 }

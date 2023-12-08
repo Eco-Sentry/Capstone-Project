@@ -1,6 +1,6 @@
 function Home() {
     return (
-        <div>
+        <div className='body'>
             <div>
             <h2>WELCOME TO ECO SENTRY</h2>
             </div>

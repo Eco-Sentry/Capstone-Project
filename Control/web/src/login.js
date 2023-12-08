@@ -10,7 +10,7 @@ function Login() {
     };
 
     return (
-        <div>
+        <div className='body'>
         <h2>Login Page</h2>
         <form>
             <div>
