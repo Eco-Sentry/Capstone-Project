@@ -1,5 +1,5 @@
 nav {
-    background-color: rgb(223, 223, 223); 
+    background-color: #1E313A; 
     align-self:normal;
     display: flex;
     align-items: center;
@@ -25,10 +25,10 @@ nav {
   
   a {
     text-decoration: none; /* Remove underlines from links */
-    color: black;
+    color: white;
   }
   
   a:hover {
     /*text-decoration: underline blue; /* Underline links on hover */
-    color: rgb(77, 77, 77);
+    color: #1B4962;
   }

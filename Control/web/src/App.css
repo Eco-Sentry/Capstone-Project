@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background-color: #00A3A3;
+  background-color: white;
   min-height: 100vh;
   /*display: flex;*/
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #1E313A;
 }
 
 .App-link {
@@ -68,29 +68,29 @@
 
 .welcome-text-box {
   border-radius: 5px;
-  background-color: #FEF9EF;
+  background-color: white;
   width: 90%;
   height: 400px;
   padding: 0;
   margin: 5px;
   color: black;
-  box-shadow: 0 0 10px 5px #113947;
+  box-shadow: 0 0 10px 5px #70ABBD;
 }
 
 .about-text-box {
   border-radius: 5px;
-  background-color: #FEF9EF;
+  background-color: white;
   width: 85%;
   height: 90%;
   padding: 20px;
   margin: auto;
   color: black;
-  box-shadow: 0 0 10px 5px #113947;
+  box-shadow: 0 0 10px 5px #70ABBD;
 }
 
 .founder-text-box {
   border-radius: 5px;
-  background-color: #FEF9EF;
+  background-color: #45B667;
   width: 60%;
   height: 60%;
   padding: 50px;
@@ -98,8 +98,8 @@
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 15px;
-  color: black;
-  box-shadow: 0 0 10px 5px #113947;
+  color: White;
+  box-shadow: 0 0 10px 5px #70ABBD;
 }
 
 .center-table {
