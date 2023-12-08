@@ -29,10 +29,9 @@
 }
 
 .button:hover {
-  background-color: #1a5266;
+  background-color: #267646;
   color: white;
 }
-
 
 /* About page divs */
 .about-page{
@@ -73,7 +72,7 @@
   height: 400px;
   padding: 0;
   margin: 5px;
-  color: black;
+  color: #1E313A;
   box-shadow: 0 0 10px 5px #70ABBD;
 }
 
@@ -84,13 +83,13 @@
   height: 90%;
   padding: 20px;
   margin: auto;
-  color: black;
+  color: #1E313A;
   box-shadow: 0 0 10px 5px #70ABBD;
 }
 
 .founder-text-box {
   border-radius: 5px;
-  background-color: #45B667;
+  background-color: white;
   width: 60%;
   height: 60%;
   padding: 50px;
@@ -98,7 +97,7 @@
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 15px;
-  color: White;
+  color: #1E313A;
   box-shadow: 0 0 10px 5px #70ABBD;
 }
 
@@ -125,6 +124,9 @@
 
 .about-profileCircle {
   background-color: white;
+  border-color: #267646;
+  border-width: 1px;
+  border-style: solid;
   height: 180px;
   width: 95%;
   border-radius: 50%;
