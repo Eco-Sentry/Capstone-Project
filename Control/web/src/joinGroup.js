@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './Navbar';
-function groupPage() {
+function joinGroup() {
     return (
         <div>
             <div className='body'>
@@ -24,6 +24,6 @@ function groupPage() {
     );
 }
 
-export default groupPage;
+export default joinGroup;
 
 
