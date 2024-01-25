@@ -220,6 +220,42 @@
 
 /* End of about page divs */
 
+/* Start of contact us page divs */
+
+.details-text-box {
+  border-radius: 5px;
+  background-color: white;
+  width: 60%;
+  height: 60%;
+  padding: 50px;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  color: #1E313A;
+  box-shadow: 0 0 10px 5px #70ABBD;
+}
+.details-info-boxes {
+  border-radius: 5px;
+  background-color: white;
+  width: 60%;
+  height: 60%;
+  padding: 50px;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  color: #1E313A;
+  box-shadow: 0 0 10px 5px #70ABBD;
+}
+.h3-contact {
+  text-align: left;
+  margin: 50px;
+  font-weight: bold;
+  padding: 0;
+}
+/* End of contact us page divs */
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
