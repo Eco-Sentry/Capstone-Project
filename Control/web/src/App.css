@@ -221,13 +221,31 @@
 /* End of about page divs */
 
 /* Start of contact us page divs */
-
+.h4-contact {
+  text-align: left;
+  margin: 50px;
+  font-weight: bold;
+  padding: 0;
+}
 .details-text-box {
   border-radius: 5px;
+  background-color: #45B667;
+  width: 100%;
+  height: 30%;
+  padding: 10px;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  color: #1E313A;
+  box-shadow: 0 0 10px 5px #267646;
+}
+.details-info-boxes {
+  border-radius: 5px;
   background-color: white;
-  width: 60%;
-  height: 60%;
-  padding: 50px;
+  width: 100%;
+  height: 20%;
+  padding: 10px;
   margin-top: 15px;
   margin-left: 10px;
   margin-right: 10px;
@@ -235,18 +253,17 @@
   color: #1E313A;
   box-shadow: 0 0 10px 5px #70ABBD;
 }
-.details-info-boxes {
-  border-radius: 5px;
-  background-color: white;
-  width: 60%;
-  height: 60%;
-  padding: 50px;
-  margin-top: 15px;
+.contact-details-table {
+  width: 50%;
+  height: 40%;
+  padding: 10px;
+  margin-top: 5px;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 15px;
-  color: #1E313A;
-  box-shadow: 0 0 10px 5px #70ABBD;
+}
+.contact-details-table-col1 {
+  width: 10%;
 }
 .h3-contact {
   text-align: left;
