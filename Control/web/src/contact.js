@@ -14,7 +14,7 @@ function Contact() {
                                             Name:
                                         </div> 
                                     </td>
-                                    <td>
+                                    <td class="contact-details-table-col2">
                                         <input class="details-info-boxes-input" type="text">  
                                         </input>  
                                     </td>
@@ -25,7 +25,7 @@ function Contact() {
                                             Phone:
                                         </div> 
                                     </td>
-                                    <td>
+                                    <td class="contact-details-table-col2">
                                         <input class="details-info-boxes-input" type="text" >  
                                         </input>   
                                     </td>
@@ -36,7 +36,7 @@ function Contact() {
                                             Email:
                                         </div> 
                                     </td>
-                                    <td>
+                                    <td class="contact-details-table-col2">
                                         <input class="details-info-boxes-input" type="text" >  
                                         </input>   
                                     </td>
@@ -47,7 +47,7 @@ function Contact() {
                                             Address:
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="contact-details-table-col2">
                                         <input class="details-info-boxes-input" type="text" >  
                                         </input>          
                                     </td>
@@ -58,10 +58,11 @@ function Contact() {
                     </td>
                 </tr>
             </table> 
-            <div class="about-text-box">
+            <div class="contact-enquiry-text-box">
                 <div class="h3-contact">Contact Us:</div>
                 <div class="h3-contact">Title:</div> <div class="details-info-boxes">XXXXX</div>
-                <div class="h3-contact">Enquiry:</div> <div class="details-info-boxes">XXXXX</div>
+                <div class="h3-contact">Enquiry:</div> <div class="details-info-boxes-enquiry">XXXXX</div>
+                <button class="contact-details-submit">Submit</button>
             </div>
         </div>    
     );
