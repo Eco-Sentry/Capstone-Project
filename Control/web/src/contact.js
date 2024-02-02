@@ -6,7 +6,7 @@ function Contact() {
                     <td> <img src="location.jpg" width="500" height="350"></img> </td>
                     <td> 
                         <div class="details-text-box"> 
-                        <div class="h4-contact">Details:</div> 
+                            <div class="h4-contact">Details:</div> 
                             <table class="contact-details-table">
                                 <tr>
                                     <td class="contact-details-table-col1">
@@ -14,10 +14,9 @@ function Contact() {
                                             Name:
                                         </div> 
                                     </td>
-                                    <td class="contact-details-table-col1">
-                                        <div class="details-info-boxes">
-                                            XXXXX
-                                        </div> 
+                                    <td>
+                                        <input class="details-info-boxes-input" type="text">  
+                                        </input>  
                                     </td>
                                 </tr>
                                 <tr>
@@ -26,10 +25,9 @@ function Contact() {
                                             Phone:
                                         </div> 
                                     </td>
-                                    <td class="contact-details-table-col1">
-                                        <div class="details-info-boxes">
-                                            0469 6969 6969
-                                        </div>  
+                                    <td>
+                                        <input class="details-info-boxes-input" type="text" >  
+                                        </input>   
                                     </td>
                                 </tr>
                                 <tr>
@@ -38,10 +36,9 @@ function Contact() {
                                             Email:
                                         </div> 
                                     </td>
-                                    <td class="contact-details-table-col1">
-                                        <div class="details-info-boxes">
-                                            XXXXXX
-                                        </div>  
+                                    <td>
+                                        <input class="details-info-boxes-input" type="text" >  
+                                        </input>   
                                     </td>
                                 </tr>
                                 <tr>
@@ -50,13 +47,13 @@ function Contact() {
                                             Address:
                                         </div>
                                     </td>
-                                    <td class="contact-details-table-col1">
-                                        <div class="details-info-boxes">
-                                            XXXXXX
-                                        </div>           
+                                    <td>
+                                        <input class="details-info-boxes-input" type="text" >  
+                                        </input>          
                                     </td>
                                 </tr>
                             </table>  
+                            <button class="contact-details-submit">Submit</button>
                         </div> 
                     </td>
                 </tr>
