@@ -1,7 +1,7 @@
 function Contact() {
     return (
         <div className='body'>
-            <table class="center-table">
+            <table class="contact-center-table">
                 <tr class="center-tableRows">
                     <td> <img src="location.jpg" width="500" height="350"></img> </td>
                     <td> 
@@ -53,7 +53,7 @@ function Contact() {
                                     </td>
                                 </tr>
                             </table>  
-                            <button class="contact-details-submit">Submit</button>
+                            <button class="contact-details-submit"> <div class="h3-contact"> Submit </div> </button>
                         </div> 
                     </td>
                 </tr>
@@ -62,7 +62,7 @@ function Contact() {
                 <div class="h3-contact">Contact Us:</div>
                 <div class="h3-contact">Title:</div> <div class="details-info-boxes">XXXXX</div>
                 <div class="h3-contact">Enquiry:</div> <div class="details-info-boxes-enquiry">XXXXX</div>
-                <button class="contact-details-submit">Submit</button>
+                <button class="contact-details-submit"> <div class="h4-contact"> Submit </div> </button>
             </div>
         </div>    
     );

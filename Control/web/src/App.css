@@ -221,6 +221,17 @@
 /* End of about page divs */
 
 /* Start of contact us page divs */
+.contact-center-table {
+  table-layout: fixed ;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  width: 90%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding: 0;
+}
 .h4-contact {
   text-align: left;
   margin: 10px;
@@ -267,12 +278,13 @@
   background-color: white;
   width: 25%;
   height: 5%;
-  padding: 2%;
+  padding: 3%;
   color: #1E313A;
+  margin-top: 15px;
   margin-bottom: 15px;
 }
 .contact-details-table {
-  width: 80%;
+  width: 70%;
   height: 40%;
   padding: 1px;
   margin-top: 5px;
@@ -310,10 +322,13 @@
 .contact-enquiry-text-box {
   border-radius: 5px;
   background-color: #45B667;
-  width: 85%;
+  width: 90%;
   height: 90%;
   padding: 20px;
-  margin: auto;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
   color: #1E313A;
   box-shadow: 0 0 10px 5px #267646;
 }
