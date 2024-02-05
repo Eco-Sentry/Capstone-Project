@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
 function Dashboard() {
     return (
@@ -7,20 +6,31 @@ function Dashboard() {
                 <div class="dashboard-sidebar">
                     <div class="dashboard-logoCircle"> <img src="logo" alt="logo" /></div>
                     <a></a>
-                    <a id="sentries"><Link to="/sentries">Sentries</Link></a>
-                    <a id="createSentries"><Link to="/sentries">Create sentries</Link></a>
-                    <a id="groups"><Link to="/groupPage">Groups</Link></a>
+                    <a onClick={sentriesClick} id="sentriesButton"> Sentries</a>
+                    <a onClick={createSentryClick} id="createSentries">Create sentries</a>
+                    <a onClick={groupsClick} id="groups">Groups</a>
                 </div>
-                <div class="dashboard-main" id="dashboard-main">
+                <div class="dashboard-main">
                     <div class="dashboard-box">
-                        <h1>Sentries</h1>
-
-                        <h3>Test - must update depending on side bar</h3>
+                        <div id="dashboardDivTitle">
+                            <h3>Dashboard</h3>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>    
     );
 }
-
+function sentriesClick() {
+    const divTitle = document.getElementById('dashboardDivTitle');
+    divTitle.innerHTML = '<h3>Sentries</h3>';
+}
+function createSentryClick() {
+    const divTitle = document.getElementById('dashboardDivTitle');
+    divTitle.innerHTML = '<h3>Create Sentry</h3>';
+}
+function groupsClick() {
+    const divTitle = document.getElementById('dashboardDivTitle');
+    divTitle.innerHTML = '<h3>Groups</h3>';
+}
 export default Dashboard;

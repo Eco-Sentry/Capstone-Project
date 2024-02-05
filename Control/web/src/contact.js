@@ -3,7 +3,7 @@ function Contact() {
         <div className='body'>
             <table class="contact-center-table">
                 <tr class="center-tableRows">
-                    <td> <img src="location.jpg" width="500" height="350"></img> </td>
+                    <td> <img src="location.jpg" width="500" height="350" alt="map"></img> </td>
                     <td> 
                         <div class="details-text-box"> 
                             <div class="h4-contact">Details:</div> 

@@ -274,11 +274,12 @@
   box-shadow: 0 0 10px 5px #70ABBD;
 }
 .contact-details-submit {
-  border-radius: 5px;
+  text-align: center;
+  border-radius: 10px;
   background-color: white;
-  width: 25%;
-  height: 5%;
-  padding: 3%;
+  width: 15%;
+  height: 3%;
+  padding: 1%;
   color: #1E313A;
   margin-top: 15px;
   margin-bottom: 15px;
