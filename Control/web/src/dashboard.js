@@ -31,7 +31,7 @@ function sentriesClick() {
     const divTitle = document.getElementById('dashboardDivTitle');
     const divMainElement = document.getElementById('dashboardMainElement');
     divTitle.innerHTML = '<h3>Sentries</h3>';
-    divMainElement.innerHTML = '<form id="form"> <input type="search" id="query" name="q" placeholder="Search..."> <button> Search </button> </form> <table class="sentiesListTable"> <tr><td><h3>S/N</h3></td> <td><h3>NAME</h3></td> <td><h3>LOCATION</h3></td> <td><h3>STATUS</h3></td> <td><h3>ACTIONS</h3></td> </tr>  <tr><td><p>1</p></td> <td><p>test</p></td> <td><p>test</p></td> <td><p>test- image</p></td> <td><p><button>test</button><p></td> </tr> </table>';
+    divMainElement.innerHTML = '<form id="form"> <input class="dashboardSentiesSearchBar" type="search" id="query" name="q" placeholder="Search..."> </form> <table class="sentiesListTable"> <tr class="tr-sentryTable"><td><h3 class="h3-sentriesTable">S/N</h3></td> <td class="tr-sentryTable"><h3 class="h3-sentriesTable">NAME</h3></td> <td class="tr-sentryTable"><h3 class="h3-sentriesTable">LOCATION</h3></td> <td class="tr-sentryTable"><h3 class="h3-sentriesTable">STATUS</h3></td> <td class="tr-sentryTable"><h3 class="h3-sentriesTable">ACTIONS</h3></td> </tr>  <tr class="tr-sentryTable"><td><p>1</p></td> <td class="tr-sentryTable"><p>test</p></td> <td class="tr-sentryTable"><p>test</p></td> <td class="tr-sentryTable"><p>test- image</p></td> <td class="tr-sentryTable"><p><button>test</button><p></td> </tr> </table>';
 }
 function createSentryClick() {
     const divTitle = document.getElementById('dashboardDivTitle');

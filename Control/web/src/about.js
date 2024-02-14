@@ -11,7 +11,7 @@ function About() {
                                     <div class="welcome-text-box">...</div>
                                 </td>
                                 <td class="welcome-table-c2">
-                                    <iframe title="Welcome Video" height="400px" width="100%" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+                                    <iframe title="Welcome Video" height="400px" width="100%" src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1"></iframe>
                                 </td>
                             </tr>
                         </table>
