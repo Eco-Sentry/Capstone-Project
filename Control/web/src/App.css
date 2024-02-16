@@ -173,9 +173,7 @@
 /*End of dashboard divs*/
 
 /* About page divs */
-.about-page{
-  height: 100vh;
-}
+
 
 .container-about {
   margin: 0 auto;
@@ -196,21 +194,21 @@
 
 .welcome-table-c1{
   width: 35%;
-  padding: 10px;
+  padding: 1%;
 }
 
 .welcome-table-c2{
   width: 65%;
-  padding: 10px;
+  padding: 3%;
 }
 
 .welcome-text-box {
   border-radius: 5px;
   background-color: white;
   width: 90%;
-  height: 400px;
+  height: 50%;
   padding: 0;
-  margin: 5px;
+  margin: 2%;
   color: #1E313A;
   box-shadow: 0 0 10px 5px #70ABBD;
 }
@@ -220,22 +218,33 @@
   background-color: white;
   width: 85%;
   height: 90%;
-  padding: 20px;
+  padding: 2%;
+  margin: auto;
+  color: #1E313A;
+  box-shadow: 0 0 10px 5px #70ABBD;
+}
+
+.aboutUs-text-box{
+  border-radius: 5px;
+  background-color: white;
+  width: 85%;
+  height: 90%;
+  padding: 2%;
   margin: auto;
   color: #1E313A;
   box-shadow: 0 0 10px 5px #70ABBD;
 }
 
 .founder-text-box {
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: white;
   width: 60%;
   height: 60%;
-  padding: 50px;
-  margin-top: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 15px;
+  padding: 15%;
+  margin-top: 2%;
+  margin-left: 5%;
+  margin-right: 15%;
+  margin-bottom: 15%;
   color: #1E313A;
   box-shadow: 0 0 10px 5px #70ABBD;
 }
@@ -251,12 +260,12 @@
 }
 
 .center-tableRows{
-  width: 25%;
+  width: 30%;
 }
 
 .h3-about {
   text-align: left;
-  margin: 50px;
+  margin: 2%;
   font-weight: bold;
   padding: 0;
 }
@@ -264,10 +273,11 @@
 .about-profileCircle {
   background-color: white;
   border-color: #267646;
-  border-width: 1px;
+  border-width: 0.5%;
   border-style: solid;
-  height: 180px;
+  height: 50%;
   width: 95%;
+  padding: 5%;
   border-radius: 50%;
   display: inline-block;
 }

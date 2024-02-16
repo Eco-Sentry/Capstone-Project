@@ -1,6 +1,6 @@
 function Contact() {
     return (
-        <div className='body'>
+        <div className='Contact'>
             <table class="contact-center-table">
                 <tr class="center-tableRows">
                     <td> <img src="location.jpg" width="500" height="350" alt="map"></img> </td>

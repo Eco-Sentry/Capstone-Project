@@ -2,7 +2,7 @@ import React from 'react';
 function Dashboard() {
     return (
         <div>
-            <div className='body'>
+            <div className='Dashboard'>
                 <div class="dashboard-sidebar">
                     <div class="dashboard-logoCircle"> <img src="logo" alt="logo" /></div>
                     <a id="lineBreak"></a>
