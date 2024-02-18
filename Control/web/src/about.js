@@ -8,7 +8,7 @@ function About() {
     const [isJenaShown, setJenaIsShown] = useState(false);
 
     return (
-        <div className='About'>
+        <div className='About' style={{ height: "100vh"}}>
             <div class="About-page">
                 <div class="container-about">
                     <div class="h3-about">Welcome</div>
@@ -35,24 +35,6 @@ function About() {
                                         <h2>Byron</h2> 
                                         <h3>Backend</h3>
                                     </div>
-                                    {isByronShown && (
-                                        <div class="aboutUs-text-box">
-                                            <table>
-                                                <tr>
-                                                    <td class="center-tableRows">
-                                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
-                                                        <br></br> 
-                                                        <h2>Byron</h2> 
-                                                        <h3>Backend</h3>
-                                                    </td>
-                                                    <td>
-                                                        <h2>Bio:</h2>
-                                                        <p>......</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    )}
                                 </td>
                                 <td class="center-tableRows"> 
                                     <div class="founder-text-box" onMouseEnter={() => setEstebanIsShown(true)} onMouseLeave={() => setEstebanIsShown(false)}> 
@@ -61,24 +43,6 @@ function About() {
                                         <h2>Esteban</h2> 
                                         <h3>Hardware</h3>
                                     </div>
-                                    {isEstebanShown && (
-                                        <div class="aboutUs-text-box">
-                                            <table>
-                                                <tr>
-                                                    <td class="center-tableRows">
-                                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
-                                                        <br></br> 
-                                                        <h2>Esteban</h2> 
-                                                        <h3>Hardware</h3>
-                                                    </td>
-                                                    <td>
-                                                        <h2>Bio:</h2>
-                                                        <p>......</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    )}
                                 </td>
                                 <td class="center-tableRows">
                                     <div class="founder-text-box" onMouseEnter={() => setEddieIsShown(true)} onMouseLeave={() => setEddieIsShown(false)}> 
@@ -87,23 +51,6 @@ function About() {
                                         <h2>Eddie</h2>
                                         <h3>Backend & Frontend</h3>
                                     </div>
-                                    {isEddieShown && (
-                                        <div class="aboutUs-text-box">
-                                            <table>
-                                                <tr>
-                                                    <td class="center-tableRows"><div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
-                                                        <br></br> 
-                                                        <h2>Eddie</h2> 
-                                                        <h3>Backend & Frontend</h3>
-                                                    </td>
-                                                    <td>
-                                                        <h2>Bio:</h2>
-                                                        <p>......</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    )}
                                 </td>
                             </tr>
                             <tr>
@@ -114,23 +61,6 @@ function About() {
                                         <h2>Savannah</h2>
                                         <h3>Frontend</h3>
                                     </div>
-                                    {isSavannahShown && (
-                                        <div class="aboutUs-text-box">
-                                            <table>
-                                                <tr>
-                                                    <td class="center-tableRows"><div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
-                                                        <br></br> 
-                                                        <h2>Savannah</h2> 
-                                                        <h3>Frontend</h3>
-                                                    </td>
-                                                    <td>
-                                                        <h2>Bio:</h2>
-                                                        <p>......</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    )}
                                 </td>
                                 <td class="center-tableRows">
                                     <div class="founder-text-box" onMouseEnter={() => setNickIsShown(true)} onMouseLeave={() => setNickIsShown(false)}> 
@@ -139,23 +69,6 @@ function About() {
                                         <h2>Nick</h2> 
                                         <h3>Frontend</h3>
                                     </div>
-                                    {isNickShown && (
-                                        <div class="aboutUs-text-box">
-                                            <table>
-                                                <tr>
-                                                    <td class="center-tableRows"><div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
-                                                        <br></br> 
-                                                        <h2>Nick</h2> 
-                                                        <h3>Frontend</h3>
-                                                    </td>
-                                                    <td>
-                                                        <h2>Bio:</h2>
-                                                        <p>......</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    )}
                                 </td>
                                 <td class="center-tableRows">
                                     <div class="founder-text-box" onMouseEnter={() => setJenaIsShown(true)} onMouseLeave={() => setJenaIsShown(false)}> 
@@ -164,27 +77,118 @@ function About() {
                                         <h2>Jena</h2> 
                                         <h3>Frontend</h3>
                                     </div>
-                                    {isJenaShown && (
-                                        <div class="aboutUs-text-box">
-                                            <table>
-                                                <tr>
-                                                    <td class="center-tableRows"><div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
-                                                        <br></br> 
-                                                        <h2>Jena</h2> 
-                                                        <h3>Frontend</h3>
-                                                    </td>
-                                                    <td>
-                                                        <h2>Bio:</h2>
-                                                        <p>......</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    )}
                                 </td>
                             </tr>
                         </table>
                     </div>
+                    {isByronShown && (
+                        <div class="aboutUs-text-box">
+                            <table>
+                                <tr>
+                                    <td class="center-tableRows">
+                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                        <br></br> 
+                                        <h2>Byron</h2> 
+                                        <h3>Backend</h3>
+                                    </td>
+                                    <td>
+                                        <h2>Bio:</h2>
+                                        <p>......</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    )}
+                    {isEstebanShown && (
+                        <div class="aboutUs-text-box">
+                            <table>
+                                <tr>
+                                    <td class="center-tableRows">
+                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                        <br></br> 
+                                        <h2>Esteban</h2> 
+                                        <h3>Hardware</h3>
+                                    </td>
+                                    <td>
+                                        <h2>Bio:</h2>
+                                        <p>......</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    )}
+                    {isEddieShown && (
+                        <div class="aboutUs-text-box">
+                            <table>
+                                <tr>
+                                    <td class="center-tableRows">
+                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                        <br></br> 
+                                        <h2>Eddie</h2> 
+                                        <h3>Backend & Frontend</h3>
+                                    </td>
+                                    <td>
+                                        <h2>Bio:</h2>
+                                        <p>......</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    )}
+                    {isSavannahShown && (
+                        <div class="aboutUs-text-box">
+                            <table>
+                                <tr>
+                                    <td class="center-tableRows">
+                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                        <br></br> 
+                                        <h2>Savannah</h2> 
+                                        <h3>Frontend</h3>
+                                    </td>
+                                    <td>
+                                        <h2>Bio:</h2>
+                                        <p>......</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    )}
+                    {isNickShown && (
+                        <div class="aboutUs-text-box">
+                            <table>
+                                <tr>
+                                    <td class="center-tableRows">
+                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                        <br></br> 
+                                        <h2>Nick</h2> 
+                                        <h3>Frontend</h3>
+                                    </td>
+                                    <td>
+                                        <h2>Bio:</h2>
+                                        <p>......</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    )}
+                    {isJenaShown && (
+                        <div class="aboutUs-text-box">
+                            <table>
+                                <tr>
+                                    <td class="center-tableRows">
+                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                        <br></br> 
+                                        <h2>Jena</h2> 
+                                        <h3>Frontend</h3>
+                                    </td>
+                                    <td>
+                                        <h2>Bio:</h2>
+                                        <p>......</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>     
