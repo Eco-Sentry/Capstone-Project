@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  padding-top: 50px;
+  padding-top: 5%;
 }
 
 .App-logo {
@@ -407,4 +407,76 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* ACCOUNT   */
+.Account {
+  background-color: #45B667;
+}
+
+.profilePic {
+  margin-left: 15%;
+  width: 20%;
+  color: black;
+  background-color: white;
+  float: left;
+  background-color: white;
+}
+
+.accountInfo {
+  margin-right: 15%;
+  width: 40%;
+  border-radius: 20px;
+  padding: 5px;
+  color: black;
+  background-color: white;
+  vertical-align: top;
+  float: right;
+
+  text-align: left;
+  font-family: Helvetica;
+}
+
+.profilePicImage {
+  width: 50%;
+  align-self: center;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.accountTable {
+  table-layout: fixed ;
+  width: 80%;
+  height: 10px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.accountInfoCell {
+  float: left;
+}
+
+.accountInfoTextTable {
+  background-color: white;
+  border-radius: 10%;
+  border-color: black;
+  border-style: dashed;
+  width: 100%;
+}
+
+
+/* LOGIN PAGE  */
+.loginButton {
+  transition-duration: 0.5s;
+  background-color: #45B667;
+  width: 7%;
+  height: 50px;
+  font-size: 75%;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
 }

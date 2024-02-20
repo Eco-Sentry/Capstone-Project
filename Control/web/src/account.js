@@ -1,20 +1,27 @@
+import logo from './EcoSentryLogo.png';
+
 function Account() {
     return (
-        <div className='body'>
-            <div>
+        <div className='Account'>
+                <style>{'body { background-color: #45B667; }'}</style>  
                 <h2>YOUR ACCOUNT</h2>
-            </div>
 
+                <table class="accountTable">
+                    <tr>
+                        <td className='profilePictureCell'> 
+                            <img src={logo} alt="logo" class="profilePicImage" style={{ alignSelf: 'center'}}/> 
+                        </td>
 
-            <div className='profilePic'>
-                <p /> Profile picture
-            </div>
-            <div className='accountInfo'>
-                <p /> Name:
-                <p /> Ph:
-                <p /> Email:
-            </div>
-        </div>    
+                        <td className="accountInfoCell">
+                            <p /> Name:
+                            <p /> Ph:
+                            <p /> Email:
+                            <p /> Bio:
+                            
+                        </td>
+                    </tr>
+                </table>
+        </div>  
     );
 }
 
