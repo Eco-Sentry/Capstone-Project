@@ -13,14 +13,18 @@ function Account() {
                         </td>
 
                         <td className="accountInfoCell">
-                            <p /> Name:
-                            <p /> Ph:
-                            <p /> Email:
-                            <p /> Bio:
+                            <form>
+                                <input className="accountDetails" type="text" name="address" placeholder="First Name"/> <br /> <br />
+                                <input className="accountDetails" type="text" name="address" placeholder="Last name"/> <br /> <br />
+                                <input className="accountDetails" type="text" name="address" placeholder="Ph Number"/> <br /> <br />
+                                <input className="bioDetails" type="text" name="address" placeholder="About me"/> <br /> <br />
+                                <input className="updateAccount" type="submit" value="Submit Changes" />
+                            </form>
                             
                         </td>
                     </tr>
                 </table>
+                <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
         </div>  
     );
 }

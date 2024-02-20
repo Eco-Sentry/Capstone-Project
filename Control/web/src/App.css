@@ -451,6 +451,7 @@
 
 .accountInfoCell {
   float: left;
+  align-content: baseline;
 }
 
 .accountInfoTextTable {
@@ -459,6 +460,101 @@
   border-color: black;
   border-style: dashed;
   width: 100%;
+}
+
+.accountDetails {
+  border-style: none;
+  border-radius: 25px;
+  font-size: 100%;
+  width: 150%;
+  padding-left: 1%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.bioDetails {
+  border-style: none;
+  border-radius: 25px;
+  font-size: 100%;
+  width: 250%;
+  padding-left: 1%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.updateAccount {
+  transition-duration: 0.5s;
+  background-color: #103438;
+  width: 75%;
+  height: 100%;
+  font-size: 100%;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+
+.updateAccount:hover {
+  background-color: white;
+  color: #103438;
+}
+
+
+/*  My Sentries Page  */
+.mySentries {
+  background-color: #45B667;
+}
+
+.mySentriesButtons:link {
+  cursor: pointer;
+}
+
+.addressInput {
+  border-style: none;
+  border-radius: 25px;
+  font-size: 150%;
+  width: 55%;
+  padding-left: 1%;
+}
+
+.locationForm {
+  padding-top: 3%;
+  padding-left: 5%;
+}
+
+.longlatInput {
+  border-style: none;
+  border-radius: 25px;
+  font-size: 150%;
+  width: 15%;
+  padding-left: 1%;
+}
+
+.searchLocationButton {
+  transition-duration: 0.5s;
+  background-color: #103438;
+  width: 12%;
+  height: 100%;
+  font-size: 100%;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+
+.mySentriesGraphs {
+  table-layout: fixed ;
+  width: 70%;
+  margin-left: 25%;
+  height: 10px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding: 0;
+  margin-top: 15px;
 }
 
 
