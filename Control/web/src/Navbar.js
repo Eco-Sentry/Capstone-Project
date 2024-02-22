@@ -1,29 +1,8 @@
 import React from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import logo from './logo192.png';         //logo192 is only placeholder
+import logo from './EcoSentryLogo.png'; 
 
-// import styled from 'styled-components';
-
-// const Nav = styled.nav`
-//   background-color: #333;
-//   padding: 10px;
-// `;
-
-// const Ul = styled.ul`
-//   list-style-type: none;
-//   padding: 0;
-// `;
-
-// const Li = styled.li`
-//   display: inline;
-//   margin-right: 20px;
-// `;
-
-// const A = styled.a`
-//   text-decoration: none;
-//   color: white;
-// `;
 
 function Navbar() {
   return (
