@@ -11,19 +11,21 @@ function About() {
         <div className='About' style={{ height: "100vh"}}>
             <div class="About-page">
                 <div class="container-about">
-                    <div class="h3-about">Welcome</div>
                     <table class="about-welcome-table">
                         <tr>
                             <td class="welcome-table-c1">
-                                <div class="welcome-text-box">...</div>
+                                <div class="h3-about">Welcome</div>
+                                <div class="welcome-text-box">We at EcoSentry strive to provide an open data center that people for all varieties of reasons from weather monitoring to personal interest can access and analiyse data freely. One can join the senrties by creating there own sentry or by following the provided examples. </div>
                             </td>
                             <td class="welcome-table-c2">
                                 <iframe title="Welcome Video" height="400px" width="100%" src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1"></iframe>
                             </td>
                         </tr>
                     </table>
-                    <div class="h3-about">About Us</div>
-                    <div class="about-text-box">...</div>
+                    <div class="about-background">
+                        <div class="h3-about2">About Us</div>
+                        <div class="about-text-box">From a group of friends to a project team, we created this solution to the growing problem of lack of consintrated and free data. Many weather stations and data collectors span a great range but are also congragated to specific locaiotns such that ........  </div>
+                    </div>
                     <div class="h3-about">Founders</div>
                     <div id="aboutPersonElement">
                         <table class="center-table">
@@ -83,9 +85,9 @@ function About() {
                     </div>
                     {isByronShown && (
                         <div class="aboutUs-text-box">
-                            <table>
+                            <table class="aboutUs-table">
                                 <tr>
-                                    <td class="center-tableRows">
+                                    <td class="center-tableRows2">
                                         <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
                                         <br></br> 
                                         <h2>Byron</h2> 
@@ -101,9 +103,9 @@ function About() {
                     )}
                     {isEstebanShown && (
                         <div class="aboutUs-text-box">
-                            <table>
+                            <table class="aboutUs-table">
                                 <tr>
-                                    <td class="center-tableRows">
+                                    <td class="center-tableRows2">
                                         <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
                                         <br></br> 
                                         <h2>Esteban</h2> 
@@ -119,9 +121,9 @@ function About() {
                     )}
                     {isEddieShown && (
                         <div class="aboutUs-text-box">
-                            <table>
+                            <table class="aboutUs-table">
                                 <tr>
-                                    <td class="center-tableRows">
+                                    <td class="center-tableRows2">
                                         <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
                                         <br></br> 
                                         <h2>Eddie</h2> 
@@ -137,9 +139,9 @@ function About() {
                     )}
                     {isSavannahShown && (
                         <div class="aboutUs-text-box">
-                            <table>
+                            <table class="aboutUs-table">
                                 <tr>
-                                    <td class="center-tableRows">
+                                    <td class="center-tableRows2">
                                         <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
                                         <br></br> 
                                         <h2>Savannah</h2> 
@@ -155,9 +157,9 @@ function About() {
                     )}
                     {isNickShown && (
                         <div class="aboutUs-text-box">
-                            <table>
+                            <table class="aboutUs-table">
                                 <tr>
-                                    <td class="center-tableRows">
+                                    <td class="center-tableRows2">
                                         <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
                                         <br></br> 
                                         <h2>Nick</h2> 
@@ -173,9 +175,9 @@ function About() {
                     )}
                     {isJenaShown && (
                         <div class="aboutUs-text-box">
-                            <table>
+                            <table class="aboutUs-table">
                                 <tr>
-                                    <td class="center-tableRows">
+                                    <td class="center-tableRows2">
                                         <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
                                         <br></br> 
                                         <h2>Jena</h2> 
