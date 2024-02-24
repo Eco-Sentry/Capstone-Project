@@ -53,7 +53,7 @@ function Contact() {
                                     </td>
                                 </tr>
                             </table>  
-                            <button class="contact-details-submit"> <div class="h3-contact"> Submit </div> </button>
+                            <button class="contact-details-submit"> Submit </button>
                         </div> 
                     </td>
                 </tr>
@@ -61,9 +61,9 @@ function Contact() {
             <div class="contact-enquiry-text-box">
                 <div class="h2-contact">Contact Us:</div>
                 <div class="h3-contact">Title:</div> <input class="details-info-boxes" type="text"></input>
-                <div class="h3-contact">Enquiry:</div> <input class="details-info-boxes-enquiry" type="text"></input>
+                <div class="h2-contact">Enquiry:</div> <input class="details-info-boxes-enquiry" type="text"></input>
                 <br></br> 
-                <button class="contact-details-submit"> <div class="h4-contact"> Submit </div> </button>
+                <button class="contact-details-submit"> Submit </button>
             </div>
         </div>    
     );
