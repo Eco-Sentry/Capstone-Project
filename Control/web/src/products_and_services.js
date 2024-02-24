@@ -4,7 +4,7 @@ function ProductsAndServices() {
     return (
         <div className='mySentries'>
             <style>{'body { background-color: #45B667; }'}</style> 
-            <div class="dashboard-sidebar">
+            <div class="yourSent-sidebar">
                     <img src={logo} alt="logo" class="profilePicImage" style={{ alignSelf: 'center'}}/> 
                     <a id="lineBreak"></a>
 

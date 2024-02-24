@@ -62,6 +62,7 @@ function Contact() {
                 <div class="h2-contact">Contact Us:</div>
                 <div class="h3-contact">Title:</div> <input class="details-info-boxes" type="text"></input>
                 <div class="h3-contact">Enquiry:</div> <input class="details-info-boxes-enquiry" type="text"></input>
+                <br></br> 
                 <button class="contact-details-submit"> <div class="h4-contact"> Submit </div> </button>
             </div>
         </div>    
