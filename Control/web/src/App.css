@@ -45,7 +45,7 @@
   left: 0;
   background-color: #1E313A;
   overflow-x: hidden;
-  padding-top: 20px;
+  padding-top: 200px;
   color: white;
   margin-top: 4.3%;
 }
@@ -177,7 +177,7 @@
   border: 1px solid rgb(181, 189, 196);
   font-size: 16px;
   height: 40px;
-  width: 210%;
+  width: 200%;
   line-height: 24px;
   padding: 5px;
   margin: 20px;
@@ -264,7 +264,7 @@
   border-radius: 5px;
   text-align: left;
   width: 120%;
-  padding-left: 50px;
+  padding-left: 40px;
   padding-bottom: 20px;
   overflow: auto;
 }
@@ -358,6 +358,16 @@
 
 /* About page divs */
 
+.center-table {
+  table-layout: fixed ;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  padding: 0;
+  height: auto;
+}
 
 .container-about {
   margin: auto;
@@ -370,7 +380,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 90%;
-  height: 300px;
+  height: 40%;
   border-collapse: collapse;
   border-spacing: 0;
   padding: 0;
@@ -404,7 +414,7 @@
   height: 90%;
   color: white;
   margin-left: 5%;
-  margin-right: auto;
+  margin-right: 10%;
 }
 
 .aboutUs-table{
@@ -415,6 +425,8 @@
 
 .aboutUs-text-box{
   background-color: white;
+  position: absolute;
+  margin-top: 0px;
   width: 85%;
   height: 90%;
   padding: 2%;
@@ -432,16 +444,6 @@
   margin-right: 15%;
   margin-bottom: 15%;
   color: white;
-}
-
-.center-table {
-  table-layout: fixed ;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  padding: 0;
 }
 
 .center-tableRows{
@@ -475,7 +477,7 @@
   border-color: #267646;
   border-width: 0.5%;
   border-style: solid;
-  height: 50%;
+  height: 100%;
   width: 95%;
   padding: 5%;
   border-radius: 50%;
@@ -495,20 +497,20 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 3%;
-  width: 90%;
+  width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   padding: 0;
 }
 .details-text-box {
-  background-color: white;
+  background-color: #449074;
   width: 100%;
-  height: 40%;
+  height: 100%;
   padding: 5px;
   margin-top: 15px;
-  margin-left: 10px;
+  margin-left: 10%;
   margin-bottom: 15px;
-  color: #0395ca;
+  color: white;
 }
 .details-info-boxes {
   background-color: white;
@@ -522,37 +524,61 @@
 .details-info-boxes-input{
   border-radius: 5px;
   background-color: white;
-  width: 100%;
-  height: 5%;
-  padding: 10%;
+  margin-top: 1%;
+  width: 70%;
+  height: 50%;
+  padding:1.5%;
   color: #0395ca;
+}
+.contact-h1 {
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 .contact-details-submit {
-  text-align: center;
-  background-color: white;
-  width: 15%;
-  height: 3%;
-  padding: 1%;
-  color: #0395ca;
-  margin: auto;
+  background-color: #232E3A; 
+  border: none; 
+  color: white; 
+  padding: 5px 10px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 14px; 
+  margin: 4px 2px; 
+  cursor: pointer; 
+  border-radius: 10px; 
 }
+
+.contact-details-submit:hover {
+  border: 1px solid;
+  border-color: #232E3A;
+  background-color: white; 
+  color: #232E3A;
+}
+
 .contact-details-table {
   width: 70%;
   height: 40%;
   padding: 1px;
-  margin-top: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 15px;
+  margin: auto;
 }
 .contact-details-table-col1 {
   width: 10%;
-  height: 5%;
+  height: 50%;
   text-align: center;
 }
+.contact-center-table-col1 {
+  width: 40%;
+}
+.contact-center-table-col1 {
+  width: 60%;
+}
 .contact-details-table-col2 {
-  width: 10%;
-  height: 5%;
+  width: 60%;
+  height: 50%;
 }
 .h2-contact {
   text-align: left;
@@ -562,11 +588,11 @@
   text-decoration-line: underline;
 }
 .h3-contact {
-  text-align: left;
+  text-align: right;
   margin-left: 5%;
-  font-weight: bold;
   padding: 0;
-  color: #0395ca;
+  color: white;
+  font-family: 'Times New Roman', Times, serif;
 }
 .details-info-boxes-enquiry{
   background-color: white;

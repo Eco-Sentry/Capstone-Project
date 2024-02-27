@@ -279,7 +279,6 @@ const YourSentry = () => {
   return (
     <div className='your-Sent'>
       <div className='yourSent-sidebar'>
-        <div className="yourSent-logoCircle"> <img src="logo" alt="logo" /></div>
         <a id="lineBreak"></a>
         <a onClick={() => setCurrentSection('sentries')} id="sentriesButton"> Sentries</a>
         <a onClick={() => setCurrentSection('CREATE A SENTRY')} id="createSentry">Create sentry</a>
