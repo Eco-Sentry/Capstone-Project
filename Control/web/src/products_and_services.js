@@ -5,7 +5,7 @@ function ProductsAndServices() {
         <div className='mySentries'>
             <style>{'body { background-color: #45B667; }'}</style> 
             <div class="yourSent-sidebar">
-                    <img src={logo} alt="logo" class="profilePicImage" style={{ alignSelf: 'center'}}/> 
+                    {/* <img src={logo} alt="logo" class="profilePicImage" style={{ alignSelf: 'center'}}/>  */}
                     <a id="lineBreak"></a>
 
                     <a id="sentriesButton" style={{cursor: 'pointer'}}> Line Graph</a>
