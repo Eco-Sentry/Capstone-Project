@@ -45,9 +45,8 @@
   left: 0;
   background-color: #1E313A;
   overflow-x: hidden;
-  padding-top: 200px;
+  padding-top: 15%;
   color: white;
-  margin-top: 4.3%;
 }
 
 .yourSent-sidebar a {
@@ -633,19 +632,20 @@
 
 /* ACCOUNT   */
 .Account {
-  background-color: #45B667;
+  background-color: #00A3A3;
+  text-align: center;
 }
 
-.profilePic {
+/* .profilePic {
   margin-left: 15%;
   width: 20%;
   color: black;
   background-color: white;
   float: left;
   background-color: white;
-}
+} */
 
-.accountInfo {
+/* .accountInfo {
   margin-right: 15%;
   width: 40%;
   border-radius: 20px;
@@ -655,48 +655,63 @@
   vertical-align: top;
   float: right;
 
-  text-align: left;
+  text-align: center;
   font-family: Helvetica;
+} */
+
+.accountTable{
+  margin-left: 10%;
+  /* align-self: center; */
+  /* text-align: center; */
 }
 
-.profilePicImage {
-  width: 50%;
+/* .profilePicImage {
+  width: 50%; 
   align-self: center;
-  padding-top: 5%;
+  padding-top: 5%; 
   padding-bottom: 5%;
-}
+} */
 
 .accountTable {
+  /* border: 1px solid; */
   table-layout: fixed ;
   width: 80%;
   height: 10px;
   border-collapse: collapse;
-  border-spacing: 0;
-  padding: 0;
-  margin-top: 15px;
+  /* border-spacing: 0; */
+  /* margin-top: 15px; */
 }
 
-.accountInfoCell {
+/* .profilePictureCell {
+  border: 1px solid;
   float: left;
   align-content: baseline;
+} */
+
+.accountInfoCell {
+  /* border: 1px solid; */
+  /* float: left; */
+  /* align-content: baseline; */
+  text-align: center;
 }
 
-.accountInfoTextTable {
+/* .accountInfoTextTable {
   background-color: white;
   border-radius: 10%;
   border-color: black;
   border-style: dashed;
-  width: 100%;
-}
+  width: 50%;
+} */
 
 .accountDetails {
   border-style: none;
-  border-radius: 25px;
+  border-radius: 3px;
   font-size: 100%;
-  width: 150%;
-  padding-left: 1%;
+  height: max-content;
+  width: 30%;
+  /* padding-left: 1%;
   padding-top: 3%;
-  padding-bottom: 3%;
+  padding-bottom: 3%; */
 }
 
 .bioDetails {
@@ -710,7 +725,7 @@
 }
 
 .updateAccount {
-  transition-duration: 0.5s;
+  /* transition-duration: 0.5s;
   background-color: #103438;
   width: 75%;
   height: 100%;
@@ -720,7 +735,7 @@
   border-radius: 10px;
   border: none;
   padding-top: 0.5%;
-  padding-bottom: 0.5%;
+  padding-bottom: 0.5%; */
 }
 
 .updateAccount:hover {
@@ -729,12 +744,12 @@
 }
 
 
-/*  My Sentries Page  */
-.mySentries {
-  background-color: #45B667;
+/*  Dashboard Page  */
+.Dashboard {
+  background-color: #00A3A3;
 }
 
-.mySentriesButtons:link {
+.dashboardButtons:link {
   cursor: pointer;
 }
 
@@ -773,7 +788,7 @@
   padding-bottom: 0.5%;
 }
 
-.mySentriesGraphs {
+.dashboardGraphs {
   table-layout: fixed ;
   width: 70%;
   margin-left: 25%;

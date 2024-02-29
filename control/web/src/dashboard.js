@@ -1,9 +1,9 @@
 import logo from './EcoSentryLogo.png';
 
-function ProductsAndServices() {
+function Dashboard() {
     return (
-        <div className='mySentries'>
-            <style>{'body { background-color: #45B667; }'}</style> 
+        <div className='Dashboard'>
+            <style>{'body { background-color: #00A3A3; }'}</style> 
             <div class="yourSent-sidebar">
                     {/* <img src={logo} alt="logo" class="profilePicImage" style={{ alignSelf: 'center'}}/>  */}
                     <a id="lineBreak"></a>
@@ -27,7 +27,7 @@ function ProductsAndServices() {
             </form>
             <br /> <br /> <br />
 
-            <table className="mySentriesGraphs">
+            <table className="dashboardGraphs">
                 <tr>
                     <td><iframe  class="contact-map" width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=Northfields%20Ave,%20Wollongong%20NSW%202522+(UOW)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" title="map"><a href="https://www.gps.ie/">Main Location</a></iframe></td>
                 </tr>
@@ -42,4 +42,4 @@ function ProductsAndServices() {
     );
 }
 
-export default ProductsAndServices;
+export default Dashboard;
