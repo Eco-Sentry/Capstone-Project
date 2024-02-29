@@ -371,15 +371,16 @@
 
 .container-about {
   margin: auto;
+  margin-top: 70%;
   height: 100%;
   padding: auto;
 }
 
 .about-welcome-table{
   table-layout: fixed;
-  margin-left: auto;
+  margin-left: 0px;
   margin-right: auto;
-  width: 90%;
+  width: 100%;
   height: 40%;
   border-collapse: collapse;
   border-spacing: 0;
@@ -387,8 +388,11 @@
 }
 
 .about-background {
-  color: white;
-  background-color: #0395ca;
+  color: #b0dcc7;
+  width: 100%;
+  height: 100%;
+  background-color: #103438;
+  margin-left: 0px;
 }
 
 .welcome-table-c1{
@@ -412,7 +416,7 @@
 .about-text-box {
   width: 100%;
   height: 90%;
-  color: white;
+  color: #b0dcc7;
   margin-left: 5%;
   margin-right: 10%;
 }
@@ -435,7 +439,7 @@
 
 .founder-text-box {
   border-radius: 20px;
-  background-color: #0395ca;
+  background-color: #103438;
   width: 60%;
   height: 60%;
   padding: 15%;
@@ -443,7 +447,7 @@
   margin-left: 5%;
   margin-right: 15%;
   margin-bottom: 15%;
-  color: white;
+  color: #b0dcc7;
 }
 
 .center-tableRows{
@@ -452,8 +456,8 @@
 
 .center-tableRows2{
   width: 50%;
-  background-color: #0395ca;
-  color: white;
+  background-color: #103438;
+  color: #b0dcc7;
 }
 
 .h3-about {

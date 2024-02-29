@@ -9,7 +9,6 @@ function Navbar() {
     <nav>
       <ul>
         <li><Link to="/home">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
         <li><Link to="/contact">Contact us</Link></li>
         <li><Link to="/your-sentry">Your sentries</Link></li>
         <li><img src={logo} alt="logo" class="center" height={60} width={60} style={{ alignSelf: 'center'}}/> </li>

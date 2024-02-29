@@ -5,7 +5,6 @@ import Navbar from './Navbar';
 import Login from './login';
 import Contact from './contact';
 import Home from './home';
-import About from './about';
 import YourSentry from './your-sentry';
 import Account from './account';
 import ProductsAndServices from './products_and_services';
@@ -19,7 +18,6 @@ function App() {
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="" element={<Home />} />
-            <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/your-sentry" element={<YourSentry />} />
             <Route path="/account" element={<Account />} />
