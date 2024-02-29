@@ -35,7 +35,7 @@ const SentriesTable = ({ sentries, onViewButtonClick}) => {
                 <img src={redImage} alt="Red" style={{ width: '20px', height: '20px' }} />
                 )}
             </td>
-            <td>{sentry.access}</td>
+            <td className="tr-sentryTable">{sentry.access}</td>
             <td className="tr-sentryTable">
               <p>
                 <button className="yourSent-view-button" onClick={() => onViewButtonClick(sentry)}>
