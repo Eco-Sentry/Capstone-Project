@@ -801,6 +801,10 @@
 
 
 /* LOGIN PAGE  */
+.login {
+  background-color: #00A3A3;
+}
+
 .loginButton {
   transition-duration: 0.5s;
   background-color: #45B667;
