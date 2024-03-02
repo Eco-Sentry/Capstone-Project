@@ -490,6 +490,12 @@
 /* End of about page divs */
 
 /* Start of contact us page divs */
+
+.container-contact {
+  height: 100%;
+  width: 100%;
+}
+
 .contact-map { 
   width: 100%;
   margin-left: 5%;
@@ -506,7 +512,7 @@
   padding: 0;
 }
 .details-text-box {
-  background-color: #449074;
+  background-color: #b0dcc7;
   width: 100%;
   height: 100%;
   padding: 5px;
@@ -516,13 +522,14 @@
   color: white;
 }
 .details-info-boxes {
+  border-radius: 5px;
   background-color: white;
+  margin-top: 1%;
   width: 90%;
-  height: 10%;
-  margin-top: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
+  height: 50%;
+  border: 0px;
+  padding:1.5%;
+  color: #0395ca;
 }
 .details-info-boxes-input{
   border-radius: 5px;
@@ -530,17 +537,26 @@
   margin-top: 1%;
   width: 70%;
   height: 50%;
+  border: 0px;
   padding:1.5%;
   color: #0395ca;
 }
 .contact-h1 {
+  text-align: left;
+  padding: 0;
   color: white;
   font-family: 'Times New Roman', Times, serif;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 2%;
-  margin-top: 2%;
 }
+
+.contact-enquiry-title {
+  text-align: left;
+  margin-left: 10%;
+  padding: 2%;
+  color: white;
+  padding: 1%;
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .contact-details-submit {
   background-color: #232E3A; 
   border: none; 
@@ -598,26 +614,31 @@
   font-family: 'Times New Roman', Times, serif;
 }
 .details-info-boxes-enquiry{
+  border-radius: 5px;
   background-color: white;
-  width: 90%;
-  height: 40%;
-  padding: 0;
-  margin-top: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
+  width: 100%;
+  height: 90%;
+  margin-top: 2%;
+  margin-left: 0px;
+  border: 0px;
 }
 .contact-enquiry-text-box {
   background-color: #0395ca;
   width: 100%;
   height: 90%;
-  padding: 20px;
-  margin-top: 15px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-bottom: 15px;
+  padding: 0;
+  margin-top: auto;
+  margin-left: 0%;
+  margin-right: 0%;
+  margin-bottom: 5%;
   color: white;
+  border: 0px;
 }
+
+.contact-enquiry-text-box-table {
+  width: 90%;
+}
+
 /* End of contact us page divs */
 
 @keyframes App-logo-spin {
