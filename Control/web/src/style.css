@@ -30,7 +30,7 @@
   height: 100vh;
 }
 .image {
-  background-image: url('./BackgroundTemp.png');
+  background-image: url('./Background.png');
   background-size: cover; /* Cover the entire area */
   background-position: center; /* Center the image */
   position: absolute;
