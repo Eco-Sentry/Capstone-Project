@@ -146,7 +146,7 @@ function Home() {
                           </div>
                         </td>
                         <td class="welcome-table-c2">
-                            <iframe title="Welcome Video" height="400px" width="100%" src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1"></iframe>
+                            <iframe title="Welcome Video" height="400px" width="100%" src="https://www.youtube.com/embed/tgbNymZ7vqY?"></iframe>
                         </td>
                     </tr>
                 </table>
