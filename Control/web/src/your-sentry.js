@@ -14,12 +14,12 @@ const SentriesTable = ({ sentries, onViewButtonClick}) => {
     <table className="sentriesListTable">
       <thead>
         <tr className="th-sentryTable">
-          <th className="th-sentryTable">S/N</th>
-          <th className="th-sentryTable">NAME</th>
-          <th className="th-sentryTable">LOCATION</th>
-          <th className="th-sentryTable">STATUS</th>
-          <th className="th-sentryTable">ACCESS</th>
-          <th className="th-sentryTable">ACTIONS</th>
+          <th className="th-sentryTable"><div className= "mySentHeader">S/N</div></th>
+          <th className="th-sentryTable"><div className= "mySentHeader">NAME</div></th>
+          <th className="th-sentryTable"><div className= "mySentHeader">LOCATION</div></th>
+          <th className="th-sentryTable"><div className= "mySentHeader">STATUS</div></th>
+          <th className="th-sentryTable"><div className= "mySentHeader">ACCESS</div></th>
+          <th className="th-sentryTable"><div className= "mySentHeader">ACTIONS</div></th>
         </tr>
       </thead>
       <tbody>
@@ -37,11 +37,11 @@ const SentriesTable = ({ sentries, onViewButtonClick}) => {
             </td>
             <td className="tr-sentryTable">{sentry.access}</td>
             <td className="tr-sentryTable">
-              <p>
-                <button className="yourSent-view-button" onClick={() => onViewButtonClick(sentry)}>
+              
+                <button className="mySent-view-button" onClick={() => onViewButtonClick(sentry)}>
                   View
                 </button>
-              </p>
+              
             </td>
           </tr>
         ))}
@@ -144,18 +144,19 @@ const YourSentry = () => {
         return (
           <div className="sentry-info-box">
             <div id="revealToken">
-              <div style={{textAlign: 'left', padding: '20px', marginTop: '-85px', marginLeft: '25px'}}>
-              <span style={{fontSize: '16px', fontWeight: 'bold'}}>Reveal Token:</span>
-              <input style={{width: '150px', height: '20px'}} id= "token" type="text" value= {token}/> &nbsp;
+              <div style={{textAlign: 'left', padding: '20px', marginTop: '-85px', marginLeft: '-4px'}}>
+              <span style={{fontSize: '16px', fontWeight: 'bold'}}>Reveal Token: </span>
+              <input style={{width: '150px', height: '20px', backgroundColor: '#B0DCC7', color: '#103438', border: '0'}} id= "token" type="text" value= {token}/> &nbsp;
                   
-                    <button className="copy-button" data-clipboard-text={token}>
+                    <button className="copy-button" style={{width: '15%'}} data-clipboard-text={token}>
                       {showCopyButton ? 'Copied!' : 'Click to Copy'}
                     </button>
               </div>
               </div>
 
               <br/>
-
+            {/* here */}
+            <div style={{backgroundColor: '#FFF3E4', padding: '3%'}}>
             <div  className= "sentry-graphs">
                 <div id="uptime">
                   <p style={{textAlign: 'left', borderBottom: '1px solid', borderColor: '#232E3A',padding: '10px'}}>
@@ -188,40 +189,41 @@ const YourSentry = () => {
             <table className="sensorTable">
                 <thead>
                   <tr>
-                    <th style={{ backgroundColor: '#F7F9FC', fontSize: "22px"}}>Sensor Type</th>
-                    <th style={{ backgroundColor: '#F7F9FC', fontSize: "22px"}}>Channel</th>
-                    <th style={{ backgroundColor: '#F7F9FC', fontSize: "22px"}}>Status</th>
-                    <th style={{ backgroundColor: '#F7F9FC', fontSize: "22px"}}></th>
+                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Sensor Type</th>
+                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Channel</th>
+                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Status</th>
+                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>Temperature</td>
                     <td>Channel 1</td>
-                    <td className="sensorStatus connected">Connected</td>
-                    <td><button className="yourSent-view-button">View</button></td>
+                    <td><span className="sensorStatus connected">Connected</span></td>
+                    <td><button className="mySent-view-button">View</button></td>
                   </tr>
                   <tr>
                     <td>Humidity</td>
                     <td>Channel 2</td>
-                    <td className="sensorStatus error">Error</td>
-                    <td><button className="yourSent-view-button">View</button></td>
+                    <td><span className="sensorStatus error">Error</span></td>
+                    <td><button className="mySent-view-button">View</button></td>
                   </tr>
                   <tr>
                     <td>Pressure</td>
                     <td>Channel 3</td>
-                    <td className="sensorStatus connected">Connected</td>
-                    <td><button className="yourSent-view-button">View</button></td>
+                    <td><span className="sensorStatus connected">Connected</span></td>
+                    <td><button className="mySent-view-button">View</button></td>
                   </tr>
                   <tr>
                     <td>Chemical</td>
                     <td>Channel 4</td>
-                    <td className="sensorStatus error">Error</td>
-                    <td><button className="yourSent-view-button">View</button></td>
+                    <td><span className="sensorStatus error">Error</span></td>
+                    <td><button className="mySent-view-button">View</button></td>
                   </tr>
                 </tbody>
               </table>
 
+            </div>
             </div>
 
 
@@ -241,25 +243,25 @@ const YourSentry = () => {
               <input className="createSentryTextBoxes" type="text" placeholder="Latitude" />
                
               <div className="access-options">
-                  <p>Access:</p>
+                  <p style={{color: '#103438'}}>Access:</p>
                   <div className="radio-buttons">
                     <input type="radio" id="public" name="sentryVisibility" value="public" />
-                    <label htmlFor="public">Public</label>
+                    <label htmlFor="public" style={{color: '#103438'}}>Public</label>
                     
                     <input type="radio" id="private" name="sentryVisibility" value="private" />
-                    <label htmlFor="private">Private</label>
+                    <label htmlFor="private" style={{color: '#103438'}}>Private</label>
                   </div>
               </div>
 
-              <button className="sentry-details-create" onClick={handleCreateSentry}>Create</button>
+              <button className="sentry-details-create" style={{width: '50%'}} onClick={handleCreateSentry}>Create</button>
             </div>
             <div>
             {token && (
               <div className="tokenDiv">
-                <p><b>Token</b> <br></br>
+                <p><b style={{color: '#103438'}}>Token</b> <br></br>
 
                     <input className="tokenCode" id= "token" type="text" value= {token}/> &nbsp;
-                  
+                  <br/>
                     <button className="copy-button" data-clipboard-text={token}>
                       {showCopyButton ? 'Copied!' : 'Click to Copy'}
                     </button>
@@ -287,7 +289,7 @@ const YourSentry = () => {
       <div className="yourSent-main">
         <div className="yourSent-box">
           <div id="yourSentDivTitle">
-            <h3>{currentSection === 'sentries' ? 'SENTRIES' : currentSection}</h3>
+            <h3>{currentSection === 'sentries' ? 'My Sentries' : currentSection}</h3>
             {currentSection === 'sentries' && (
                 <div className= "yourSentSearchDiv">
                     <input
