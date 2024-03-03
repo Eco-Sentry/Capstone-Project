@@ -10,31 +10,38 @@ function Login() {
     };
 
     return (
-        <div className='body'>
+        <div className='login'>
+        <style>{'body { background-color: #00A3A3; }'}</style>
         <h2>Login Page</h2>
-        <form>
-            <div>
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    id="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-            <button type="button" class="loginButton" onClick={handleLogin}>
-                Login
-            </button>
-        </form>
+
+        <table class="accountTable">
+                    <tr>
+                        <td className="accountInfoCell">
+                            <form>
+                                <input
+                                    placeholder=" Email"
+                                    className="accountDetails"
+                                    type="text"
+                                    id="username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                /> <br /> <br />
+                                <input
+                                    placeholder=" Password"
+                                    className="accountDetails"
+                                    type="password"
+                                    id="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                /> <br /> <br />
+
+                                <input onClick={handleLogin} className="yourSent-view-button" type="submit" value="Login" style={{height: '100%', width: 'auto', fontSize: '100%'}}/>
+                            </form>
+                            
+                        </td>
+                    </tr>
+                </table>
+                <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
         </div>
     );
 }

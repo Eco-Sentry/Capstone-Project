@@ -1,5 +1,5 @@
 nav {
-    background-color: #1E313A; 
+    background-color: #103438; 
     align-self:normal;
     display: flex;
     align-items: center;
@@ -18,7 +18,7 @@ nav {
   
   li {
     display: inline; /* Display list items horizontally */
-    margin-right: 5%; /* Margin between list items */
+    margin-right: 7%; /* Margin between list items */
     font-family: Helvetica;
     font-size: 100%;
     vertical-align: middle;

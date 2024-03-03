@@ -43,9 +43,9 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #1E313A;
+  background-color: #103438;
   overflow-x: hidden;
-  padding-top: 15%;
+  padding-top: 10%;
   color: white;
 }
 
@@ -69,13 +69,13 @@
 
 .yourSent-box {
   border-radius: 5px;
-  background-color: #FEF9EF;
+  background-color: white;
   max-width: 100%;
   max-height: 100%;
   padding-bottom: 100px;
   margin: 40px;
   color: #1E313A;
-  box-shadow: 0 0 10px 5px #70ABBD;
+  /* box-shadow: 0 0 10px 5px #103438; */
 }
 
 .yourSent-logoCircle {
@@ -92,28 +92,56 @@
 
 #yourSentDivTitle{
   text-align: left;
-  padding-left: 40px;
+  padding-left: 1%;
+  margin-bottom: -2%;
   font-size: xxx-large;
   text-shadow: -1px 4px 6px rgba(36, 50, 65, 0.5);
 }
 
 .yourSentriesSearchBar {
-  border-radius: 20px;
-  background-color: white;
+  border: 0;
+  border-radius: 3px;
+  background-color: #B0DCC7;
   width: 20%;
-  height: 5%;
+  height: 35px;
   padding: 5px;
   margin: 2%;
-  color: #223354;
+  color: #103438;
 }
 
 .yourSentSearchDiv{
-  margin-top: -50px;
-  margin-left: -35px;
+  margin-top: -5%;
+  margin-left: -1.9%;
 }
 
+
+.mySent-view-button {
+  background-color: #FFF3E4; 
+  border: 2px solid;
+  border-color: #D7B58F; 
+  color: #000000; 
+  width: 40%;
+  height: 65%;
+  padding: 5px 10px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 14px; 
+  margin: 4px 2px; 
+  cursor: pointer; 
+  border-radius: 5px; 
+}
+
+.mySent-view-button:hover {
+  border: 1px solid;
+  border-color: #FFF3E4;
+  background-color: #D7B58F; 
+  color: #000000;
+}
+
+
 .yourSent-view-button {
-  background-color: #232E3A; 
+  background-color: #103438; 
   border: none; 
   color: white; 
   padding: 5px 10px; 
@@ -137,26 +165,37 @@
   table-layout: auto ;
   width: 100%;
   height: 100px;
-  border-collapse: separate;
+  /* border-collapse: separate; */
   border-spacing: 0;
-  padding: 0;
+  padding: 1%;
   margin-top: 15px;
 }
 
 .th-sentryTable {
-  border: 1px solid;
-  border-radius: 20px;
-  border-color: #223354;
-  border-left: 0; 
-  border-right: 0;
-  background-color: #F6F8FB;
+  /* border: 1px solid; */
+  /* border-radius: 3px; */
+  padding: 1%;
+  /* border-color: #223354; */
+  /* border-left: 0;  */
+  /* border-right: 0; */
+  background-color: #FFF3E4;
   font-weight: 400;
-  font-size: medium;
+  font-size: 24px;
+}
+
+.mySentHeader{
+  /* border: 1px solid; */
+  border-radius: 5px;
+  background-color: white;
+  /* border-width: 10px; */
+  /* padding: 2%; */
+  /* height: 25%; */
+  /* width: 40%px; */
 }
 
 .tr-sentryTable {
-  background-color: white;
-  border-radius: 20px;
+  background-color: #FFF3E4;
+  /* border-radius: 20px; */
   font-weight: 600;
   font-size: large;
 }
@@ -172,17 +211,23 @@
 .createSentryTextBoxes{
   display: flex;
   border-radius: 5px;
-  background: rgb(249, 250, 250);
-  border: 1px solid rgb(181, 189, 196);
+  /* background: rgb(249, 250, 250); */
+  background-color: #B0DCC7;
+  /* border: 1px solid rgb(181, 189, 196); */
+  border: 0;
   font-size: 16px;
   height: 40px;
   width: 200%;
   line-height: 24px;
   padding: 5px;
   margin: 20px;
-  color: rgb(8, 9, 10);
+  /* color: rgb(8, 9, 10); */
+  color: #103438;
   box-shadow: none;
-  
+}
+
+.createSentryTextBoxes::placeholder{
+  color: #103438
 }
 
 .access-options {
@@ -214,7 +259,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 2px solid #ccc;
+  border: 1px solid #103438;
   margin-right: 5px;
 }
 
@@ -258,29 +303,32 @@
 
 .tokenDiv{
   margin-top: 6%;
-  background-color: white;
-  border: 1px solid;
+  background-color: #FFF3E4;
+  border: 0;
   border-radius: 5px;
   text-align: left;
-  width: 120%;
+  width: 140%;
   padding-left: 40px;
   padding-bottom: 20px;
   overflow: auto;
 }
 
 .tokenCode{
-  border: 1px solid;
-  background-color: #D2D2D2;
-  width: 70%;
+  border: 0;
+  background-color: #DED3BB;
+  width:  80%;
   height: 30px;
+  color: #103438;
 }
 
 .copy-button{
   text-align: center;
   border-radius: 5px;
-  background-color: #1E313A;
-  color: white;
+  background-color: #DED3BB;
+  border-color: #000000;
+  color: #103438;
   cursor: pointer;
+  width: 40%;
 }
 
 .sentry-graphs {
@@ -290,26 +338,30 @@
 
 #uptime {
   background-color: white;
-  border: 1px solid;
+  border: 0;
   /* border-color: red; */
   flex: 0.45; /* Adjust flex value to make it smaller */
   margin-right: 1px; 
-  margin-left: 30px;
+  margin-left: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 #connection {
   background-color: white;
-  border: 1px solid;
+  border: 0;
   /* border-color: blue; */
   flex: 0.45; /* Adjust flex value to make it smaller */
   margin-left: 1px; 
-  margin-right: 30px;
+  margin-right: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .sensorTable {
   font-size: 16px;
   width: 100%;
   border-collapse: collapse;
+  background-color: #DED3BB;
+  color: #103438;
 }
 
 .sensorTable th, .sensorTable td {
@@ -322,9 +374,9 @@
   width: 25%;
 }
 
-.sensorTable td {
+/* .sensorTable td {
   border-bottom: 1px solid #EEEEEE;
-}
+} */
 
 .sensorTable tr{
   padding: 10px;
@@ -335,23 +387,29 @@
 }
 
 .sensorStatus {
-  width: auto; 
-  height: auto; 
-  border-radius: 100px; 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  /* width: auto; 
+  height: auto;  */
+  /* border-radius: 100px;  */
+  border-radius: 5px;
+  display: inline-block;
+  padding: 2%;
+  /* align-items: center;
+  justify-content: center; */
   /* font-size: 20px; */
 }
 
 .error {
-  background-color: rgba(211, 64, 83, 0.1);
-  color: #D34053;
+  /* background-color: rgba(211, 64, 83, 0.1);
+  color: #D34053; */
+  background-color: #FFD1D1;
+  color: #FF6565;
 }
 
 .connected {
-  background-color: rgba(33, 150, 83, 0.1);
-  color: #219653;
+  /* background-color: rgba(33, 150, 83, 0.1);
+  color: #219653; */
+  background-color: #CCE9CF;
+  color: #48BE00;
 }
 /*End of dashboard divs*/
 
@@ -490,6 +548,12 @@
 /* End of about page divs */
 
 /* Start of contact us page divs */
+
+.container-contact {
+  height: 100%;
+  width: 100%;
+}
+
 .contact-map { 
   width: 100%;
   margin-left: 5%;
@@ -506,7 +570,7 @@
   padding: 0;
 }
 .details-text-box {
-  background-color: #449074;
+  background-color: #b0dcc7;
   width: 100%;
   height: 100%;
   padding: 5px;
@@ -516,13 +580,14 @@
   color: white;
 }
 .details-info-boxes {
+  border-radius: 5px;
   background-color: white;
+  margin-top: 1%;
   width: 90%;
-  height: 10%;
-  margin-top: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
+  height: 50%;
+  border: 0px;
+  padding:1.5%;
+  color: #0395ca;
 }
 .details-info-boxes-input{
   border-radius: 5px;
@@ -530,17 +595,26 @@
   margin-top: 1%;
   width: 70%;
   height: 50%;
+  border: 0px;
   padding:1.5%;
   color: #0395ca;
 }
 .contact-h1 {
+  text-align: left;
+  padding: 0;
   color: white;
   font-family: 'Times New Roman', Times, serif;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 2%;
-  margin-top: 2%;
 }
+
+.contact-enquiry-title {
+  text-align: left;
+  margin-left: 10%;
+  padding: 2%;
+  color: white;
+  padding: 1%;
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .contact-details-submit {
   background-color: #232E3A; 
   border: none; 
@@ -598,26 +672,31 @@
   font-family: 'Times New Roman', Times, serif;
 }
 .details-info-boxes-enquiry{
+  border-radius: 5px;
   background-color: white;
-  width: 90%;
-  height: 40%;
-  padding: 0;
-  margin-top: 15px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
+  width: 100%;
+  height: 90%;
+  margin-top: 2%;
+  margin-left: 0px;
+  border: 0px;
 }
 .contact-enquiry-text-box {
   background-color: #0395ca;
   width: 100%;
   height: 90%;
-  padding: 20px;
-  margin-top: 15px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-bottom: 15px;
+  padding: 0;
+  margin-top: auto;
+  margin-left: 0%;
+  margin-right: 0%;
+  margin-bottom: 5%;
   color: white;
+  border: 0px;
 }
+
+.contact-enquiry-text-box-table {
+  width: 90%;
+}
+
 /* End of contact us page divs */
 
 @keyframes App-logo-spin {
@@ -755,7 +834,7 @@
 
 .addressInput {
   border-style: none;
-  border-radius: 25px;
+  border-radius: 10px;
   font-size: 150%;
   width: 55%;
   padding-left: 1%;
@@ -768,7 +847,7 @@
 
 .longlatInput {
   border-style: none;
-  border-radius: 25px;
+  border-radius: 10px;
   font-size: 150%;
   width: 15%;
   padding-left: 1%;
@@ -796,11 +875,74 @@
   border-collapse: collapse;
   border-spacing: 0;
   padding: 0;
-  margin-top: 15px;
+  margin-top: 2%;
+}
+
+/* Checkboxes */
+.graphType {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.graphType input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  margin-left: 20%;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.graphType:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.graphType input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+.graphType:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.graphType input:checked ~ .checkmark:after {
+  display: block;
+}
+.graphType .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 
 /* LOGIN PAGE  */
+.login {
+  background-color: #00A3A3;
+}
+
 .loginButton {
   transition-duration: 0.5s;
   background-color: #45B667;
