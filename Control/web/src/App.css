@@ -45,7 +45,7 @@
   left: 0;
   background-color: #103438;
   overflow-x: hidden;
-  padding-top: 15%;
+  padding-top: 10%;
   color: white;
 }
 
@@ -834,7 +834,7 @@
 
 .addressInput {
   border-style: none;
-  border-radius: 25px;
+  border-radius: 10px;
   font-size: 150%;
   width: 55%;
   padding-left: 1%;
@@ -847,7 +847,7 @@
 
 .longlatInput {
   border-style: none;
-  border-radius: 25px;
+  border-radius: 10px;
   font-size: 150%;
   width: 15%;
   padding-left: 1%;
@@ -875,7 +875,66 @@
   border-collapse: collapse;
   border-spacing: 0;
   padding: 0;
-  margin-top: 15px;
+  margin-top: 2%;
+}
+
+/* Checkboxes */
+.graphType {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.graphType input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  margin-left: 20%;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.graphType:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.graphType input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+.graphType:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.graphType input:checked ~ .checkmark:after {
+  display: block;
+}
+.graphType .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 
