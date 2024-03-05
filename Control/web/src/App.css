@@ -497,9 +497,9 @@
 .founder-text-box {
   border-radius: 20px;
   background-color: #103438;
-  width: 60%;
-  height: 60%;
-  padding: 15%;
+  width: 65%;
+  height: 50%;
+  padding: 10%;
   margin-top: 2%;
   margin-left: 5%;
   margin-right: 15%;
@@ -534,12 +534,12 @@
 }
 
 .about-profileCircle {
-  background-color: white;
-  border-color: #267646;
+  background-image: url('./Background.png');
+  border-color: #2dc0e7;
   border-width: 0.5%;
   border-style: solid;
-  height: 100%;
-  width: 95%;
+  height: 150px;
+  width: 80%;
   padding: 5%;
   border-radius: 50%;
   display: inline-block;

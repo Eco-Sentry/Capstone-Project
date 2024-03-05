@@ -137,28 +137,14 @@ function Home() {
         
         <div class="About-page">
             <div class="container-about">
-                <table class="about-welcome-table">
-                    <tr>
-                        <td class="welcome-table-c1">
-                          <div class="about-background">
-                            <div class="h3-about2">About Us</div>
-                            <div class="about-text-box">From a group of friends to a project team, we created this solution to the growing problem of lack of consintrated and free data. Many weather stations and data collectors span a great range but are also congragated to specific locaiotns such that ........  </div>
-                          </div>
-                        </td>
-                        <td class="welcome-table-c2">
-                            <iframe title="Welcome Video" height="400px" width="100%" src="https://www.youtube.com/embed/tgbNymZ7vqY?"></iframe>
-                        </td>
-                    </tr>
-                </table>
-                
-                <div class="h3-about">Founders</div>
+                <h2>Founders</h2>
                 <div id="aboutPersonElement">
                     <table class="center-table">
                         <tr>
                             <td class="center-tableRows">
                                 <div class="containerByron">
                                     <div class="founder-text-box" onMouseEnter={() => setByronIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setByronIsShown(false) + setGroupTableIsShown(true)}>
-                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div>
+                                        <div class="about-profileCircle">  </div>
                                         <br></br> 
                                         <h2>Byron</h2> 
                                         <h3>Backend</h3>
@@ -168,7 +154,7 @@ function Home() {
                             <td class="center-tableRows"> 
                                 <div class="containerByron">
                                     <div class="founder-text-box" onMouseEnter={() => setEstebanIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setEstebanIsShown(false) + setGroupTableIsShown(true)}> 
-                                        <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div>
+                                        <div class="about-profileCircle"></div>
                                         <br></br> 
                                         <h2>Esteban</h2> 
                                         <h3>Hardware</h3>
@@ -177,7 +163,7 @@ function Home() {
                             </td>
                             <td class="center-tableRows">
                                 <div class="founder-text-box" onMouseEnter={() => setEddieIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setEddieIsShown(false) + setGroupTableIsShown(true)}> 
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                    <div class="about-profileCircle"> </div> 
                                     <br></br> 
                                     <h2>Eddie</h2>
                                     <h3>Backend & Frontend</h3>
@@ -187,7 +173,7 @@ function Home() {
                         <tr>
                             <td class="center-tableRows">
                                 <div class="founder-text-box" onMouseEnter={() => setSavannahIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setSavannahIsShown(false) + setGroupTableIsShown(true)}> 
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div>
+                                    <div class="about-profileCircle">  </div>
                                     <br></br> 
                                     <h2>Savannah</h2>
                                     <h3>Frontend</h3>
@@ -195,7 +181,7 @@ function Home() {
                             </td>
                             <td class="center-tableRows">
                                 <div class="founder-text-box" onMouseEnter={() => setNickIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setNickIsShown(false) + setGroupTableIsShown(true)}> 
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div>
+                                    <div class="about-profileCircle"> </div>
                                     <br></br> 
                                     <h2>Nick</h2> 
                                     <h3>Frontend</h3>
@@ -203,7 +189,7 @@ function Home() {
                             </td>
                             <td class="center-tableRows">
                                 <div class="founder-text-box" onMouseEnter={() => setJenaIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setJenaIsShown(false) + setGroupTableIsShown(true)}> 
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div>
+                                    <div class="about-profileCircle">  </div>
                                     <br></br> 
                                     <h2>Jena</h2> 
                                     <h3>Frontend</h3>
@@ -217,7 +203,7 @@ function Home() {
                         <table class="aboutUs-table">
                             <tr>
                                 <td class="center-tableRows2">
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                    <div class="about-profileCircle">  </div> 
                                     <br></br> 
                                     <h2>Byron</h2> 
                                     <h3>Backend</h3>
@@ -235,7 +221,7 @@ function Home() {
                         <table class="aboutUs-table">
                             <tr>
                                 <td class="center-tableRows2">
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                    <div class="about-profileCircle">  </div> 
                                     <br></br> 
                                     <h2>Esteban</h2> 
                                     <h3>Hardware</h3>
@@ -253,7 +239,7 @@ function Home() {
                         <table class="aboutUs-table">
                             <tr>
                                 <td class="center-tableRows2">
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                    <div class="about-profileCircle">  </div> 
                                     <br></br> 
                                     <h2>Eddie</h2> 
                                     <h3>Backend & Frontend</h3>
@@ -271,7 +257,7 @@ function Home() {
                         <table class="aboutUs-table">
                             <tr>
                                 <td class="center-tableRows2">
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                    <div class="about-profileCircle">  </div> 
                                     <br></br> 
                                     <h2>Savannah</h2> 
                                     <h3>Frontend</h3>
@@ -289,7 +275,7 @@ function Home() {
                         <table class="aboutUs-table">
                             <tr>
                                 <td class="center-tableRows2">
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                    <div class="about-profileCircle"> </div> 
                                     <br></br> 
                                     <h2>Nick</h2> 
                                     <h3>Frontend</h3>
@@ -307,7 +293,7 @@ function Home() {
                         <table class="aboutUs-table">
                             <tr>
                                 <td class="center-tableRows2">
-                                    <div class="about-profileCircle"> <img src="placeholder.jpg" alt="placeholder" /> </div> 
+                                    <div class="about-profileCircle"> </div> 
                                     <br></br> 
                                     <h2>Jena</h2> 
                                     <h3>Frontend</h3>
@@ -325,6 +311,25 @@ function Home() {
     </div>  
     );
 }
+
+
+
+/*
+<table class="about-welcome-table">
+                    <tr>
+                        <td class="welcome-table-c1">
+                          <div class="about-background">
+                            <div class="h3-about2">About Us</div>
+                            <div class="about-text-box">From a group of friends to a project team, we created this solution to the growing problem of lack of consintrated and free data. Many weather stations and data collectors span a great range but are also congragated to specific locaiotns such that ........  </div>
+                          </div>
+                        </td>
+                        <td class="welcome-table-c2">
+                            <iframe title="Welcome Video" height="400px" width="100%" src="https://www.youtube.com/embed/tgbNymZ7vqY?"></iframe>
+                        </td>
+                    </tr>
+                </table>
+*/
+
 
 export default Home;
 
