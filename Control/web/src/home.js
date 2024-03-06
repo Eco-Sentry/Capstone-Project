@@ -49,7 +49,6 @@ function Home() {
   const [isSavannahShown, setSavannahIsShown] = useState(false);
   const [isNickShown, setNickIsShown] = useState(false);
   const [isJenaShown, setJenaIsShown] = useState(false);
-  const [isGroupTableIsShown, setGroupTableIsShown] = useState(true);
   //About page - end
 
   return (
@@ -143,7 +142,7 @@ function Home() {
                         <tr>
                             <td class="center-tableRows">
                                 <div class="containerByron">
-                                    <div class="founder-text-box" onMouseEnter={() => setByronIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setByronIsShown(false) + setGroupTableIsShown(true)}>
+                                    <div class="founder-text-box" onMouseEnter={() => setByronIsShown(true)} onMouseLeave={() => setByronIsShown(false)}>
                                         <div class="about-profileCircle">  </div>
                                         <br></br> 
                                         <h2>Byron</h2> 
@@ -153,7 +152,7 @@ function Home() {
                             </td>
                             <td class="center-tableRows"> 
                                 <div class="containerByron">
-                                    <div class="founder-text-box" onMouseEnter={() => setEstebanIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setEstebanIsShown(false) + setGroupTableIsShown(true)}> 
+                                    <div class="founder-text-box" onMouseEnter={() => setEstebanIsShown(true)} onMouseLeave={() => setEstebanIsShown(false)}> 
                                         <div class="about-profileCircle"></div>
                                         <br></br> 
                                         <h2>Esteban</h2> 
@@ -162,7 +161,7 @@ function Home() {
                                 </div>
                             </td>
                             <td class="center-tableRows">
-                                <div class="founder-text-box" onMouseEnter={() => setEddieIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setEddieIsShown(false) + setGroupTableIsShown(true)}> 
+                                <div class="founder-text-box" onMouseEnter={() => setEddieIsShown(true)} onMouseLeave={() => setEddieIsShown(false)}> 
                                     <div class="about-profileCircle"> </div> 
                                     <br></br> 
                                     <h2>Eddie</h2>
@@ -172,7 +171,7 @@ function Home() {
                         </tr>
                         <tr>
                             <td class="center-tableRows">
-                                <div class="founder-text-box" onMouseEnter={() => setSavannahIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setSavannahIsShown(false) + setGroupTableIsShown(true)}> 
+                                <div class="founder-text-box" onMouseEnter={() => setSavannahIsShown(true)} onMouseLeave={() => setSavannahIsShown(false)}> 
                                     <div class="about-profileCircle">  </div>
                                     <br></br> 
                                     <h2>Savannah</h2>
@@ -180,7 +179,7 @@ function Home() {
                                 </div>
                             </td>
                             <td class="center-tableRows">
-                                <div class="founder-text-box" onMouseEnter={() => setNickIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setNickIsShown(false) + setGroupTableIsShown(true)}> 
+                                <div class="founder-text-box" onMouseEnter={() => setNickIsShown(true)} onMouseLeave={() => setNickIsShown(false)}> 
                                     <div class="about-profileCircle"> </div>
                                     <br></br> 
                                     <h2>Nick</h2> 
@@ -188,7 +187,7 @@ function Home() {
                                 </div>
                             </td>
                             <td class="center-tableRows">
-                                <div class="founder-text-box" onMouseEnter={() => setJenaIsShown(true) + setGroupTableIsShown(false)} onMouseLeave={() => setJenaIsShown(false) + setGroupTableIsShown(true)}> 
+                                <div class="founder-text-box" onMouseEnter={() => setJenaIsShown(true)} onMouseLeave={() => setJenaIsShown(false)}> 
                                     <div class="about-profileCircle">  </div>
                                     <br></br> 
                                     <h2>Jena</h2> 
