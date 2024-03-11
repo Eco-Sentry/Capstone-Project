@@ -197,7 +197,17 @@ function Home() {
                         </tr>
                     </table>
                 </div>
-                {isByronShown && (
+                
+            </div>
+        </div>
+    </div>  
+    );
+}
+
+
+
+/*
+{isByronShown && (
                     <div class="aboutUs-text-box">
                         <table class="aboutUs-table">
                             <tr>
@@ -305,15 +315,18 @@ function Home() {
                         </table>
                     </div>
                 )}
-            </div>
-        </div>
-    </div>  
-    );
-}
 
 
 
-/*
+
+
+
+
+
+
+
+
+
 <table class="about-welcome-table">
                     <tr>
                         <td class="welcome-table-c1">
