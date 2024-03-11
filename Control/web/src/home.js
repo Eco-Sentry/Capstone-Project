@@ -109,30 +109,6 @@ function Home() {
             </div>
           </div>
 
-          <div className='section'> 
-          <div>
-            <h2>Partners</h2>
-          </div>
-            <div className='row'>
-              <div className='column'>
-                <div className='boxOne'>
-                  <h5>TOP LEFT</h5>
-                </div>
-                <div className='boxOne'>
-                  <h5>BOT LEFT</h5>
-                </div>
-              </div>
-              <div className='column'>
-                <div className='boxOne'>
-                  <h5>TOP RIGHT</h5>
-                </div>
-                <div className='boxOne'>
-                  <h5>BOT RIGHT</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-
         
         <div class="About-page">
             <div class="container-about">
