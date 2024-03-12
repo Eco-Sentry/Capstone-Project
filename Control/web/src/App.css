@@ -548,27 +548,65 @@
 /* End of about page divs */
 
 /* Start of contact us page divs */
-
-.container-contact {
+.contact-get-in-touch-table {
+  table-layout: fixed ;
+  width: 100%;
   height: 100%;
+  border-collapse: collapse;
+}
+.details-info-boxes {
+  background-color: #b0dcc7;
+  margin-top: 1%;
   width: 100%;
+  height: 100%;
+  border: 0px;
+  padding:1.5%;
+  text-align: left;
+  text-align: top;
+  color: black;
 }
 
-.contact-map { 
-  width: 100%;
-  margin-left: 5%;
-}
 .contact-center-table {
   table-layout: fixed ;
   margin-top: 3%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 3%;
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
   border-spacing: 0;
   padding: 0;
+  text-align: left;
 }
+
+.contact-map { 
+  width: 90%;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+
+
+
+
+
+
+
+
+.contact-details-table {
+  width: 70%;
+  height: 40%;
+  padding: 1px;
+  margin: auto;
+}
+
+.container-contact {
+  height: 100%;
+  width: 100%;
+}
+
+
+
 .details-text-box {
   background-color: #b0dcc7;
   width: 100%;
@@ -579,16 +617,7 @@
   margin-bottom: 15px;
   color: white;
 }
-.details-info-boxes {
-  border-radius: 5px;
-  background-color: white;
-  margin-top: 1%;
-  width: 90%;
-  height: 50%;
-  border: 0px;
-  padding:1.5%;
-  color: #0395ca;
-}
+
 .details-info-boxes-input{
   border-radius: 5px;
   background-color: white;
@@ -636,12 +665,7 @@
   color: #232E3A;
 }
 
-.contact-details-table {
-  width: 70%;
-  height: 40%;
-  padding: 1px;
-  margin: auto;
-}
+
 .contact-details-table-col1 {
   width: 10%;
   height: 50%;
