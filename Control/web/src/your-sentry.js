@@ -4,8 +4,9 @@ import greenImage from './green.png';
 import redImage from './red.png';
 // import uptime from './temp-uptime.png';
 // import connection from './temp-connection.png';
-import UptimeGraph from './UptimeGraph'; 
-import ConnectionGraph from './ConnectionGraph';
+import UptimeGraph from './components/UptimeGraph'; 
+import ConnectionGraph from './components/ConnectionGraph';
+import SensorInfo from './SensorInfo';
 
 
 // SentriesTable Component
@@ -128,6 +129,14 @@ const YourSentry = () => {
     setCurrentSection('SENTRY INFO');
   };
 
+  const handleViewButtonClickSensorInfo = sentry => {
+    setSelectedSentry(sentry);
+    setCurrentSection('SENSOR INFO');
+
+    // const sensorName = sentry.sensorName;
+    // handleDownloadPDF(sensorName);
+  };
+
   useEffect(() => {
     return () => {
       // Reset
@@ -189,7 +198,7 @@ const YourSentry = () => {
             <table className="sensorTable">
                 <thead>
                   <tr>
-                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Sensor Type</th>
+                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Sensor Name</th>
                     <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Channel</th>
                     <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Status</th>
                     <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Actions</th>
@@ -200,25 +209,25 @@ const YourSentry = () => {
                     <td>Temperature</td>
                     <td>Channel 1</td>
                     <td><span className="sensorStatus connected">Connected</span></td>
-                    <td><button className="mySent-view-button">View</button></td>
+                    <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
                   </tr>
                   <tr>
                     <td>Humidity</td>
                     <td>Channel 2</td>
                     <td><span className="sensorStatus error">Error</span></td>
-                    <td><button className="mySent-view-button">View</button></td>
+                    <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
                   </tr>
                   <tr>
                     <td>Pressure</td>
                     <td>Channel 3</td>
                     <td><span className="sensorStatus connected">Connected</span></td>
-                    <td><button className="mySent-view-button">View</button></td>
+                    <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
                   </tr>
                   <tr>
                     <td>Chemical</td>
                     <td>Channel 4</td>
                     <td><span className="sensorStatus error">Error</span></td>
-                    <td><button className="mySent-view-button">View</button></td>
+                    <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -233,6 +242,10 @@ const YourSentry = () => {
             <p>Location: {selectedSentry.location}</p> */}
           </div>
         );
+
+      case 'SENSOR INFO':
+        return <SensorInfo />;
+
         
       case 'CREATE A SENTRY':
         return (
