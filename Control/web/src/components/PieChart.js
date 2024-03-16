@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-const PieGraph = () => {
+const PieGraph = ({id}) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -47,11 +47,11 @@ const PieGraph = () => {
         chartInstance.destroy();
       }
     };
-  }, []); // Empty dependency array to ensure the effect runs only once
+  }, [id]); // Empty dependency array to ensure the effect runs only once
 
   return (
     <div className="chart-container"> 
-      <canvas ref={chartRef} width='800' height='400' />
+      <canvas ref={chartRef} id= {id} width='800' height='400' />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-const UptimeGraph = () => {
+const UptimeGraph = ({id}) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const UptimeGraph = () => {
         chartInstance.destroy(); 
       }
     };
-  }, []);
+  }, [id]);
 
   return (
     <div className="uptime-graph">
