@@ -585,143 +585,64 @@
   margin-bottom: 50px;
 }
 
+/* End of contact us page divs */
 
+/* home page - sav */
 
-
-
-
-
-
-
-.contact-details-table {
-  width: 70%;
-  height: 40%;
-  padding: 1px;
+.homePage-ourMission-table {
+  width: 95%;
   margin: auto;
-}
-
-.container-contact {
-  height: 100%;
-  width: 100%;
-}
-
-
-
-.details-text-box {
-  background-color: #b0dcc7;
-  width: 100%;
-  height: 100%;
-  padding: 5px;
-  margin-top: 15px;
-  margin-left: 10%;
-  margin-bottom: 15px;
-  color: white;
-}
-
-.details-info-boxes-input{
-  border-radius: 5px;
-  background-color: white;
-  margin-top: 1%;
-  width: 70%;
-  height: 50%;
-  border: 0px;
-  padding:1.5%;
-  color: #0395ca;
-}
-.contact-h1 {
-  text-align: left;
-  padding: 0;
-  color: white;
-  font-family: 'Times New Roman', Times, serif;
-}
-
-.contact-enquiry-title {
-  text-align: left;
-  margin-left: 10%;
-  padding: 2%;
-  color: white;
-  padding: 1%;
-  font-family: 'Times New Roman', Times, serif;
-}
-
-.contact-details-submit {
-  background-color: #232E3A; 
-  border: none; 
-  color: white; 
-  padding: 5px 10px; 
-  text-align: center; 
-  text-decoration: none; 
-  display: inline-block; 
-  font-size: 14px; 
-  margin: 4px 2px; 
-  cursor: pointer; 
-  border-radius: 10px; 
-}
-
-.contact-details-submit:hover {
-  border: 1px solid;
-  border-color: #232E3A;
-  background-color: white; 
-  color: #232E3A;
-}
-
-
-.contact-details-table-col1 {
-  width: 10%;
-  height: 50%;
   text-align: center;
 }
-.contact-center-table-col1 {
+
+.homePage-ourMission-table-c1 {
   width: 40%;
-}
-.contact-center-table-col1 {
-  width: 60%;
-}
-.contact-details-table-col2 {
-  width: 60%;
-  height: 50%;
-}
-.h2-contact {
-  text-align: left;
-  margin-left: 5%;
-  font-weight: bold;
-  padding: 0;
-  text-decoration-line: underline;
-}
-.h3-contact {
-  text-align: right;
-  margin-left: 5%;
-  padding: 0;
-  color: white;
-  font-family: 'Times New Roman', Times, serif;
-}
-.details-info-boxes-enquiry{
-  border-radius: 5px;
-  background-color: white;
-  width: 100%;
-  height: 90%;
-  margin-top: 2%;
-  margin-left: 0px;
-  border: 0px;
-}
-.contact-enquiry-text-box {
-  background-color: #0395ca;
-  width: 100%;
-  height: 90%;
-  padding: 0;
-  margin-top: auto;
-  margin-left: 0%;
-  margin-right: 0%;
-  margin-bottom: 5%;
-  color: white;
-  border: 0px;
+  background-color: #DED3BB;
 }
 
-.contact-enquiry-text-box-table {
+.homePage-ourMission-table-c2 {
+  width: 60%;
+  background-color: #b0dcc7;
+  font-size: 60%;
+  padding: 5%;
+}
+
+.charts-graphs-table {
   width: 90%;
+  padding: 5%;
+  margin: auto;
+  text-align: center;
 }
 
-/* End of contact us page divs */
+.charts-graphs-table-c1 {
+  text-align: left;
+}
+
+.charts-graphs-table-c2 {
+  text-align: right;
+}
+
+.homePage-aboutUs-table {
+  width: 95%;
+  margin: auto;
+  margin-bottom: 10%;
+  text-align: center;
+}
+
+.homePage-aboutUs-table-c1 {
+  width: 60%;
+  background-color: #b0dcc7;
+  font-size: 60%;
+  padding: 5%;
+}
+
+.homePage-aboutUs-table-c2 {
+  width: 40%;
+  background-color: #DED3BB;
+  
+}
+
+/* end of home page - sav */
 
 @keyframes App-logo-spin {
   from {
