@@ -123,7 +123,65 @@ function Home() {
                     <h1>About Us</h1>
                 </td>
             </tr>
-          </table>  
+          </table> 
+          <table class="center-table">
+                <tr>
+                    <td >
+                        <div class="containerByron">
+                            <div class="founder-text-box" >
+                                <div class="about-profileCircle">  </div>
+                                <br></br> 
+                                <h2>Byron</h2> 
+                                <h3>Backend</h3>
+                            </div>
+                        </div>
+                    </td>
+                    <td > 
+                        <div class="containerByron">
+                            <div class="founder-text-box" > 
+                                <div class="about-profileCircle"></div>
+                                <br></br> 
+                                <h2>Esteban</h2> 
+                                <h3>Hardware</h3>
+                            </div>
+                        </div>
+                    </td>
+                    <td >
+                    <div class="founder-text-box" > 
+                        <div class="about-profileCircle"> </div> 
+                            <br></br> 
+                            <h2>Eddie</h2>
+                            <h3>Backend & Frontend</h3>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="founder-text-box" > 
+                            <div class="about-profileCircle">  </div>
+                            <br></br> 
+                            <h2>Savannah</h2>
+                            <h3>Frontend</h3>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="founder-text-box" > 
+                            <div class="about-profileCircle"> </div>
+                            <br></br> 
+                            <h2>Nick</h2> 
+                            <h3>Frontend</h3>
+                        </div>
+                    </td>
+                    <td >
+                        <div class="founder-text-box" > 
+                            <div class="about-profileCircle">  </div>
+                            <br></br> 
+                            <h2>Jena</h2> 
+                            <h3>Frontend</h3>
+                        </div>
+                    </td>
+                </tr>
+            </table> 
     </div>  
     );
 }

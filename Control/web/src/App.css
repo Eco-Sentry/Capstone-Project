@@ -415,16 +415,7 @@
 
 /* About page divs */
 
-.center-table {
-  table-layout: fixed ;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  padding: 0;
-  height: auto;
-}
+
 
 .container-about {
   margin: auto;
@@ -494,43 +485,28 @@
   color: #1E313A;
 }
 
+
+
+
+
+.center-table {
+  table-layout: fixed;
+  margin: auto;
+  width: 95%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  height: auto;
+  margin-bottom: 5%;
+}
+
 .founder-text-box {
-  border-radius: 20px;
-  background-color: #103438;
-  width: 65%;
+  background-color: #F3F3F3;
+  width: 85%;
   height: 50%;
-  padding: 10%;
-  margin-top: 2%;
-  margin-left: 5%;
-  margin-right: 15%;
-  margin-bottom: 15%;
-  color: #b0dcc7;
-}
-
-.center-tableRows{
-  width: 30%;
-}
-
-.center-tableRows2{
-  width: 50%;
-  background-color: #103438;
-  color: #b0dcc7;
-}
-
-.h3-about {
-  text-align: left;
-  margin: 2%;
-  font-weight: bold;
-  padding: 0;
-  color: #0395ca;
-}
-
-.h3-about2 {
-  text-align: left;
+  padding: 5%;
+  margin: auto;
+  color: black;
   margin-top: 3%;
-  margin: 1%;
-  font-weight: bold;
-  padding: 0;
 }
 
 .about-profileCircle {
