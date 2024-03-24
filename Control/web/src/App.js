@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Navbar from './Navbar';
 import Login from './login';
@@ -14,6 +16,7 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
+        <ToastContainer />
           <Navbar />
           <Routes>
             <Route path="/home" element={<Home />} />

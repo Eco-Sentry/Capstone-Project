@@ -860,8 +860,19 @@
 
 
 /* LOGIN PAGE  */
-.login {
-  background-color: #00A3A3;
+.loginPage {
+  /* background-color: #00A3A3; */
+  /* height: 50vh; */
+  /* padding-top: 7%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginDiv {
+  background-color: #ffffff;
+  /* padding: 20px; */
+  /* width: 300px; */
 }
 
 .loginButton {
@@ -875,4 +886,61 @@
   border-radius: 10px;
   border: none;
   margin-top: 10px;
+}
+
+.loginText {
+  text-align: left;
+  background-color: #B0DCC7;
+  color: #103438;
+  border: 0;
+  border-radius: 3px;
+  font-size: 100%;
+  width: 80%;
+  height: max-content;
+  padding: 1%;
+}
+
+.loginText ::placeholder{
+  font-weight: 100;
+}
+
+/* toast container */
+.Toastify__toast-container {
+  width: 400px; 
+}
+
+/* toast message */
+.Toastify__toast {
+  font-size: 14px; 
+  background-color: #fff; 
+  color: #000000; 
+  border-radius: 8px; 
+  text-align: left;
+}
+
+/* toast body */
+.Toastify__toast-body {
+  padding: 12px; 
+}
+
+.create-account-button {
+  background-color: white; 
+  border: 1px solid; 
+  color: #232E3A; 
+  padding: 5px 10px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 14px; 
+  font-weight: 600;
+  margin: 4px 2px; 
+  cursor: pointer; 
+  border-radius: 10px; 
+}
+
+.create-account-button:hover {
+  border: 1px solid;
+  border-color: #232E3A;
+  background-color: #103438; 
+  color: white;
 }
