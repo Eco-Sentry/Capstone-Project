@@ -11,7 +11,7 @@ import PieChart from './components/PieChart';
 
 /* Added by (Jena) Heat Map*/
 import { useState } from 'react';
-import Heatmap from './components/heatmap';
+import Heatmap from './components/heatmapgoogle';
 import LineGraph from './components/LineGraph';
 import Histogram from './components/Histogram';
 
@@ -48,12 +48,47 @@ function Dashboard() {
     // Added by Jena - Result Types to display the HeatMap/LineGraph/Histogram
     const [resultType, setResultType] = useState('heat-map'); // State to track the selected result type - default to be heat
     const [selectedConditions, setSelectedConditions] = useState([]);
-    
+    // const [searchTerm, setSearchTerm] = useState('');
+    // const [location, setLocation] = useState({ lat: 0, lng: 0 });
+
+    // // SEARCH GOOGLE MAPS
+    // const handleChange = (event) => {
+    //   setSearchTerm(event.target.value);
+    // };
+    // const handleSearch = async () => {
+    //   try {
+    //       const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(searchTerm)}&key=AIzaSyASzqm2ZhLYvaPbm7eiojXN3ov9VcbmLgs`);
+    //       const data = await response.json();
+    //       if (data.results.length > 0) {
+    //           const location = data.results[0].geometry.location;
+    //           setLocation({ lat: location.lat, lng: location.lng });
+    //       } else {
+    //           console.log('No results found');
+    //       }
+    //   } catch (error) {
+    //       console.error('Error:', error);
+    //   }
+    // };
+    // const handleKeyPress = (event) => {
+    //   if (event.key === 'Enter') {
+    //       handleSearch();
+    //   }
+    // };
+  
     // Function to handle radio button change
     const handleResultTypeChange = (event) => {
       setResultType(event.target.value); // Update the selected result type when radio button changes
+      // Clear selected conditions when result type changes
+      setSelectedConditions([]);
+      // Uncheck all checkboxes
+      document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+      document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.checked = false;
+      });
     };
-
+    
     // Function to handle checkbox change
     const handleConditionChange = (event) => {
       const { id, checked } = event.target;
@@ -63,196 +98,106 @@ function Dashboard() {
         setSelectedConditions(prevConditions => prevConditions.filter(condition => condition !== id)); // Remove condition from the list if unchecked
       }
     };
-
-    // Function to render the  component based on the selected result type
+    
+    // Function to render the component based on the selected result type
     const renderResultComponent = () => {
       switch (resultType) {
-          case 'heat-map':
-            return renderHeatMap();
-          case 'line-graph':
-            return renderLineGraphs();
-          case 'histogram':
-            return renderHistograms();
-          default:
-            return null;
+        case 'heat-map':
+          return renderHeatMap();
+        case 'line-graph':
+          return renderLineGraphs();
+        case 'histogram':
+          return renderHistograms();
+        default:
+          return null;
       }
     };
-    const graphComponents = {
-      'heat-map': (id, heatmapData) => <Heatmap id={id} heatmapData={heatmapData} />,
-      'line-graph': (id, data) => <LineGraph id={id} data={data} />,
-      'histogram': (id, data) => <Histogram id={id} data={data} />,
-    };
-    // Function to render HeatMap component based on checked conditions
+    // Function to render Heatmap component based on selected conditions
     const renderHeatMap = () => {
-      if (resultType === 'heat-map' && selectedConditions.length === 0) {
+      // Find the selected condition
+      const selectedCondition = selectedConditions[0];
+
+      // If no condition is selected or the result type is not 'heat-map', render a placeholder message
+      if (!selectedCondition || resultType !== 'heat-map') {
+        const defaultData = [
+          { lat: -34.397, lng: 150.644, intensity: 0.5 },
+          { lat: -33.867, lng: 151.206, intensity: 0.8 },
+          { lat: -37.814, lng: 144.963, intensity: 0.3 },
+          // Add more default data points as needed
+        ];
         return (
           <div>
-            <div className='graph-title' style={{whiteSpace: 'nowrap'}}>Heat Map</div>
-            <div className='heatmap'><Heatmap /></div>
+            <div className='graph-title'>Heat Map</div> 
+            <Heatmap data={defaultData} />
           </div>
         );
       }
-      return selectedConditions.map((condition, index) => {
-        let heatmapData = [];
 
-        switch (condition) {
-          case 'precipitation':
-            heatmapData = [
-              [-34.4278, 150.8931, 10], // Wollongong
-              [-34.5619, 150.8275, 15], // Shellharbour
-              [-34.6440, 150.8673, 20], // Kiama
-              [-34.4263, 150.8986, 12], // Fairy Meadow
-              [-34.4356, 150.8983, 18], // North Wollongong
-              [-34.5105, 150.8406, 22], // Warilla
-              [-34.5124, 150.7710, 25], // Windang
-              [-34.4578, 150.8143, 17], // Albion Park
-              [-34.3836, 150.8920, 19], // Figtree
-              [-34.5600, 150.8100, 23], // Shell Cove
-              [-34.6778, 150.8470, 16], // Gerringong
-              [-34.7144, 150.8268, 13], // Gerroa
-              [-34.5489, 150.7833, 21], // Minnamurra
-              [-34.5342, 150.8776, 14], // Port Kembla
-              [-34.6328, 150.8445, 18], // Jamberoo
-              [-34.7235, 150.8488, 20], // Kiama Downs
-              [-34.5701, 150.8481, 15], // Barrack Heights
-              [-34.5230, 150.7703, 12], // Lake Illawarra
-              [-34.4066, 150.8842, 16], // Mount Keira
-              [-34.5293, 150.9053, 19], // Cordeaux Heights
-              [-34.6756, 150.8495, 22], // Werri Beach
-              [-34.7029, 150.8606, 25], // Gerroa Beach
-              [-34.5950, 150.8556, 18], // Oak Flats
-              [-34.5781, 150.7969, 14], // Minnamurra Rainforest
-              [-34.6144, 150.8181, 21] // Kiama Blowhole
-            ];
-            break;
-          case 'temperature':
-            heatmapData = [
-              [-34.4278, 150.8931, 5], // Wollongong
-              [-34.5619, 150.8275, 8], // Shellharbour
-              [-34.6440, 150.8673, 15], // Kiama
-              [-34.4263, 150.8986, 6], // Fairy Meadow
-              [-34.4356, 150.8983, 10], // North Wollongong
-              [-34.5105, 150.8406, 12], // Warilla
-              [-34.5124, 150.7710, 14], // Windang
-              [-34.4578, 150.8143, 9], // Albion Park
-              [-34.3836, 150.8920, 11], // Figtree
-              [-34.5600, 150.8100, 16], // Shell Cove
-              [-34.6778, 150.8470, 7], // Gerringong
-              [-34.7144, 150.8268, 4], // Gerroa
-              [-34.5489, 150.7833, 13], // Minnamurra
-              [-34.5342, 150.8776, 6], // Port Kembla
-              [-34.6328, 150.8445, 10], // Jamberoo
-              [-34.7235, 150.8488, 12], // Kiama Downs
-              [-34.5701, 150.8481, 8], // Barrack Heights
-              [-34.5230, 150.7703, 5], // Lake Illawarra
-              [-34.4066, 150.8842, 7], // Mount Keira
-              [-34.5293, 150.9053, 11], // Cordeaux Heights
-              [-34.6756, 150.8495, 14], // Werri Beach
-              [-34.7029, 150.8606, 16], // Gerroa Beach
-              [-34.5950, 150.8556, 10], // Oak Flats
-              [-34.5781, 150.7969, 6], // Minnamurra Rainforest
-              [-34.6144, 150.8181, 13] // Kiama Blowhole
-            ];
-            break;
-          case 'air-quality':
-            heatmapData = [
-              [-34.4278, 150.8931, 20], // Wollongong
-              [-34.5619, 150.8275, 25], // Shellharbour
-              [-34.6440, 150.8673, 30], // Kiama
-              [-34.4263, 150.8986, 22], // Fairy Meadow
-              [-34.4356, 150.8983, 28], // North Wollongong
-              [-34.5105, 150.8406, 32], // Warilla
-              [-34.5124, 150.7710, 35], // Windang
-              [-34.4578, 150.8143, 27], // Albion Park
-              [-34.3836, 150.8920, 29], // Figtree
-              [-34.5600, 150.8100, 33], // Shell Cove
-              [-34.6778, 150.8470, 26], // Gerringong
-              [-34.7144, 150.8268, 21], // Gerroa
-              [-34.5489, 150.7833, 13], // Minnamurra
-              [-34.5342, 150.8776, 6], // Port Kembla
-              [-34.6328, 150.8445, 10], // Jamberoo
-              [-34.7235, 150.8488, 12], // Kiama Downs
-              [-34.5701, 150.8481, 8], // Barrack Heights
-              [-34.5230, 150.7703, 5], // Lake Illawarra
-              [-34.4066, 150.8842, 7], // Mount Keira
-              [-34.5293, 150.9053, 11], // Cordeaux Heights
-              [-34.6756, 150.8495, 14], // Werri Beach
-              [-34.7029, 150.8606, 16], // Gerroa Beach
-              [-34.5950, 150.8556, 10], // Oak Flats
-              [-34.5781, 150.7969, 6], // Minnamurra Rainforest
-              [-34.6144, 150.8181, 13] // Kiama Blowhole
-            ];
-            break;
-          case 'wind-speed':
-            heatmapData = [
-              [-34.4278, 150.8931, 20], // Wollongong
-              [-34.5619, 150.8275, 25], // Shellharbour
-              [-34.6440, 150.8673, 30], // Kiama
-              [-34.4263, 150.8986, 22], // Fairy Meadow
-              [-34.4356, 150.8983, 28], // North Wollongong
-              [-34.5105, 150.8406, 32], // Warilla
-              [-34.5124, 150.7710, 35], // Windang
-              [-34.4578, 150.8143, 27], // Albion Park
-              [-34.3836, 150.8920, 29], // Figtree
-              [-34.5600, 150.8100, 33], // Shell Cove
-              [-34.6778, 150.8470, 26], // Gerringong
-              [-34.7144, 150.8268, 21], // Gerroa
-              [-34.5489, 150.7833, 13], // Minnamurra
-              [-34.5342, 150.8776, 6], // Port Kembla
-              [-34.6328, 150.8445, 10], // Jamberoo
-              [-34.7235, 150.8488, 12], // Kiama Downs
-              [-34.5701, 150.8481, 8], // Barrack Heights
-              [-34.5230, 150.7703, 5], // Lake Illawarra
-              [-34.4066, 150.8842, 7], // Mount Keira
-              [-34.5293, 150.9053, 11], // Cordeaux Heights
-              [-34.6756, 150.8495, 14], // Werri Beach
-              [-34.7029, 150.8606, 16], // Gerroa Beach
-              [-34.5950, 150.8556, 10], // Oak Flats
-              [-34.5781, 150.7969, 6], // Minnamurra Rainforest
-              [-34.6144, 150.8181, 13] // Kiama Blowhole
-            ];
-            break;
-          case 'humidity':
-            heatmapData = [
-              [-34.4278, 150.8931, 20], // Wollongong
-              [-34.5619, 150.8275, 25], // Shellharbour
-              [-34.6440, 150.8673, 30], // Kiama
-              [-34.4263, 150.8986, 22], // Fairy Meadow
-              [-34.4356, 150.8983, 28], // North Wollongong
-              [-34.5105, 150.8406, 32], // Warilla
-              [-34.5124, 150.7710, 35], // Windang
-              [-34.4578, 150.8143, 27], // Albion Park
-              [-34.3836, 150.8920, 29], // Figtree
-              [-34.5600, 150.8100, 33], // Shell Cove
-              [-34.6778, 150.8470, 26], // Gerringong
-              [-34.7144, 150.8268, 21], // Gerroa
-              [-34.5489, 150.7833, 13], // Minnamurra
-              [-34.5342, 150.8776, 6], // Port Kembla
-              [-34.6328, 150.8445, 10], // Jamberoo
-              [-34.7235, 150.8488, 12], // Kiama Downs
-              [-34.5701, 150.8481, 8], // Barrack Heights
-              [-34.5230, 150.7703, 5], // Lake Illawarra
-              [-34.4066, 150.8842, 7], // Mount Keira
-              [-34.5293, 150.9053, 11], // Cordeaux Heights
-              [-34.6756, 150.8495, 14], // Werri Beach
-              [-34.7029, 150.8606, 16], // Gerroa Beach
-              [-34.5950, 150.8556, 10], // Oak Flats
-              [-34.5781, 150.7969, 6], // Minnamurra Rainforest
-              [-34.6144, 150.8181, 13] // Kiama Blowhole
-            ];
-            break;
-          default:
-            break;
-        }
-          const title = condition.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); // Capitalize each word
-          return (
-            <div key={index}>
-              <div className='graph-title'>{title}</div> 
-              <div className='heaatmap'><Heatmap key={index} heatmapData={heatmapData} /></div>
-            </div>
-          );
-      });
+      // Initialize an empty array to hold the data for the selected condition
+      let data = [];
+
+      // Set data based on the selected condition
+      switch (selectedCondition) {
+        case 'precipitation':
+          data = [
+            { lat: -33.333, lng: 121.854, intensity: 0.7 },
+            { lat: -37.505, lng: 143.065, intensity: 0.6 },
+            { lat: -31.768, lng: 128.906, intensity: 0.4 },
+            { lat: -27.469, lng: 153.025, intensity: 0.9 },
+            { lat: -34.429, lng: 116.234, intensity: 0.2 }
+          ];
+          break;
+        case 'temperature':
+          data = [
+            { lat: -33.8679, lng: 151.2074, value: 22 },
+            { lat: -37.8136, lng: 144.9631, value: 25 },
+            { lat: -27.4698, lng: 153.0251, value: 28 },
+            { lat: -35.282, lng: 149.128, value: 21 },
+            { lat: -31.9505, lng: 115.8605, value: 30 }
+          ];
+          break;
+        case 'air-quality':
+          data = [
+            { lat: -42.882, lng: 147.329, index: 80 },
+            { lat: -33.8688, lng: 151.2093, index: 75 },
+            { lat: -35.2809, lng: 149.130, index: 70 },
+            { lat: -31.9505, lng: 115.8605, index: 65 },
+            { lat: -27.4705, lng: 153.026, index: 72 }
+          ];
+          break;
+        case 'wind-speed':
+          data = [
+            { lat: -37.562, lng: 144.937, speed: 10 },
+            { lat: -33.8688, lng: 151.2093, speed: 12 },
+            { lat: -32.425, lng: 137.646, speed: 14 },
+            { lat: -34.429, lng: 116.234, speed: 8 },
+            { lat: -27.4705, lng: 153.026, speed: 16 }
+          ];
+          break;
+        case 'humidity':
+          data = [
+            { lat: -20.301, lng: 148.932, value: 56 },
+            { lat: -33.8679, lng: 151.2074, value: 60 },
+            { lat: -34.5775, lng: 150.8717, value: 58 },
+            { lat: -34.429, lng: 116.234, value: 62 },
+            { lat: -37.505, lng: 143.065, value: 54 }
+          ];
+          break;
+
+        default:
+          break;
+      }
+
+      const title = selectedCondition.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); // Capitalize each word
+
+      return (
+        <div>
+          <div className='graph-title'>{title}</div> {/* Title above the heatmap */}
+          <Heatmap data={data} /> {/* Render Heatmap component with specific data */}
+        </div>
+      );
     };
+   
     // Function to render LineGraph components based on checked conditions
     const renderLineGraphs = () => {
       if (resultType === 'line-graph' && selectedConditions.length === 0) {
@@ -290,8 +235,11 @@ function Dashboard() {
         
         return (
           <div key={index}>
-            <div className='graph-title'>{title}</div> {/* Title above the graph */}
-            {graphComponents[resultType](condition, data)} 
+            <div className='graph-title'>{title}</div> 
+            <div id={`${condition}_chart`}>
+              {graphComponents[resultType](condition, data)}
+            </div>
+            <button onClick={() => handleDownloadPDF(`${condition}_chart`)}>Download</button>
           </div>
         );
       });
@@ -332,13 +280,24 @@ function Dashboard() {
       const title = condition.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); // Capitalize each word
       
       return (
-        <div key={index}>
-          <div className='graph-title'>{title}</div> {/* Title above the graph */}
-          {graphComponents[resultType](condition, data)}
+        <div>
+          <div key={index}>
+            <div className='graph-title'>{title}</div> 
+            <div id={`${condition}_chart`}>
+                {graphComponents[resultType](condition, data)}
+              </div>
+              <button onClick={() => handleDownloadPDF(`${condition}_chart`)}>Download</button>
+          </div>
         </div>
       );
     });
   };
+  const graphComponents = {
+    'heat-map': () =>  <Heatmap />,
+    'line-graph': (id, data) => <LineGraph id={id} data={data} />,
+    'histogram': (id, data) => <Histogram id={id} data={data} />,
+  };
+  
 
 
 
@@ -417,7 +376,7 @@ function Dashboard() {
                     </label> */}
 
             {/* Inserted by Jena - Result Types and Conditions*/}
-              <div className="result-title">Result Types</div>
+              <div className="resultconditions-title">Result Types</div>
                 <div className="resultconditions-options">
                 <div className="result-option">
                   <input type="radio" id="heat-map" name="resultType" value="heat-map" checked={resultType === 'heat-map'} onChange={handleResultTypeChange} />
@@ -433,29 +392,56 @@ function Dashboard() {
                 </div>
               </div>
 
-            <div className="conditions-title"> Conditions</div>
-              <div className="resultconditions-options">
-                <div className="conditions-option">
-                  <input type="checkbox" id="precipitation" name="precipitation" value="precipitation" onChange={handleConditionChange} />
-                  <label htmlFor="precipitation">Precipitaion</label>
+              <div className="resultconditions-title"> Conditions</div>
+                <div className="resultconditions-options">
+                  {resultType === 'heat-map' ? (
+                    <>
+                      <div className="conditions-option">
+                        <input type="radio" id="precipitation" name="conditions" value="precipitation" onChange={handleConditionChange} />
+                        <label htmlFor="precipitation">Precipitation</label>
+                      </div>
+                      <div className="conditions-option">
+                        <input type="radio" id="temperature" name="conditions" value="temperature" onChange={handleConditionChange} />
+                        <label htmlFor="temperature">Temperature</label>
+                      </div>
+                      <div className="conditions-option">
+                        <input type="radio" id="air-quality" name="conditions" value="air-quality" onChange={handleConditionChange} />
+                        <label htmlFor="air-quality">Air Quality</label>
+                      </div>
+                      <div className="conditions-option">
+                        <input type="radio" id="wind-speed" name="conditions" value="wind-speed" onChange={handleConditionChange} />
+                        <label htmlFor="wind-speed">Wind Speed</label>
+                      </div>
+                      <div className="conditions-option">
+                        <input type="radio" id="humidity" name="conditions" value="humidity" onChange={handleConditionChange} />
+                        <label htmlFor="humidity">Humidity</label>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="conditions-option">
+                        <input type="checkbox" id="precipitation" name="precipitation" value="precipitation" onChange={handleConditionChange} />
+                        <label htmlFor="precipitation">Precipitation</label>
+                      </div>
+                      <div className="conditions-option">
+                        <input type="checkbox" id="temperature" name="temperature" value="temperature" onChange={handleConditionChange} />
+                        <label htmlFor="temperature">Temperature</label>
+                      </div>
+                      <div className="conditions-option">
+                        <input type="checkbox" id="air-quality" name="air-quality" value="air-quality" onChange={handleConditionChange} />
+                        <label htmlFor="air-quality">Air Quality</label>
+                      </div>
+                      <div className="conditions-option">
+                        <input type="checkbox" id="wind-speed" name="wind-speed" value="wind-speed" onChange={handleConditionChange} />
+                        <label htmlFor="wind-speed">Wind Speed</label>
+                      </div>
+                      <div className="conditions-option">
+                        <input type="checkbox" id="humidity" name="humidity" value="humidity" onChange={handleConditionChange} />
+                        <label htmlFor="humidity">Humidity</label>
+                      </div>
+                    </>
+                  )}
                 </div>
-                <div className="conditions-option">
-                  <input type="checkbox" id="temperature" name="temperature" value="temperature" onChange={handleConditionChange} />
-                  <label htmlFor="temperature">Temperature</label>
-                </div>
-                <div className="conditions-option">
-                  <input type="checkbox" id="air-quality" name="air-quality" value="air-quality" onChange={handleConditionChange} />
-                  <label htmlFor="air-quality">Air Quality</label>
-                </div>
-                <div className="conditions-option">
-                  <input type="checkbox" id="wind-speed" name="wind-speed" value="wind-speed" onChange={handleConditionChange} />
-                  <label htmlFor="wind-speed">Wind Speed</label>
-                </div>
-                <div className="conditions-option">
-                  <input type="checkbox" id="humidity" name="humidity" value="humidity" onChange={handleConditionChange} />
-                  <label htmlFor="humidity">Humidity</label>
-                </div>
-              </div>
             </div>
             
             <div className="Dashboard-content">
@@ -463,11 +449,18 @@ function Dashboard() {
                 <h1>Dashboard</h1>
               </div>
               <div className="address-search-container">
-                <input class="address-input" type="text" name="address" placeholder="Address"></input>
-                <button class="address-search-button">Search</button>
+                <input className="address-input" type="text" name="address" placeholder="Address or Coordinates" ></input>
+                <button className="address-search-button" >Search</button>
               </div>
-              <div className='display-conditions-graph' >
+              <div className='display-conditions-graph' id='content-to-download' >
                 {renderResultComponent()}
+              </div>
+              <div>
+                {(resultType === 'line-graph' || resultType === 'histogram') && (
+                  <div >
+                    <button className="download-all-button" onClick={handleDownloadAllCharts}>Download All Charts</button>
+                  </div>
+                )}
               </div>
             </div>
             
@@ -485,7 +478,7 @@ function Dashboard() {
                 <iframe  style={{}} class="contact-map" width="100" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=Northfields%20Ave,%20Wollongong%20NSW%202522+(UOW)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" title="map"></iframe>
             </div> */}
 
-            <table className="dashboardGraphs" id="content-to-download">
+            {/* <table className="dashboardGraphs" id="content-to-download">
 
                 <tr>
                     <td> <div style={{backgroundColor: "white", padding: "5%", borderRadius: "10px"}} id="barChart"> Bar Chart <BarChart/> 
@@ -499,9 +492,9 @@ function Dashboard() {
                     <a style={{color: "black", cursor: "pointer"}} onClick={() => handleDownloadPDF('doughnutChart')}> <u> Download </u> </a> </div></td>
                 </tr>
 
-            </table>
+            </table> */}
             {/* <button onClick={handleDownloadAllCharts}>Download all</button> */}
-            <input style={{margin: "5%", width: "15%"}} className="searchLocationButton" type="submit" value="Download All Charts" onClick={handleDownloadAllCharts}/>
+            {/* <input style={{margin: "5%", width: "15%"}} className="searchLocationButton" type="submit" value="Download All Charts" onClick={handleDownloadAllCharts}/> */}
 
         </div>    
     );
