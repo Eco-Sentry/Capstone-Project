@@ -120,3 +120,8 @@
     text-align: left;
     font-family: Helvetica;
 }
+
+/* -------------------- DASHBOARD -------------------- */
+input[type="radio"] {
+  margin-right: 5px; /* Adjust as needed */
+}
