@@ -15,7 +15,16 @@ import Heatmap from './components/HeatMap';
 import LineGraph from './components/LineGraph';
 import Histogram from './components/Histogram';
 
-function Dashboard() {
+//function Dashboard() {
+  const Dashboard = () => {
+
+  const [inputLocation, setLocationValue] = useState('');
+
+  const searchButton = () => {
+    alert('Searching location:   ' + inputLocation);
+  }
+
+  
 
     //EDDIE for one chart
     const handleDownloadPDF = chartId => {
@@ -300,9 +309,6 @@ function Dashboard() {
     'line-graph': (id, data) => <LineGraph id={id} data={data} />,
     'histogram': (id, data) => <Histogram id={id} data={data} />,
   };
-  
-
-
 
     // const handleDownloadAllCharts = () => {
     //     const pdf = new jsPDF();
@@ -452,13 +458,15 @@ function Dashboard() {
                 <h1>Dashboard</h1>
               </div>
               <div className="address-search-container">
-                <input 
+                <input
                   className="address-input" 
                   type="text" 
                   name="address"
                   placeholder="Enter address or coordinates"
+                  value={inputLocation}
+                  onChange={e => setLocationValue(e.target.value)}
                 />
-                <button className="address-search-button" >Search</button>
+                <button onClick={searchButton} className="address-search-button" >Search</button>
               </div>
               <div className='display-conditions-graph' id='content-to-download' >
                 {renderResultComponent()}
