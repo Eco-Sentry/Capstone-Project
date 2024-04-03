@@ -1,0 +1,35 @@
+nav {
+    background-color: #103438; 
+    align-self:normal;
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 9%;
+    z-index: 1000;
+  }
+  
+  ul {
+    list-style-type: none; /* Remove bullet points from the list */
+    width: 100%;  /*Keeps the text centered*/
+  }
+  
+  li {
+    display: inline; /* Display list items horizontally */
+    margin-right: 7%; /* Margin between list items */
+    font-family: Helvetica;
+    font-size: 100%;
+    vertical-align: middle;
+  }
+  
+  a {
+    text-decoration: none; /* Remove underlines from links */
+    color: white;
+  }
+  
+  a:hover {
+    /*text-decoration: underline blue; /* Underline links on hover */
+    color: #1B4962;
+  }
