@@ -17,43 +17,8 @@ import './style.css';
 //About page 
 import React, { useState, useEffect  } from 'react';
 import { Chart } from 'chart.js';
-const getWindowDimensions = () => {
-    const { innerWidth: width, innerHeight: height } = window;
-    return {
-        width,
-        height
-    };
-};
-const useWindowDimensions = () => {
-    const [windowDimensions, setWindowDimensions] = useState(
-        getWindowDimensions()
-    );  
-    useEffect(() => {
-        function handleResize() {
-            setWindowDimensions(getWindowDimensions());
-        }  
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);  
-    return windowDimensions;
-};
-//About page - end
-/*
-  const [isByronShown, setByronIsShown] = useState(false);
-  const [isEstebanShown, setEstebanIsShown] = useState(false);
-  const [isEddieShown, setEddieIsShown] = useState(false);
-  const [isSavannahShown, setSavannahIsShown] = useState(false);
-  const [isNickShown, setNickIsShown] = useState(false);
-  const [isJenaShown, setJenaIsShown] = useState(false);
-*/ 
 
 function Home() {
-  //About page 
-  const { height, width } = useWindowDimensions();
-
-
-  //About page - end
-
   return (
     <div className='body'>
           <div className='section'>
