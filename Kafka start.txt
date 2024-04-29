@@ -1,0 +1,7 @@
+/opt/homebrew/bin/brew services start zookeeper
+
+
+/opt/homebrew/bin/brew services stop zookeeper
+
+brew services start kafka
+

@@ -1,0 +1,185 @@
+# CREATE DATABASE
+initdb /opt/homebrew/Cellar/postgresql@14/14.9/data -E utf8
+/Users/byronbanzhaf/Documents/Github Repositories/Capstone-Project
+initdb "/Users/byronbanzhaf/Documents/Github Repositories/Capstone-Project/Database" -E utf8
+
+# RUN DATABASE
+pg_ctl -D "/Users/byronbanzhaf/Documents/Github Repositories/Capstone-Project/Database" -l "/Users/byronbanzhaf/Documents/Github Repositories/Capstone-Project/DatabaseLog/pg_logfile.log" start
+
+# KILL ALL POSTGRES SERVICES
+sudo pkill -u postgres
+
+
+# CONNECT TO DATABASE esusers
+psql -U byronbanzhaf -h localhost -p 5433 -d postgres
+\c esusers
+
+# CREATE THE USER FOR THE SPRING SERVICE
+CREATE USER ecoadmin WITH PASSWORD 'ecosentry';
+ALTER ROLE ecoadmin SET client_encoding TO 'utf8';
+ALTER ROLE ecoadmin SET default_transaction_isolation TO 'read committed';
+ALTER ROLE ecoadmin SET timezone TO 'UTC';
+
+GRANT ALL PRIVILEGES ON DATABASE esusers TO ecoadmin;
+
+
+curl -X POST -H "Content-Type: application/json" -d '{"fname":"John", "lname":"Doe", "email":"john.doe@example.com", "password":"password"}' http://localhost:8082/users/create
+
+curl -X POST -H "Content-Type: application/json" -d '{"userId":1, "address":"192.168.1.104"}' http://localhost:8082/node/create
+curl -X POST -H "Content-Type: application/json" -d '{"userId":1, "address":"172.20.10.3"}' http://localhost:8082/node/create
+curl -X POST -H "Content-Type: application/json" -d '{"userId":1, "address":"172.20.10.4"}' http://localhost:8082/node/create
+curl -X POST -H "Content-Type: application/json" -d '{"userId":1, "address":"172.20.10.5"}' http://localhost:8082/node/create
+curl -X POST -H "Content-Type: application/json" -d '{"userId":1, "address":"172.20.10.6"}' http://localhost:8082/node/create
+curl -X POST -H "Content-Type: application/json" -d '{"userId":1, "address":"172.20.10.7"}' http://localhost:8082/node/create
+
+curl -X POST -H "Content-Type: application/json" -d '{"userId":1, "longitude":150.869843, "latitude":-34.406021}' http://localhost:8082/sentry/create
+
+curl -X POST http://localhost:8082/login -H "Content-Type: application/json" -d '{"username":"john.doe@example.com","password":"password"}'
+
+curl http://localhost:8082/node/ips
+
+
+{"Time":"17:18","Date":"26-02-2024","Value":10.563}
+{"Time":"17:18","Date":"26-02-2024","Value":10.563}
+{"Time":"17:18","Date":"26-02-2024","Value":10.563}
+{"Time":"17:18","Date":"26-02-2024","Value":10.563}
+{"Time":"17:18","Date":"26-02-2024","Value":10.563}
+{"Time":"17:18","Date":"26-02-2024","Value":10.563}
+{"Time":"17:18","Date":"26-02-2024","Value":10.563}
+ERROR:"Misconfigured connection"
+WARNING:"Unusual value":123904,900
+
+
+
+
+
+curl -X POST http://localhost:8086/loginService/createUser \
+-H "Content-Type: application/json" \
+-d '{
+  "fName": "John",
+  "lName": "Doe",
+  "email": "john.doe@example.com",
+  "password": "password123"
+}'
+
+
+
+
+
+curl -X POST http://localhost:8086/loginService/login \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}'
+curl -X POST http://localhost:42069/login \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}'
+
+
+
+
+
+
+//// LEGACY
+curl -X GET http://localhost:8086/loginService/authorize \
+-H "Authorization: Bearer YOUR_JWT_TOKEN_HERE"
+
+
+//////
+curl -X GET http://localhost:8086/loginService/authorize \
+-H "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDExMzEwMiwiZXhwIjoxNzE0MTQ5MTAyfQ.s5s4z_weo2DUaSleChCW6V-zcR5k5hvzP0naFmHzco0"
+
+
+curl -X POST http://localhost:8080/api/validate-token \
+     -H "Content-Type: application/json" \
+     -d '"your_token_here"'
+
+
+///////
+curl -X POST http://localhost:8082/api/validate-token \
+     -H "Content-Type: application/json" \
+     -d "curl -X GET http://localhost:8086/loginService/authorize \
+-H "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDExMzMwNiwiZXhwIjoxNzE0MTQ5MzA2fQ.7KNV_8UxTa7DEUTHtiMtVDKwtPx8WQizm8eoW63irAk"
+"
+
+curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDExMzMwNiwiZXhwIjoxNzE0MTQ5MzA2fQ.7KNV_8UxTa7DEUTHtiMtVDKwtPx8WQizm8eoW63irAk" http://localhost:42069/login
+
+
+
+
+
+
+
+
+
+
+
+///REGISTRATIONS
+curl -X POST http://localhost:8082/api/register-sentry \
+-H "Content-Type: application/json" \
+-d '{
+  "userToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxMzk2NTM5OSwiZXhwIjoxNzE0MDAxMzk5fQ.GAjCbG-XhrCmCs-ZlFD6juC0sgPt3q_vXwj_oKif3i8",
+  "longitude": -34.392123,
+  "latitude": 150.894943
+}'
+
+
+curl -X POST http://localhost:8082/api/propose-sensor-type \
+-H "Content-Type: application/json" \
+-d '{
+  "userToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxMzk2NTM5OSwiZXhwIjoxNzE0MDAxMzk5fQ.GAjCbG-XhrCmCs-ZlFD6juC0sgPt3q_vXwj_oKif3i8",
+  "unit": "C",
+  "description": "Measure temperature in C",
+  "sensorType": "Temperature"
+}'
+
+
+
+curl -X POST http://localhost:8082/api/register-sensor \
+-H "Content-Type: application/json" \
+-d '{
+  "userToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxMzk2NTM5OSwiZXhwIjoxNzE0MDAxMzk5fQ.GAjCbG-XhrCmCs-ZlFD6juC0sgPt3q_vXwj_oKif3i8",
+  "sensorTypeId": "1a8bd541-627b-4b80-b519-9c66dc3883e2",
+  "sentryId": "76e06fef-1032-41cc-bcda-5ed18699c3e1"
+}'
+
+
+
+
+
+
+
+
+
+
+
+/////// SEND DATA
+curl -X POST http://localhost:9069/api/send-data \
+-H "Content-Type: application/json" \
+-d '{
+  "sensorId": "257130ba-6751-45fa-a8a6-e7291ab80435",
+  "sentryId": "76e06fef-1032-41cc-bcda-5ed18699c3e1",
+  "value": 10.0
+}'
+
+
+
+
+
+
+
+curl -H "Authorization: Bearer <Your-JWT-Token>" http://localhost:42069/your-endpoint
+
+
+
+curl "http://localhost:9069/api/sensor-readings?sensorType=1a8bd541-627b-4b80-b519-9c66dc3883e2&startDateTime=2024-04-01T00:00:00&endDateTime=2024-04-30T23:59:59&latitude=40.7128&longitude=-74.0060&maxDistance=5"
+
+curl -X GET "http://localhost:9069/api/readings?sensorType=1a8bd541-627b-4b80-b519-9c66dc3883e2&minLongitude=150.89400&maxLongitude=150.89500&minLatitude=-34.39300&maxLatitude=-34.39200&startTime=2024-04-27%2012:00:00&endTime=2024-04-27%2013:00:00"
+
+curl -X GET "http://localhost:9069/api/readings?sensorType=1a8bd541-627b-4b80-b519-9c66dc3883e2&minLatitude=-34.50&maxLatitude=-34.30&minLongitude=150.80&maxLongitude=151.00&startTime=2024-04-27T13:37:00Z&endTime=2024-04-27T23:59:59Z"
+
+
