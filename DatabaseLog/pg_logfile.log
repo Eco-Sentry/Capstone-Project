@@ -110,3 +110,127 @@
 2023-09-27 12:03:10.942 AEST [8396] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5433"
 2023-09-27 12:03:10.944 AEST [8397] LOG:  database system was shut down at 2023-09-23 00:30:59 AEST
 2023-09-27 12:03:10.947 AEST [8396] LOG:  database system is ready to accept connections
+2023-10-09 16:48:19.182 AEDT [22723] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-10-09 16:48:19.183 AEDT [22723] LOG:  listening on IPv6 address "::1", port 5433
+2023-10-09 16:48:19.183 AEDT [22723] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2023-10-09 16:48:19.183 AEDT [22723] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5433"
+2023-10-09 16:48:19.185 AEDT [22724] LOG:  database system was interrupted; last known up at 2023-10-03 15:55:23 AEDT
+2023-10-09 16:48:19.218 AEDT [22724] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-10-09 16:48:19.218 AEDT [22724] FATAL:  could not open directory "pg_stat": No such file or directory
+2023-10-09 16:48:19.218 AEDT [22723] LOG:  startup process (PID 22724) exited with exit code 1
+2023-10-09 16:48:19.218 AEDT [22723] LOG:  aborting startup due to startup process failure
+2023-10-09 16:48:19.219 AEDT [22723] LOG:  database system is shut down
+2023-10-25 10:12:28.079 AEDT [24663] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-10-25 10:12:28.080 AEDT [24663] LOG:  could not bind IPv6 address "::1": Address already in use
+2023-10-25 10:12:28.080 AEDT [24663] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-10-25 10:12:28.080 AEDT [24663] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2023-10-25 10:12:28.080 AEDT [24663] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2023-10-25 10:12:28.080 AEDT [24663] WARNING:  could not create listen socket for "localhost"
+2023-10-25 10:12:28.080 AEDT [24663] FATAL:  could not create any TCP/IP sockets
+2023-10-25 10:12:28.080 AEDT [24663] LOG:  database system is shut down
+2023-10-25 10:31:11.547 AEDT [25275] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2023-10-25 10:31:11.548 AEDT [25275] LOG:  listening on IPv6 address "::1", port 5433
+2023-10-25 10:31:11.548 AEDT [25275] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2023-10-25 10:31:11.548 AEDT [25275] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5433"
+2023-10-25 10:31:11.550 AEDT [25276] LOG:  database system was shut down at 2023-10-25 10:12:19 AEDT
+2023-10-25 10:31:11.552 AEDT [25275] LOG:  database system is ready to accept connections
+2023-12-18 04:21:45.176 AEDT [25281] LOG:  stats_timestamp 2023-12-18 04:21:45.302783+11 is later than collector's time 2023-12-18 04:21:45.176764+11 for database 14042
+2024-02-04 01:16:22.454 AEDT [25275] LOG:  received smart shutdown request
+2024-02-04 01:16:22.458 AEDT [25275] LOG:  background worker "logical replication launcher" (PID 25282) exited with exit code 1
+2024-02-04 01:16:22.458 AEDT [25277] LOG:  shutting down
+2024-02-04 01:16:22.483 AEDT [25275] LOG:  database system is shut down
+2024-02-22 14:52:20.845 AEDT [33252] LOG:  starting PostgreSQL 14.9 (Homebrew) on aarch64-apple-darwin22.4.0, compiled by Apple clang version 14.0.3 (clang-1403.0.22.14.1), 64-bit
+2024-02-22 14:52:20.846 AEDT [33252] LOG:  listening on IPv6 address "::1", port 5433
+2024-02-22 14:52:20.846 AEDT [33252] LOG:  listening on IPv4 address "127.0.0.1", port 5433
+2024-02-22 14:52:20.846 AEDT [33252] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5433"
+2024-02-22 14:52:20.849 AEDT [33253] LOG:  database system was shut down at 2024-02-04 01:16:22 AEDT
+2024-02-22 14:52:20.851 AEDT [33252] LOG:  database system is ready to accept connections
+2024-02-22 14:59:16.513 AEDT [35297] FATAL:  database "esusers" does not exist
+2024-02-22 14:59:17.896 AEDT [35306] FATAL:  database "esusers" does not exist
+2024-02-22 14:59:56.279 AEDT [35441] FATAL:  database "esusers" does not exist
+2024-02-22 14:59:57.647 AEDT [35456] FATAL:  database "esusers" does not exist
+2024-02-22 15:01:08.047 AEDT [36215] FATAL:  database "esusers" does not exist
+2024-02-22 15:01:09.436 AEDT [36217] FATAL:  database "esusers" does not exist
+2024-02-22 15:02:03.302 AEDT [36411] FATAL:  database "esusers" does not exist
+2024-02-22 15:02:04.668 AEDT [36427] FATAL:  database "esusers" does not exist
+2024-02-22 15:05:10.360 AEDT [37067] ERROR:  syntax error at or near "user" at character 22
+2024-02-22 15:05:10.360 AEDT [37067] STATEMENT:  drop table if exists user cascade
+2024-02-22 15:05:10.376 AEDT [37067] ERROR:  syntax error at or near "user" at character 14
+2024-02-22 15:05:10.376 AEDT [37067] STATEMENT:  create table user (id bigint not null, email varchar(255), f_name varchar(255), l_name varchar(255), password varchar(255), primary key (id))
+2024-02-22 15:07:26.056 AEDT [37067] ERROR:  syntax error at or near "user" at character 22
+2024-02-22 15:07:26.056 AEDT [37067] STATEMENT:  drop table if exists user cascade
+2024-02-22 15:22:51.099 AEDT [36365] ERROR:  relation "users" does not exist at character 15
+2024-02-22 15:22:51.099 AEDT [36365] STATEMENT:  SELECT * FROM users;
+2024-02-22 15:22:57.455 AEDT [36365] ERROR:  relation "users" does not exist at character 15
+2024-02-22 15:22:57.455 AEDT [36365] STATEMENT:  SELECT * FROM users;
+2024-02-22 15:29:42.928 AEDT [48113] ERROR:  relation "users" does not exist at character 15
+2024-02-22 15:29:42.928 AEDT [48113] STATEMENT:  SELECT * FROM users;
+2024-02-22 15:39:33.468 AEDT [48113] ERROR:  syntax error at or near "/" at character 1
+2024-02-22 15:39:33.468 AEDT [48113] STATEMENT:  /dt
+	users
+	/dt users
+	CREATE USER ecoadmin WITH PASSWORD 'ecosentry';
+2024-02-22 15:41:11.309 AEDT [36365] ERROR:  syntax error at or near "psql" at character 1
+2024-02-22 15:41:11.309 AEDT [36365] STATEMENT:  psql
+	SELECT * FROM users;
+2024-02-22 15:41:19.621 AEDT [36365] ERROR:  syntax error at or near "psql" at character 1
+2024-02-22 15:41:19.621 AEDT [36365] STATEMENT:  psql
+	SELECT * FROM users;
+2024-02-22 15:41:38.134 AEDT [36365] ERROR:  syntax error at or near "psql" at character 1
+2024-02-22 15:41:38.134 AEDT [36365] STATEMENT:  psql
+	SELECT * FROM users;
+2024-02-22 15:41:46.200 AEDT [36365] ERROR:  relation "users" does not exist at character 15
+2024-02-22 15:41:46.200 AEDT [36365] STATEMENT:  SELECT * FROM users;
+2024-02-23 14:00:36.183 AEDT [48113] ERROR:  syntax error at or near "/" at character 1
+2024-02-23 14:00:36.183 AEDT [48113] STATEMENT:  /dt
+	GRANT ALL PRIVILEGES ON DATABASE esusers TO ecoadmin;
+2024-02-23 14:01:24.543 AEDT [48113] ERROR:  relation "users" does not exist at character 15
+2024-02-23 14:01:24.543 AEDT [48113] STATEMENT:  SELECT * FROM users;
+2024-02-23 14:09:17.529 AEDT [48113] ERROR:  relation "users" does not exist at character 15
+2024-02-23 14:09:17.529 AEDT [48113] STATEMENT:  SELECT * FROM users;
+2024-02-24 13:15:36.671 AEDT [80247] ERROR:  syntax error at or near "SELECT" at character 21
+2024-02-24 13:15:36.671 AEDT [80247] STATEMENT:  SELECT * FROM users
+	SELECT * FROM 'users'
+	SELECT * FROM users;
+2024-02-24 13:16:01.241 AEDT [80247] ERROR:  relation "users" does not exist at character 15
+2024-02-24 13:16:01.241 AEDT [80247] STATEMENT:  SELECT * FROM users;
+2024-02-24 13:17:34.799 AEDT [63650] ERROR:  relation "users" does not exist at character 15
+2024-02-24 13:17:34.799 AEDT [63650] STATEMENT:  SELECT * FROM users;
+2024-02-24 13:28:21.909 AEDT [68417] ERROR:  syntax error at or near "SELECT" at character 21
+2024-02-24 13:28:21.909 AEDT [68417] STATEMENT:  SELECT * FROM users
+	SELECT * FROM users;
+2024-02-27 02:51:18.290 AEDT [68417] ERROR:  syntax error at or near "curl" at character 1
+2024-02-27 02:51:18.290 AEDT [68417] STATEMENT:  curl -X POST -H "Content-Type: application/json" -d '{"user_id":1, "longitude":150.869843, "latitude":-34.406021}' http://localhost:8082/sentry/create
+	SELECT * FROM users;
+2024-04-01 16:15:42.369 AEDT [11579] ERROR:  relation "users" does not exist at character 70
+2024-04-01 16:15:42.369 AEDT [11579] STATEMENT:  select u1_0.id,u1_0.email,u1_0.f_name,u1_0.l_name,u1_0.password from users u1_0 where u1_0.email=$1
+2024-04-24 22:40:54.085 AEST [97687] ERROR:  syntax error at or near "SELECT" at character 26
+2024-04-24 22:40:54.085 AEST [97687] STATEMENT:  SELECT * FROM sensorType
+	SELECT * FROM users
+	SELECT * FROM sensortype;
+2024-04-24 22:41:11.768 AEST [97687] ERROR:  relation "sensortype" does not exist at character 15
+2024-04-24 22:41:11.768 AEST [97687] STATEMENT:  SELECT * FROM sensortype;
+2024-04-24 22:41:18.013 AEST [97687] ERROR:  relation "sensortype" does not exist at character 15
+2024-04-24 22:41:18.013 AEST [97687] STATEMENT:  SELECT * FROM sensorType;
+2024-04-24 22:53:30.869 AEST [97687] ERROR:  syntax error at or near "SELECT" at character 19
+2024-04-24 22:53:30.869 AEST [97687] STATEMENT:  DROP TABLE sentry
+	SELECT * FROM sentry;
+2024-04-24 22:53:43.464 AEST [97687] ERROR:  cannot drop table sentry because other objects depend on it
+2024-04-24 22:53:43.464 AEST [97687] DETAIL:  constraint fkssfkc5hku5p6hpe67lu45w0rs on table sensor depends on table sentry
+2024-04-24 22:53:43.464 AEST [97687] HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2024-04-24 22:53:43.464 AEST [97687] STATEMENT:  DROP TABLE sentry;
+2024-04-24 22:54:16.282 AEST [97687] ERROR:  syntax error at or near "CASCADE" at character 6
+2024-04-24 22:54:16.282 AEST [97687] STATEMENT:  DROP CASCADE sentry
+	;
+2024-04-24 22:54:47.104 AEST [97687] ERROR:  syntax error at or near ";" at character 11
+2024-04-24 22:54:47.104 AEST [97687] STATEMENT:  DROP TABLE;
+2024-04-24 22:58:43.723 AEST [97687] ERROR:  syntax error at or near "*" at character 12
+2024-04-24 22:58:43.723 AEST [97687] STATEMENT:  DROP TABLE * CASCADE;
+2024-04-24 22:58:51.455 AEST [97687] ERROR:  syntax error at or near ";" at character 5
+2024-04-24 22:58:51.455 AEST [97687] STATEMENT:  DROP;
+2024-04-24 22:58:55.077 AEST [97687] ERROR:  syntax error at or near "*" at character 6
+2024-04-24 22:58:55.077 AEST [97687] STATEMENT:  DROP *;
+2024-04-24 23:24:04.116 AEST [97687] ERROR:  relation "sensorreading" does not exist at character 15
+2024-04-24 23:24:04.116 AEST [97687] STATEMENT:  SELECT * FROM sensorreading;
+2024-04-26 16:30:58.496 AEST [97687] ERROR:  relation "sensors" does not exist at character 15
+2024-04-26 16:30:58.496 AEST [97687] STATEMENT:  SELECT * FROM sensors;
