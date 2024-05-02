@@ -18,32 +18,7 @@ const SentryInfo = ({ token, showCopyButton, handleViewButtonClickSensorInfo, ha
       <br />
       {/* here */}
       <div style={{backgroundColor: '#FFF3E4', padding: '3%'}}>
-            {/* <div  className= "sentry-graphs">
-                <div id="uptime">
-                  <p style={{textAlign: 'left', borderBottom: '1px solid', borderColor: '#232E3A',padding: '10px'}}>
-                    Uptime 
-                    <br/>
-                    <span style={{fontSize: '17px'}}>xxxxx</span>
-                  
-                  </p>
-
-                  <UptimeGraph />
-
-                </div>
-                <div id="connection">
-                <p style={{textAlign: 'left', borderBottom: '1px solid', borderColor: '#232E3A', padding: '10px'}}>
-                    Connection 
-                    <br/>
-                    <span style={{fontSize: '17px'}}>xxx</span>
-                  
-                  </p>
-
-                  <ConnectionGraph />
-
-                </div>
-            </div> */}
-
-      {/* <br /><br /> */}
+            
       <button class= "mySent-view-button" onClick={handleAddSensor} style={{ marginLeft: '90%', width: '10%'}}>Add Sensor</button>
       <div style={{ backgroundColor: 'white' }}>
         {/* Sensor table */}

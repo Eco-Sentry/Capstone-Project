@@ -357,7 +357,7 @@
 }
 
 .sensorTable {
-  border: 1px solid;
+  /* border: 1px solid; */
   font-size: 16px;
   width: 100%;
   border-collapse: collapse;
@@ -366,7 +366,7 @@
 }
 
 .sensorTable th, .sensorTable td {
-  border: 1px solid;
+  /* border: 1px solid; */
   text-align: center;
   padding: 1%;
 }
@@ -633,117 +633,42 @@
 
 
 /* ACCOUNT   */
-.Account {
-  background-color: #00A3A3;
-  text-align: center;
-}
-
-/* .profilePic {
-  margin-left: 15%;
-  width: 20%;
-  color: black;
-  background-color: white;
-  float: left;
-  background-color: white;
-} */
-
-/* .accountInfo {
-  margin-right: 15%;
-  width: 40%;
-  border-radius: 20px;
-  padding: 5px;
-  color: black;
-  background-color: white;
-  vertical-align: top;
-  float: right;
-
-  text-align: center;
-  font-family: Helvetica;
-} */
-
-.accountTable{
-  margin-left: 10%;
-  /* align-self: center; */
-  /* text-align: center; */
-}
-
-/* .profilePicImage {
-  width: 50%; 
-  align-self: center;
-  padding-top: 5%; 
-  padding-bottom: 5%;
-} */
-
-.accountTable {
-  /* border: 1px solid; */
-  table-layout: fixed ;
-  width: 80%;
-  height: 10px;
-  border-collapse: collapse;
-  /* border-spacing: 0; */
-  /* margin-top: 15px; */
-}
-
-/* .profilePictureCell {
-  border: 1px solid;
-  float: left;
-  align-content: baseline;
-} */
-
-.accountInfoCell {
-  /* border: 1px solid; */
-  /* float: left; */
-  /* align-content: baseline; */
-  text-align: center;
-}
-
-/* .accountInfoTextTable {
-  background-color: white;
-  border-radius: 10%;
-  border-color: black;
-  border-style: dashed;
-  width: 50%;
-} */
-
-.accountDetails {
-  border-style: none;
-  border-radius: 3px;
-  font-size: 100%;
-  height: max-content;
-  width: 30%;
-  /* padding-left: 1%;
-  padding-top: 3%;
-  padding-bottom: 3%; */
-}
-
-.bioDetails {
-  border-style: none;
-  border-radius: 25px;
-  font-size: 100%;
-  width: 250%;
-  padding-left: 1%;
-  padding-top: 3%;
-  padding-bottom: 3%;
-}
-
-.updateAccount {
-  /* transition-duration: 0.5s;
-  background-color: #103438;
-  width: 75%;
-  height: 100%;
-  font-size: 100%;
-  color: white;
-  cursor: pointer;
-  border-radius: 10px;
-  border: none;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%; */
-}
-
-.updateAccount:hover {
-  background-color: white;
+.account-container {
   color: #103438;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
 }
+
+.account-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.account-input {
+  background-color: #B0DCC7;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
 
 
 /*  Dashboard Page  */
