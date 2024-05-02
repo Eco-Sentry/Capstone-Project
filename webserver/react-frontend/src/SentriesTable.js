@@ -11,7 +11,7 @@ const SentriesTable = ({ sentries, onViewButtonClick }) => {
           <th className="th-sentryTable"><div className= "mySentHeader">NAME</div></th>
           <th className="th-sentryTable"><div className= "mySentHeader">LOCATION</div></th>
           <th className="th-sentryTable"><div className= "mySentHeader">STATUS</div></th>
-          <th className="th-sentryTable"><div className= "mySentHeader">ACCESS</div></th>
+          {/* <th className="th-sentryTable"><div className= "mySentHeader">ACCESS</div></th> */}
           <th className="th-sentryTable"><div className= "mySentHeader">ACTIONS</div></th>
         </tr>
       </thead>
@@ -28,7 +28,7 @@ const SentriesTable = ({ sentries, onViewButtonClick }) => {
                 <img src={redImage} alt="Red" style={{ width: '20px', height: '20px' }} />
                 )}
             </td>
-            <td className="tr-sentryTable">{sentry.access}</td>
+            {/* <td className="tr-sentryTable">{sentry.access}</td> */}
             <td className="tr-sentryTable">
               <button className="mySent-view-button" onClick={() => onViewButtonClick(sentry)}>
                 View

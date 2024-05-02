@@ -60,16 +60,16 @@ const YourSentry = () => {
   const [currentSection, setCurrentSection] = useState('sentries');
   // const [sentries, setSentries] = useState([
   const [sentries] = useState([
-    { name: 'Tom', location: 'Sydney', status: 'Green', access: 'Public' },
-    { id: 2, name: 'Alice', location: 'Melbourne', status: 'Red', access: 'Private' },
-    { id: 3, name: 'John', location: 'Brisbane', status: 'Green', access: 'Public' },
-    { id: 4, name: 'Emily', location: 'Perth', status: 'Green', access: 'Public' },
-    { id: 5, name: 'Michael', location: 'Adelaide', status: 'Red', access: 'Private' },
-    { id: 6, name: 'Tommy', location: 'Gold Coast', status: 'Green', access: 'Public' },
-    { id: 7, name: 'Daniel', location: 'Newcastle', status: 'Red', access: 'Public' },
-    { id: 8, name: 'Olivia', location: 'Canberra', status: 'Green', access: 'Private' },
-    { name: 'James', location: 'Sunshine Coast', status: 'Green', access: 'Public' },
-    { id: 10, name: 'Johnny', location: 'Wollongong', status: 'Red', access: 'Public' },
+    { name: 'Tom', location: 'Sydney', status: 'Green' },
+    { id: 2, name: 'Alice', location: 'Melbourne', status: 'Red' },
+    { id: 3, name: 'John', location: 'Brisbane', status: 'Green' },
+    { id: 4, name: 'Emily', location: 'Perth', status: 'Green' },
+    { id: 5, name: 'Michael', location: 'Adelaide', status: 'Red' },
+    { id: 6, name: 'Tommy', location: 'Gold Coast', status: 'Green' },
+    { id: 7, name: 'Daniel', location: 'Newcastle', status: 'Red' },
+    { id: 8, name: 'Olivia', location: 'Canberra', status: 'Green' },
+    { name: 'James', location: 'Sunshine Coast', status: 'Green' },
+    { id: 10, name: 'Johnny', location: 'Wollongong', status: 'Red' },
     
     // Add more hereee
   ]);

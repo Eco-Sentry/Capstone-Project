@@ -51,7 +51,7 @@ const SentryInfo = ({ token, showCopyButton, handleViewButtonClickSensorInfo, ha
                 <thead>
                   <tr>
                     <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Sensor Name</th>
-                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Channel</th>
+                    {/* <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Channel</th> */}
                     <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Status</th>
                     <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Actions</th>
                   </tr>
@@ -59,25 +59,25 @@ const SentryInfo = ({ token, showCopyButton, handleViewButtonClickSensorInfo, ha
                 <tbody>
                   <tr>
                     <td>Temperature</td>
-                    <td>Channel 1</td>
+                    {/* <td>Channel 1</td> */}
                     <td><span className="sensorStatus connected">Connected</span></td>
                     <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
                   </tr>
                   <tr>
                     <td>Humidity</td>
-                    <td>Channel 2</td>
+                    {/* <td>Channel 2</td> */}
                     <td><span className="sensorStatus error">Error</span></td>
                     <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
                   </tr>
                   <tr>
                     <td>Pressure</td>
-                    <td>Channel 3</td>
+                    {/* <td>Channel 3</td> */}
                     <td><span className="sensorStatus connected">Connected</span></td>
                     <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
                   </tr>
                   <tr>
                     <td>Chemical</td>
-                    <td>Channel 4</td>
+                    {/* <td>Channel 4</td> */}
                     <td><span className="sensorStatus error">Error</span></td>
                     <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
                   </tr>
