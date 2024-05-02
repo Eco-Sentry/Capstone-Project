@@ -1,55 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import ClipboardJS from 'clipboard';
-import greenImage from './green.png';
-import redImage from './red.png';
+// import greenImage from './green.png';
+// import redImage from './red.png';
 // import uptime from './temp-uptime.png';
 // import connection from './temp-connection.png';
-import UptimeGraph from './components/UptimeGraph'; 
-import ConnectionGraph from './components/ConnectionGraph';
+// import UptimeGraph from './components/UptimeGraph'; 
+// import ConnectionGraph from './components/ConnectionGraph';
+import SentriesTable from './SentriesTable';
+import SentryInfo from './SentryInfo';
+import CreateSentry from './CreateSentry';
 import SensorInfo from './SensorInfo';
 
 
 // SentriesTable Component
-const SentriesTable = ({ sentries, onViewButtonClick}) => {
-  return (
-    <table className="sentriesListTable">
-      <thead>
-        <tr className="th-sentryTable">
-          <th className="th-sentryTable"><div className= "mySentHeader">S/N</div></th>
-          <th className="th-sentryTable"><div className= "mySentHeader">NAME</div></th>
-          <th className="th-sentryTable"><div className= "mySentHeader">LOCATION</div></th>
-          <th className="th-sentryTable"><div className= "mySentHeader">STATUS</div></th>
-          <th className="th-sentryTable"><div className= "mySentHeader">ACCESS</div></th>
-          <th className="th-sentryTable"><div className= "mySentHeader">ACTIONS</div></th>
-        </tr>
-      </thead>
-      <tbody>
-        {sentries.map((sentry, index) => (
-          <tr key={sentry.id} className="tr-sentryTable">
-            <td className="tr-sentryTable"><p>{index + 1}</p></td>
-            <td className="tr-sentryTable"><p>{sentry.name}</p></td>
-            <td className="tr-sentryTable"><p>{sentry.location}</p></td>
-            <td className="tr-sentryTable">
-              {sentry.status === 'Green' ? (
-                <img src={greenImage} alt="Green" style={{ width: '20px', height: '20px' }} />
-                ) : (
-                <img src={redImage} alt="Red" style={{ width: '20px', height: '20px' }} />
-                )}
-            </td>
-            <td className="tr-sentryTable">{sentry.access}</td>
-            <td className="tr-sentryTable">
+// const SentriesTable = ({ sentries, onViewButtonClick}) => {
+//   return (
+    // <table className="sentriesListTable">
+    //   <thead>
+    //     <tr className="th-sentryTable">
+    //       <th className="th-sentryTable"><div className= "mySentHeader">S/N</div></th>
+    //       <th className="th-sentryTable"><div className= "mySentHeader">NAME</div></th>
+    //       <th className="th-sentryTable"><div className= "mySentHeader">LOCATION</div></th>
+    //       <th className="th-sentryTable"><div className= "mySentHeader">STATUS</div></th>
+    //       <th className="th-sentryTable"><div className= "mySentHeader">ACCESS</div></th>
+    //       <th className="th-sentryTable"><div className= "mySentHeader">ACTIONS</div></th>
+    //     </tr>
+    //   </thead>
+    //   <tbody>
+    //     {sentries.map((sentry, index) => (
+    //       <tr key={sentry.id} className="tr-sentryTable">
+    //         <td className="tr-sentryTable"><p>{index + 1}</p></td>
+    //         <td className="tr-sentryTable"><p>{sentry.name}</p></td>
+    //         <td className="tr-sentryTable"><p>{sentry.location}</p></td>
+    //         <td className="tr-sentryTable">
+    //           {sentry.status === 'Green' ? (
+    //             <img src={greenImage} alt="Green" style={{ width: '20px', height: '20px' }} />
+    //             ) : (
+    //             <img src={redImage} alt="Red" style={{ width: '20px', height: '20px' }} />
+    //             )}
+    //         </td>
+    //         <td className="tr-sentryTable">{sentry.access}</td>
+    //         <td className="tr-sentryTable">
               
-                <button className="mySent-view-button" onClick={() => onViewButtonClick(sentry)}>
-                  View
-                </button>
+    //             <button className="mySent-view-button" onClick={() => onViewButtonClick(sentry)}>
+    //               View
+    //             </button>
               
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-};
+    //         </td>
+    //       </tr>
+    //     ))}
+    //   </tbody>
+    // </table>
+//     <SentriesTable sentries={filteredSentries} onViewButtonClick={handleViewButtonClick} />
+//   );
+// };
 
 // Your Sentry Component
 const YourSentry = () => {
@@ -137,12 +141,20 @@ const YourSentry = () => {
     // handleDownloadPDF(sensorName);
   };
 
+  // <SentriesTable sentries={filteredSentries} onViewButtonClick={handleViewButtonClick} />
+
   useEffect(() => {
     return () => {
       // Reset
       setToken(false);
     };
   }, [currentSection]);
+
+  const handleAddSensor = () => {
+    // Logic for adding a sensor
+    // console.log('Adding sensor');
+    alert("Adding sensor");
+  };
   
   const renderSection = () => {
     switch (currentSection) {
@@ -151,96 +163,106 @@ const YourSentry = () => {
         
       case 'SENTRY INFO':
         return (
-          <div className="sentry-info-box">
-            <div id="revealToken">
-              <div style={{textAlign: 'left', padding: '20px', marginTop: '-85px', marginLeft: '-4px'}}>
-              <span style={{fontSize: '16px', fontWeight: 'bold'}}>Reveal Token: </span>
-              <input style={{width: '150px', height: '20px', backgroundColor: '#B0DCC7', color: '#103438', border: '0'}} id= "token" type="text" value= {token}/> &nbsp;
+          // <div className="sentry-info-box">
+          //   <div id="revealToken">
+          //     <div style={{textAlign: 'left', padding: '20px', marginTop: '-85px', marginLeft: '-4px'}}>
+          //     <span style={{fontSize: '16px', fontWeight: 'bold'}}>Reveal Token: </span>
+          //     <input style={{width: '150px', height: '20px', backgroundColor: '#B0DCC7', color: '#103438', border: '0'}} id= "token" type="text" value= {token}/> &nbsp;
                   
-                    <button className="copy-button" style={{width: '15%'}} data-clipboard-text={token}>
-                      {showCopyButton ? 'Copied!' : 'Click to Copy'}
-                    </button>
-              </div>
-              </div>
+          //           <button className="copy-button" style={{width: '15%'}} data-clipboard-text={token}>
+          //             {showCopyButton ? 'Copied!' : 'Click to Copy'}
+          //           </button>
+          //     </div>
+          //     </div>
 
-              <br/>
-            {/* here */}
-            <div style={{backgroundColor: '#FFF3E4', padding: '3%'}}>
-            <div  className= "sentry-graphs">
-                <div id="uptime">
-                  <p style={{textAlign: 'left', borderBottom: '1px solid', borderColor: '#232E3A',padding: '10px'}}>
-                    Uptime 
-                    <br/>
-                    <span style={{fontSize: '17px'}}>xxxxx</span>
+          //     <br/>
+          //   {/* here */}
+          //   <div style={{backgroundColor: '#FFF3E4', padding: '3%'}}>
+          //   <div  className= "sentry-graphs">
+          //       <div id="uptime">
+          //         <p style={{textAlign: 'left', borderBottom: '1px solid', borderColor: '#232E3A',padding: '10px'}}>
+          //           Uptime 
+          //           <br/>
+          //           <span style={{fontSize: '17px'}}>xxxxx</span>
                   
-                  </p>
+          //         </p>
 
-                  {/* <img src={uptime} alt='uptime' width={500} height={500}></img> */}
-                  <UptimeGraph />
+          //         {/* <img src={uptime} alt='uptime' width={500} height={500}></img> */}
+          //         <UptimeGraph />
 
-                </div>
-                <div id="connection">
-                <p style={{textAlign: 'left', borderBottom: '1px solid', borderColor: '#232E3A', padding: '10px'}}>
-                    Connection 
-                    <br/>
-                    <span style={{fontSize: '17px'}}>xxx</span>
+          //       </div>
+          //       <div id="connection">
+          //       <p style={{textAlign: 'left', borderBottom: '1px solid', borderColor: '#232E3A', padding: '10px'}}>
+          //           Connection 
+          //           <br/>
+          //           <span style={{fontSize: '17px'}}>xxx</span>
                   
-                  </p>
+          //         </p>
 
-                  {/* <img src={connection} alt='uptime' width={500} height={500}></img> */}
-                  <ConnectionGraph />
+          //         {/* <img src={connection} alt='uptime' width={500} height={500}></img> */}
+          //         <ConnectionGraph />
 
-                </div>
-            </div>
-            <br/><br/>
-            <div style={{backgroundColor: 'white'}}>
+          //       </div>
+          //   </div>
+          //   <br/><br/>
+          //   <div style={{backgroundColor: 'white'}}>
               
-            <table className="sensorTable">
-                <thead>
-                  <tr>
-                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Sensor Name</th>
-                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Channel</th>
-                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Status</th>
-                    <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Temperature</td>
-                    <td>Channel 1</td>
-                    <td><span className="sensorStatus connected">Connected</span></td>
-                    <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
-                  </tr>
-                  <tr>
-                    <td>Humidity</td>
-                    <td>Channel 2</td>
-                    <td><span className="sensorStatus error">Error</span></td>
-                    <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
-                  </tr>
-                  <tr>
-                    <td>Pressure</td>
-                    <td>Channel 3</td>
-                    <td><span className="sensorStatus connected">Connected</span></td>
-                    <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
-                  </tr>
-                  <tr>
-                    <td>Chemical</td>
-                    <td>Channel 4</td>
-                    <td><span className="sensorStatus error">Error</span></td>
-                    <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
-                  </tr>
-                </tbody>
-              </table>
+          //   <table className="sensorTable">
+          //       <thead>
+          //         <tr>
+          //           <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Sensor Name</th>
+          //           <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Channel</th>
+          //           <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Status</th>
+          //           <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Actions</th>
+          //         </tr>
+          //       </thead>
+          //       <tbody>
+          //         <tr>
+          //           <td>Temperature</td>
+          //           <td>Channel 1</td>
+          //           <td><span className="sensorStatus connected">Connected</span></td>
+          //           <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
+          //         </tr>
+          //         <tr>
+          //           <td>Humidity</td>
+          //           <td>Channel 2</td>
+          //           <td><span className="sensorStatus error">Error</span></td>
+          //           <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
+          //         </tr>
+          //         <tr>
+          //           <td>Pressure</td>
+          //           <td>Channel 3</td>
+          //           <td><span className="sensorStatus connected">Connected</span></td>
+          //           <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
+          //         </tr>
+          //         <tr>
+          //           <td>Chemical</td>
+          //           <td>Channel 4</td>
+          //           <td><span className="sensorStatus error">Error</span></td>
+          //           <td><button className="mySent-view-button" onClick={handleViewButtonClickSensorInfo}>View</button></td>
+          //         </tr>
+          //       </tbody>
+          //     </table>
 
-            </div>
-            </div>
+          //   </div>
+          //   </div>
 
 
 
-            {/* <h4>Sentry Info</h4>
-            <p>Name: {selectedSentry.name}</p>
-            <p>Location: {selectedSentry.location}</p> */}
-          </div>
+          //   {/* <h4>Sentry Info</h4>
+          //   <p>Name: {selectedSentry.name}</p>
+          //   <p>Location: {selectedSentry.location}</p> */}
+          // </div>
+          <div className="your-sentry-container">
+              {currentSection === 'SENTRY INFO' && (
+                <SentryInfo
+                token={token}
+                showCopyButton={showCopyButton}
+                handleViewButtonClickSensorInfo={handleViewButtonClickSensorInfo}
+                handleAddSensor={handleAddSensor}
+              />
+              )}
+        </div>
         );
 
       case 'SENSOR INFO':
@@ -249,39 +271,48 @@ const YourSentry = () => {
         
       case 'CREATE A SENTRY':
         return (
-          <div className="create-sentry">
-            <div className="inputs-container">
-              <input className="createSentryTextBoxes" type="text" placeholder="Sentry Name" />
-              <input className="createSentryTextBoxes" type="text" placeholder="Longitude" />
-              <input className="createSentryTextBoxes" type="text" placeholder="Latitude" />
+          // <div className="create-sentry">
+          //   <div className="inputs-container">
+          //     <input className="createSentryTextBoxes" type="text" placeholder="Sentry Name" />
+          //     <input className="createSentryTextBoxes" type="text" placeholder="Longitude" />
+          //     <input className="createSentryTextBoxes" type="text" placeholder="Latitude" />
                
-              <div className="access-options">
-                  <p style={{color: '#103438'}}>Access:</p>
-                  <div className="radio-buttons">
-                    <input type="radio" id="public" name="sentryVisibility" value="public" />
-                    <label htmlFor="public" style={{color: '#103438'}}>Public</label>
+          //     <div className="access-options">
+          //         <p style={{color: '#103438'}}>Access:</p>
+          //         <div className="radio-buttons">
+          //           <input type="radio" id="public" name="sentryVisibility" value="public" />
+          //           <label htmlFor="public" style={{color: '#103438'}}>Public</label>
                     
-                    <input type="radio" id="private" name="sentryVisibility" value="private" />
-                    <label htmlFor="private" style={{color: '#103438'}}>Private</label>
-                  </div>
-              </div>
+          //           <input type="radio" id="private" name="sentryVisibility" value="private" />
+          //           <label htmlFor="private" style={{color: '#103438'}}>Private</label>
+          //         </div>
+          //     </div>
 
-              <button className="sentry-details-create" style={{width: '50%'}} onClick={handleCreateSentry}>Create</button>
-            </div>
-            <div>
-            {token && (
-              <div className="tokenDiv">
-                <p><b style={{color: '#103438'}}>Token</b> <br></br>
+          //     <button className="sentry-details-create" style={{width: '50%'}} onClick={handleCreateSentry}>Create</button>
+          //   </div>
+          //   <div>
+          //   {token && (
+          //     <div className="tokenDiv">
+          //       <p><b style={{color: '#103438'}}>Token</b> <br></br>
 
-                    <input className="tokenCode" id= "token" type="text" value= {token}/> &nbsp;
-                  <br/>
-                    <button className="copy-button" data-clipboard-text={token}>
-                      {showCopyButton ? 'Copied!' : 'Click to Copy'}
-                    </button>
-                </p>
-              </div>
-            )}
-            </div>
+          //           <input className="tokenCode" id= "token" type="text" value= {token}/> &nbsp;
+          //         <br/>
+          //           <button className="copy-button" data-clipboard-text={token}>
+          //             {showCopyButton ? 'Copied!' : 'Click to Copy'}
+          //           </button>
+          //       </p>
+          //     </div>
+          //   )}
+          //   </div>
+          // </div>
+          <div className="your-sentry-container">
+              {currentSection === 'CREATE A SENTRY' && (
+                <CreateSentry
+                  token={token}
+                  showCopyButton={showCopyButton}
+                  handleCreateSentry={handleCreateSentry}
+                />
+              )}
           </div>
         );
       case 'GROUPS':
