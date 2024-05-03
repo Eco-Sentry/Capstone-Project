@@ -4,68 +4,88 @@ import SentriesTable from './SentriesTable';
 import SentryInfo from './SentryInfo';
 import CreateSentry from './CreateSentry';
 import SensorInfo from './SensorInfo';
-
-
+import axios from 'axios'; // Import axios for making HTTP requests
 
 // Your Sentry Component
 const YourSentry = () => {
   const [currentSection, setCurrentSection] = useState('sentries');
-  // const [sentries, setSentries] = useState([
-  const [sentries] = useState([
-    { name: 'Tom', location: 'Sydney', status: 'Green' },
-    { id: 2, name: 'Alice', location: 'Melbourne', status: 'Red' },
-    { id: 3, name: 'John', location: 'Brisbane', status: 'Green' },
-    { id: 4, name: 'Emily', location: 'Perth', status: 'Green' },
-    { id: 5, name: 'Michael', location: 'Adelaide', status: 'Red' },
-    { id: 6, name: 'Tommy', location: 'Gold Coast', status: 'Green' },
-    { id: 7, name: 'Daniel', location: 'Newcastle', status: 'Red' },
-    { id: 8, name: 'Olivia', location: 'Canberra', status: 'Green' },
-    { name: 'James', location: 'Sunshine Coast', status: 'Green' },
-    { id: 10, name: 'Johnny', location: 'Wollongong', status: 'Red' },
-    
-    // Add more hereee
-  ]);
-
+  const [sentries, setSentries] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  // const [showSentryInfo, setShowSentryInfo] = useState(false);
   const [selectedSentry, setSelectedSentry] = useState(null);
+  const [selectedSensor, setSelectedSensor] = useState(null);
+  const [token, setToken] = useState('');
+  const [showCopyButton, setShowCopyButton] = useState(false); // State to track if copy button should be shown
+  const [userInfo, setUserInfo] = useState(null); // State to store user information
+
+  useEffect(() => {
+    // Function to fetch user sentries
+    const fetchUserSentries = async () => {
+      try {
+        // Define the JWT token
+        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDcxMjY5NSwiZXhwIjoxNzE0NzQ4Njk1fQ.E73DPIvd2i9X8M-rZ3kxsdGgPBuTcslgohvQ3WsCOfg";
+  
+        // Make a POST request to the backend API to get user sentries
+        const response = await axios.post(
+          'http://202.65.64.38:8082/api/get-user-sentries',
+          token, // Send token directly as the request body
+          {
+            headers: {
+              'Content-Type': 'text/plain', // Set content type as text/plain
+            },
+          }
+        );
+  
+        console.log('Response from API:', response.data); // Log the response data
+        console.log('First sentry object:', response.data[0]);
+        
+        // Transform the data received from the API into the format expected by the component
+        const transformedSentries = response.data.map((sentry, index) => ({
+          id: sentry.id,
+          name: `Sentry ${index + 1}`,
+          location: sentry.latitude !== null && sentry.longitude !== null ? `${sentry.latitude}, ${sentry.longitude}` : 'Unknown',
+          status: sentry.trust === 0 ? 'Red' : 'Green'
+        }));
+              
+  
+        // Update user sentries in state with the transformed data
+        setSentries(transformedSentries);
+
+        // Set user info if available
+        setUserInfo(response.data);
+      } catch (error) {
+        console.error('Error fetching user sentries:', error);
+      }
+    };
+  
+    // Call the fetchUserSentries function when the component mounts
+    fetchUserSentries();
+  }, []); // The empty dependency array ensures this effect runs only once after the component mounts
+
+  useEffect(() => {
+    const clipboard = new ClipboardJS('.copy-button');
+
+    clipboard.on('success', () => {
+      setShowCopyButton(true);
+      setTimeout(() => setShowCopyButton(false), 1000);
+    });
+
+    return () => {
+      clipboard.destroy();
+    };
+  }, []);
 
   const filteredSentries = sentries.filter(sentry =>
-    sentry.name.toLowerCase().includes(searchQuery.toLowerCase())
+    sentry.name && sentry.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleSearchChange = event => {
     setSearchQuery(event.target.value);
   };
 
-  const [token, setToken] = useState('');
-
-  const [showCopyButton, setShowCopyButton] = useState(false); // State to track if copy button should be shown
-
-  useEffect(() => {
-    // Initialize Clipboard.js
-    const clipboard = new ClipboardJS('.copy-button');
-
-    // Event listener to handle the copying
-    clipboard.on('success', () => {
-      // Show that the copy worked briefly 
-      setShowCopyButton(true);
-      setTimeout(() => setShowCopyButton(false), 1000);
-    });
-
-    // Clean up event listeners
-    return () => {
-      clipboard.destroy();
-    };
-  }, []);
-
-
   const handleCreateSentry = () => {
-    // Logic for creating sentry
     const generatedToken = generateToken();
     setToken(generatedToken);
   };
-
 
   const generateToken = () => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -85,29 +105,13 @@ const YourSentry = () => {
     setCurrentSection('SENTRY INFO');
   };
 
-  const handleViewButtonClickSensorInfo = sentry => {
-    setSelectedSentry(sentry);
+  const handleViewButtonClickSensorInfo = sensor => {
+    // Pass both the sentry and the selected sensor to SensorInfo component
+    // setSelectedSentry(sentry);
+    setSelectedSensor(sensor);
     setCurrentSection('SENSOR INFO');
-
-    // const sensorName = sentry.sensorName;
-    // handleDownloadPDF(sensorName);
   };
 
-  // <SentriesTable sentries={filteredSentries} onViewButtonClick={handleViewButtonClick} />
-
-  useEffect(() => {
-    return () => {
-      // Reset
-      setToken(false);
-    };
-  }, [currentSection]);
-
-  const handleAddSensor = () => {
-    // Logic for adding a sensor
-    // console.log('Adding sensor');
-    alert("Adding sensor");
-  };
-  
   const renderSection = () => {
     switch (currentSection) {
       case 'sentries':
@@ -115,24 +119,32 @@ const YourSentry = () => {
         
       case 'SENTRY INFO':
         return (
-          
           <div className="your-sentry-container">
             <SentryInfo
+              sentry={selectedSentry}
               token={token}
               showCopyButton={showCopyButton}
               handleViewButtonClickSensorInfo={handleViewButtonClickSensorInfo}
-              handleAddSensor={handleAddSensor}
             />
           </div>
         );
 
-      case 'SENSOR INFO':
-        return <SensorInfo />;
-
+        case 'SENSOR INFO':
+          return (
+            <div className="your-sentry-container">
+              <SensorInfo
+                sentry={selectedSentry}
+                selectedSensor={selectedSensor}
+                token={token} // Pass token to SensorInfo component
+                showCopyButton={showCopyButton}
+                // handleViewButtonClickSensorInfo={handleViewButtonClickSensorInfo}
+                // sensorId={selectedSensor?.id} // Pass sensorId from selectedSentry to SensorInfo component
+              />
+            </div>
+          );
         
       case 'CREATE A SENTRY':
         return (
-          
           <div className="your-sentry-container">
             <CreateSentry
               token={token}
@@ -141,10 +153,9 @@ const YourSentry = () => {
             />
           </div>
         );
-      // case 'GROUPS':
-      //   return <div>Grouping Sentries</div>;
-      // default:
-      //   return <div>Not Found</div>;
+        
+      default:
+        return null; // Return null for unknown sections
     }
   };
 
@@ -154,7 +165,6 @@ const YourSentry = () => {
         <a id="lineBreak"></a>
         <a onClick={() => setCurrentSection('sentries')} id="sentriesButton"> Sentries</a>
         <a onClick={() => setCurrentSection('CREATE A SENTRY')} id="createSentry">Create sentry</a>
-        {/* <a onClick={() => setCurrentSection('GROUPS')} id="groups">Groups</a> */}
       </div>
       <div className="yourSent-main">
         <div className="yourSent-box">

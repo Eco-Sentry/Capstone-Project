@@ -1,32 +1,76 @@
-import pfp from './profileImage.png';
+import React, { useState, useEffect } from 'react';
+import defaultAvatar from './pfp.png';
+import axios from 'axios'; // Import axios for making HTTP requests
 
 function Account() {
-    return (
-        <div className='Account'>
-                <style>{'body { background-color: #00A3A3; }'}</style>  
-                <h2>YOUR ACCOUNT</h2>
+  const [userInfo, setUserInfo] = useState(null); // State to store user information
 
-                <table class="accountTable">
-                    <tr>
-                        {/* <td className='profilePictureCell'> 
-                            <img src={pfp} alt="logo" class="profilePicImage" style={{ textAlign: 'top', height: '70%', width: '70%'}}/>  
-                        </td> */}
+  useEffect(() => {
+    // Function to fetch user information
+    const fetchUserInfo = async () => {
+      try {
+        // Define the JWT token
+        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNDcyMjUzOSwiZXhwIjoxNzE0NzU4NTM5fQ.OMZ4okFksg_7-S3891ZK8Cyw4irKpDuuJvFtwNHgzr8";
 
-                        <td className="accountInfoCell">
-                            <form>
-                                <input className="accountDetails" type="text" name="address" placeholder=" First Name"/> <br /> <br />
-                                <input className="accountDetails" type="text" name="address" placeholder=" Last name"/> <br /> <br />
-                                <input className="accountDetails" type="text" name="address" placeholder=" Email"/> <br /> <br />
-                                {/* <input className="bioDetails" type="text" name="address" placeholder="About me"/> <br /> <br /> */}
-                                <input className="yourSent-view-button" type="submit" value="Submit Changes" style={{height: '100%', width: 'auto', fontSize: '100%'}}/>
-                            </form>
-                            
-                        </td>
-                    </tr>
-                </table>
-                <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-        </div>  
-    );
+        // Make a POST request to the backend API to get user information
+        // Send token as plain text in the request body
+        const response = await axios.post(
+          'http://202.65.64.38:8082/api/get-user-info',
+          token, // Send token directly as the request body
+          {
+            headers: {
+              'Content-Type': 'text/plain', // Set content type as text/plain
+            },
+          }
+        );
+
+        console.log('Response from API:', response.data); // Log the response data
+        // Update user information in state
+        setUserInfo(response.data);
+      } catch (error) {
+        console.error('Error fetching user information:', error);
+      }
+    };
+
+    // Call the fetchUserInfo function when the component mounts
+    fetchUserInfo();
+  }, []); // The empty dependency array ensures this effect runs only once after the component mounts
+
+  return (
+    <div className="account-container">
+      <div className="account-header">
+        <img src={defaultAvatar} alt="Profile" className="profile-image" />
+        <h2>Your Account</h2>
+      </div>
+      {/* <div className="account-info">
+        {userInfo ? (
+          <div>
+            <p>First Name: {userInfo.fname}</p>
+            <p>Last Name: {userInfo.lname}</p>
+            <p>Email: {userInfo.email}</p>
+          </div>
+        ) : (
+          <p>Loading user information...</p>
+        )}
+      </div> */}
+      <div className="account-form">
+        <form>
+          <div className="form-group">
+            <label htmlFor="firstName">First Name</label>
+            <input className="account-input" type="text" name="firstName" value={userInfo ? userInfo.fname : ''} disabled />
+          </div>
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name</label>
+            <input className="account-input" type="text" name="lastName" value={userInfo ? userInfo.lname : ''} disabled />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input className="account-input" type="email" name="email" value={userInfo ? userInfo.email : ''} disabled />
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default Account;
