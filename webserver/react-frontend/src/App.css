@@ -563,9 +563,31 @@
   margin-bottom: 50px;
 }
 
+.contact-details-submit {
+  background-color: #103438; 
+  border: none; 
+  color: white; 
+  padding: 5px 10px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 14px; 
+  margin: 4px 2px; 
+  cursor: pointer; 
+  border-radius: 10px; 
+}
+
+.contact-details-submit:hover {
+  border: 1px solid;
+  border-color: #232E3A;
+  background-color: white; 
+  color: #232E3A;
+}
+
+
 /* End of contact us page divs */
 
-/* home page - sav */
+/* home page */
 
 .homePage-ourMission-table {
   width: 95%;
