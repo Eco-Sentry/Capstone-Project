@@ -22,7 +22,7 @@ const YourSentry = () => {
     const fetchUserSentries = async () => {
       try {
         // Define the JWT token
-        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDcxMjY5NSwiZXhwIjoxNzE0NzQ4Njk1fQ.E73DPIvd2i9X8M-rZ3kxsdGgPBuTcslgohvQ3WsCOfg";
+        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDgwNjI0OCwiZXhwIjoxNzE0ODQyMjQ4fQ.Wd3fMR-Pnfw2SEGYrxNw2NXnEIXH3zkUiNjFlJE44OA";
   
         // Make a POST request to the backend API to get user sentries
         const response = await axios.post(

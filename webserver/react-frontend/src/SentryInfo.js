@@ -1,18 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import UptimeGraph from './components/UptimeGraph'; 
-import ConnectionGraph from './components/ConnectionGraph';
 import axios from 'axios';
+import AddSensorPopup from './AddSensorPopup'; // Import the AddSensorPopup component
 
-const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo, handleAddSensor }) => {
+const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo }) => {
   const [sensorData, setSensorData] = useState([]);
-  // console.log('Sentry Info:', sentry);
+  const [isAddSensorPopupOpen, setIsAddSensorPopupOpen] = useState(false);
+  const [sensorTypes, setSensorTypes] = useState([]); // State to store sensor types from the API response
+  const [selectedSensorType, setSelectedSensorType] = useState(''); // State to store the selected sensor type
+  const [description, setDescription] = useState(''); // State to store the description of the sensor
+
+  useEffect(() => {
+    const fetchSensorTypes = async () => {
+      try {
+        const response = await axios.get('http://202.65.64.38:8082/api/get-sensor-types');
+        setSensorTypes(response.data);
+      } catch (error) {
+        console.error('Error fetching sensor types:', error);
+      }
+    };
+
+    fetchSensorTypes();
+  }, []);
+
   useEffect(() => {
     const fetchSensorData = async () => {
       try {
         const response = await axios.post(
           'http://202.65.64.38:8082/api/get-sentry-sensors',
           {
-            token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDcxMjY5NSwiZXhwIjoxNzE0NzQ4Njk1fQ.E73DPIvd2i9X8M-rZ3kxsdGgPBuTcslgohvQ3WsCOfg',
+            token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDgwNjI0OCwiZXhwIjoxNzE0ODQyMjQ4fQ.Wd3fMR-Pnfw2SEGYrxNw2NXnEIXH3zkUiNjFlJE44OA',
             sentryId: sentry.id
           },
           {
@@ -21,20 +37,37 @@ const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo, h
             }
           }
         );
-        // console.log('Sensor Data:', response.data); // Log the response data
         setSensorData(response.data);
       } catch (error) {
         console.error('Error fetching sensor data:', error);
       }
-    };    
-  
-    fetchSensorData();
-  }, [sentry.id]);  
+    };
 
-  // console.log('Sentry ID:', sentry ? sentry.id : 'No sentry information available');
-  // console.log('Sentry Info:', sentry);
-  // console.log('Sensor Data:', sensorData);
-  
+    fetchSensorData();
+  }, [sentry.id]);
+
+  const toggleAddSensorPopup = () => {
+    setIsAddSensorPopupOpen(!isAddSensorPopupOpen);
+  };
+
+  const handleAddSensor = async () => {
+    try {
+      // console.log('Selected Sensor Type:', selectedSensorType);
+      const response = await axios.post('http://202.65.64.38:8082/api/register-sensor', {
+        userToken: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDgwNjI0OCwiZXhwIjoxNzE0ODQyMjQ4fQ.Wd3fMR-Pnfw2SEGYrxNw2NXnEIXH3zkUiNjFlJE44OA',
+        sensorTypeId: selectedSensorType,
+        sentryId: sentry.id
+      });
+
+      // Update sensor data after adding a new sensor
+      setSensorData([...sensorData, response.data]);
+      // Close the add sensor popup
+      setIsAddSensorPopupOpen(false);
+    } catch (error) {
+      console.error('Error adding sensor:', error);
+    }
+  };
+
   return (
     <div className="sentry-info-box">
       <div id="revealToken">
@@ -48,45 +81,62 @@ const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo, h
       </div>
 
       <br />
-      {/* here */}
-      
-      <div style={{backgroundColor: '#FFF3E4', padding: '3%'}}>
-      <button class= "mySent-view-button" onClick={handleAddSensor} style={{ marginLeft: '90%', width: '10%'}}>Add Sensor</button>
-      
-      <div style={{ backgroundColor: 'white' }}>
-        {/* <h4>Sensor Info</h4> */}
-        <table className="sensorTable">
-          <thead>
-            <tr>
-                <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Sensor Name</th>
-                <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>description</th>
-                <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Status</th>
-                <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;'}}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sensorData.map(sensor => (
-              <tr key={sensor.id}>
-                <td>{sensor.sensorType.sensorType}</td>
-                <td>{sensor.sensorType.description}</td>
-                <td>
-                  <span className={`sensorStatus ${sensor.sensorType.activated ? 'connected' : 'error'}`}>
-                    {sensor.sensorType.activated ? 'Connected' : 'Error'}
-                  </span>
-                </td>
-                <td>
-                  <button className="mySent-view-button" onClick={() => handleViewButtonClickSensorInfo(sensor)}>  
-                    View
-                  </button>
-                </td>
+
+      <div style={{ backgroundColor: '#FFF3E4', padding: '3%' }}>
+        <button className="mySent-view-button" onClick={toggleAddSensorPopup} style={{ marginLeft: '90%', width: '10%' }}>Add Sensor</button>
+
+        <div style={{ backgroundColor: 'white' }}>
+          <table className="sensorTable">
+            <thead>
+              <tr>
+                <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px' }}>Sensor Name</th>
+                <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px' }}>Description</th>
+                <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px' }}>Status</th>
+                <th style={{ backgroundColor: '#FFFFFF', fontSize: "22px", boxShadow: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px' }}>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {sensorData.length === 0 ? (
+                <tr>
+                  <td colSpan="4">Loading...</td>
+                </tr>
+              ) : (
+                sensorData.map(sensor => (
+                  <tr key={sensor.id}>
+                    <td>{sensor.sensorType?.sensorType || 'N/A'}</td>
+                    <td>{sensor.sensorType?.description || 'N/A'}</td>
+                    <td>
+                      <span className={`sensorStatus ${sensor.sensorType?.activated ? 'connected' : 'error'}`}>
+                        {sensor.sensorType?.activated ? 'Connected' : 'Error'}
+                      </span>
+                    </td>
+                    <td>
+                      <button className="mySent-view-button" onClick={() => handleViewButtonClickSensorInfo(sensor)}>
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+
+          </table>
+        </div>
       </div>
 
-
+      {/* Render the AddSensorPopup component conditionally */}
+      {isAddSensorPopupOpen && (
+        <AddSensorPopup
+        isOpen={isAddSensorPopupOpen}
+        sensorTypes={sensorTypes}
+        selectedSensorType={selectedSensorType}
+        setSelectedSensorType={setSelectedSensorType}
+        description={description}
+        setDescription={setDescription}
+        onAddSensor={handleAddSensor}
+        onRequestClose={toggleAddSensorPopup}  // or a different close function
+      />      
+      )}
 
     </div>
   );

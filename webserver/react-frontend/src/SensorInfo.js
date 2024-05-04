@@ -13,7 +13,7 @@ const SensorInfo = ({ sentry, selectedSensor, showCopyButton }) => {
         const response = await axios.post(
           'http://202.65.64.38:8082/api/get-sentry-sensors',
           {
-            token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDcxMjY5NSwiZXhwIjoxNzE0NzQ4Njk1fQ.E73DPIvd2i9X8M-rZ3kxsdGgPBuTcslgohvQ3WsCOfg',
+            token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDgwNjI0OCwiZXhwIjoxNzE0ODQyMjQ4fQ.Wd3fMR-Pnfw2SEGYrxNw2NXnEIXH3zkUiNjFlJE44OA',
             sentryId: sentry.id
           },
           {

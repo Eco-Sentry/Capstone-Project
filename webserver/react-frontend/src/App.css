@@ -413,6 +413,79 @@
   background-color: #CCE9CF;
   color: #48BE00;
 }
+
+/* Style for the modal content */
+.add-sensor-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  z-index: 1001; /* Ensure the modal is above other elements */
+}
+
+/* Style for the modal overlay */
+.add-sensor-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1000; /* Ensure the overlay is behind the modal content */
+}
+
+.add-sensor-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.add-sensor-popup h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.add-sensor-popup select,
+.add-sensor-popup textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.add-sensor-popup textarea {
+  resize: none;
+  height: 80px; /* Adjust this height as needed */
+}
+
+.add-sensor-popup button {
+  width: 100%;
+  padding: 10px;
+  background-color: #232E3A;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-sensor-popup button:hover {
+  border: 1px solid;
+  border-color: #232E3A;
+  background-color: white; 
+  color: #232E3A;
+
+}
+
+
 /*End of dashboard divs*/
 
 /* About page divs */
