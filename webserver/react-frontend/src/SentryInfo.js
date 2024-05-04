@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddSensorPopup from './AddSensorPopup'; // Import the AddSensorPopup component
+import AddSensorPopup from './AddSensorPopup'; 
+import { toast } from 'react-toastify';
 
 const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo }) => {
   const [sensorData, setSensorData] = useState([]);
@@ -63,8 +64,10 @@ const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo })
       setSensorData([...sensorData, response.data]);
       // Close the add sensor popup
       setIsAddSensorPopupOpen(false);
+      toast.success('Sensor added successfully! Please refresh the page.');
     } catch (error) {
       console.error('Error adding sensor:', error);
+      toast.error('Failed to add sensor. Please try again.');
     }
   };
 
@@ -98,7 +101,7 @@ const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo })
             <tbody>
               {sensorData.length === 0 ? (
                 <tr>
-                  <td colSpan="4">Loading...</td>
+                  <td colSpan="4">No Sensors</td>
                 </tr>
               ) : (
                 sensorData.map(sensor => (

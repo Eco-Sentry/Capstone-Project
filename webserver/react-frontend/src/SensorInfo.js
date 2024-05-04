@@ -6,7 +6,20 @@ import axios from 'axios';
 const SensorInfo = ({ sentry, selectedSensor, showCopyButton }) => {
   
   const [sensorData, setSensorInfo] = useState([]);
-  // console.log("Props received by SensorInfo:", { sentry, showCopyButton, sensorId });
+  
+  const getCurrentDateAndTime = () => {
+    const today = new Date();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2); // Ensure two digits for month
+    const year = today.getFullYear();
+    const date = ('0' + today.getDate()).slice(-2); // Ensure two digits for day
+    const hours = ('0' + today.getHours()).slice(-2); // Ensure two digits for hours
+    const minutes = ('0' + today.getMinutes()).slice(-2); // Ensure two digits for minutes
+    return `${year}-${month}-${date}T${hours}:${minutes}`;
+  };
+
+  const [selectedDateTime, setSelectedDateTime] = useState(getCurrentDateAndTime());
+  // console.log("DATE aND TIME", getCurrentDateAndTime())
+
   useEffect(() => {
     const fetchSensorInfo = async () => {
       try {
@@ -29,10 +42,10 @@ const SensorInfo = ({ sentry, selectedSensor, showCopyButton }) => {
         console.error('Error fetching sensor data:', error);
       }
     };
-      // console.log('SENSOR =============', sensorData);
-      fetchSensorInfo();
+
+    fetchSensorInfo();
   
-  }, [sentry.id, selectedSensor]); // Include sensorId in the dependency array  
+  }, [sentry.id, selectedSensor]); 
 
   const handleDownloadPDF = () => {
     const element = document.getElementById('sensorInfoContent');
@@ -81,7 +94,18 @@ const SensorInfo = ({ sentry, selectedSensor, showCopyButton }) => {
       </div>
 
       <div id="sensorInfoContent">
+      Date Time: &nbsp;
+      <input
+        type="datetime-local"
+        id="date-time"
+        name="sensor-dateTime-graph"
+        value={selectedDateTime}
+        min="2024-04-05T00:00"
+        max={getCurrentDateAndTime()} 
+        onChange={(e) => setSelectedDateTime(e.target.value)} />
+      <br/>
         Graph goes here
+        <iframe src="http://202.65.64.38:5000/generate-interactive-graph" style= {{width: '100%', height: '600px', border: 'none'}}></iframe>
       </div>
       <button className="sentry-details-create" style={{ display: 'initial', width: '15%' }} onClick={handleDownloadPDF}>
         Download as PDF
@@ -90,4 +114,4 @@ const SensorInfo = ({ sentry, selectedSensor, showCopyButton }) => {
   );
 };
 
-export default SensorInfo;
+export default SensorInfo; 

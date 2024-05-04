@@ -82,23 +82,7 @@ const YourSentry = () => {
     setSearchQuery(event.target.value);
   };
 
-  const handleCreateSentry = () => {
-    const generatedToken = generateToken();
-    setToken(generatedToken);
-  };
 
-  const generateToken = () => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const tokenLength = 30;
-    let token = '';
-
-    for (let i = 0; i < tokenLength; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      token += characters.charAt(randomIndex);
-    }
-
-    return token;
-  };
 
   const handleViewButtonClick = sentry => {
     setSelectedSentry(sentry);
@@ -149,7 +133,6 @@ const YourSentry = () => {
             <CreateSentry
               token={token}
               showCopyButton={showCopyButton}
-              handleCreateSentry={handleCreateSentry}
             />
           </div>
         );
