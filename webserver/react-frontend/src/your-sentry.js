@@ -5,6 +5,7 @@ import SentryInfo from './SentryInfo';
 import CreateSentry from './CreateSentry';
 import SensorInfo from './SensorInfo';
 import axios from 'axios'; // Import axios for making HTTP requests
+import { toast } from 'react-toastify';
 
 // Your Sentry Component
 const YourSentry = () => {
@@ -22,7 +23,7 @@ const YourSentry = () => {
     const fetchUserSentries = async () => {
       try {
         // Define the JWT token
-        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDgwNjI0OCwiZXhwIjoxNzE0ODQyMjQ4fQ.Wd3fMR-Pnfw2SEGYrxNw2NXnEIXH3zkUiNjFlJE44OA";
+        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNDkwOTc2NiwiZXhwIjoxNzE0OTQ1NzY2fQ.KNMpCN7_Ck02lC_hI3_6jJb0v_dj1wZTKnkLTsEC2gk";
   
         // Make a POST request to the backend API to get user sentries
         const response = await axios.post(
@@ -96,10 +97,41 @@ const YourSentry = () => {
     setCurrentSection('SENSOR INFO');
   };
 
+  const handleDeleteButtonSentry = async (sentry) => {
+    // Logic to delete the sentry
+    console.log('Deleting sentry:', sentry.id);
+
+    try {
+      // Define the JWT token
+      const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNDkwOTc2NiwiZXhwIjoxNzE0OTQ1NzY2fQ.KNMpCN7_Ck02lC_hI3_6jJb0v_dj1wZTKnkLTsEC2gk";
+      
+      // Make a POST request to delete the sentry
+      const response = await axios.post(
+        'http://202.65.64.38:8082/api/delete-sentry',
+        {
+          token: token,
+          objId: sentry.id // Assuming sentry id is used as objId
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json', // Set content type as application/json
+          },
+        }
+      );
+      toast.success('Sentry deleted successfully! Please refresh page!');
+      console.log('Response from delete API:', response.data); // Log the response data
+      // If the delete operation is successful, you can update the UI accordingly
+    } catch (error) {
+      console.error('Error deleting sentry:', error);
+      toast.error('Failed to delete sentry. Please try again.');
+      // Handle error, display a message to the user, etc.
+    }
+  };
+
   const renderSection = () => {
     switch (currentSection) {
       case 'sentries':
-        return <SentriesTable sentries={filteredSentries} onViewButtonClick={handleViewButtonClick} />;
+        return <SentriesTable sentries={filteredSentries} onViewButtonClick={handleViewButtonClick} onDeleteButtonSentry={handleDeleteButtonSentry}/>;
         
       case 'SENTRY INFO':
         return (

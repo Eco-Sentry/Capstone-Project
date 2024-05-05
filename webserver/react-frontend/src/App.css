@@ -371,6 +371,19 @@
   padding: 1%;
 }
 
+/* Style the button */
+.mySent-delete-button {
+  background-color: transparent; /* Make the background transparent */
+  border: none; /* Remove the border */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  /* padding: 0; Remove padding */
+}
+
+/* Add hover effect */
+.mySent-delete-button:hover .fa-trash-o {
+  color: red; /* Change icon color on hover */
+}
+
 /* .sensorTable th:nth-child(4),
 .sensorTable td:nth-child(4) {
   width: 25%;

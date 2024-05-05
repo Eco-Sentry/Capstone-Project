@@ -31,7 +31,7 @@ const CreateSentry = ({ showCopyButton }) => {
       const response = await axios.post(
         'http://202.65.64.38:8082/api/register-sentry',
         {
-          userToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDgwNjI0OCwiZXhwIjoxNzE0ODQyMjQ4fQ.Wd3fMR-Pnfw2SEGYrxNw2NXnEIXH3zkUiNjFlJE44OA",
+          userToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNDkwOTc2NiwiZXhwIjoxNzE0OTQ1NzY2fQ.KNMpCN7_Ck02lC_hI3_6jJb0v_dj1wZTKnkLTsEC2gk",
           longitude: parseFloat(longitude),
           latitude: parseFloat(latitude)
         }
@@ -51,7 +51,7 @@ const CreateSentry = ({ showCopyButton }) => {
       setIsPopupOpen(true);
   
       // Handle success
-      toast.success('Sentry created successfully!');
+      toast.success('Sentry created successfully! Please refresh page!');
       
     } catch (error) {
       // Handle error

@@ -10,7 +10,7 @@ function Account() {
     const fetchUserInfo = async () => {
       try {
         // Define the JWT token
-        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNDcyMjUzOSwiZXhwIjoxNzE0NzU4NTM5fQ.OMZ4okFksg_7-S3891ZK8Cyw4irKpDuuJvFtwNHgzr8";
+        const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNDkwOTc2NiwiZXhwIjoxNzE0OTQ1NzY2fQ.KNMpCN7_Ck02lC_hI3_6jJb0v_dj1wZTKnkLTsEC2gk";
 
         // Make a POST request to the backend API to get user information
         // Send token as plain text in the request body

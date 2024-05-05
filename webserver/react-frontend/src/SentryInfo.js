@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddSensorPopup from './AddSensorPopup'; 
 import { toast } from 'react-toastify';
+import trashIcon from './trash.png';
+import Modal from 'react-modal';
 
 const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo }) => {
   const [sensorData, setSensorData] = useState([]);
@@ -9,6 +11,8 @@ const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo })
   const [sensorTypes, setSensorTypes] = useState([]); // State to store sensor types from the API response
   const [selectedSensorType, setSelectedSensorType] = useState(''); // State to store the selected sensor type
   const [description, setDescription] = useState(''); // State to store the description of the sensor
+  const [selectedSensor, setSelectedSensor] = useState(null);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
 
   useEffect(() => {
     const fetchSensorTypes = async () => {
@@ -29,7 +33,7 @@ const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo })
         const response = await axios.post(
           'http://202.65.64.38:8082/api/get-sentry-sensors',
           {
-            token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDgwNjI0OCwiZXhwIjoxNzE0ODQyMjQ4fQ.Wd3fMR-Pnfw2SEGYrxNw2NXnEIXH3zkUiNjFlJE44OA',
+            token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNDkwOTc2NiwiZXhwIjoxNzE0OTQ1NzY2fQ.KNMpCN7_Ck02lC_hI3_6jJb0v_dj1wZTKnkLTsEC2gk',
             sentryId: sentry.id
           },
           {
@@ -55,7 +59,7 @@ const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo })
     try {
       // console.log('Selected Sensor Type:', selectedSensorType);
       const response = await axios.post('http://202.65.64.38:8082/api/register-sensor', {
-        userToken: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDgwNjI0OCwiZXhwIjoxNzE0ODQyMjQ4fQ.Wd3fMR-Pnfw2SEGYrxNw2NXnEIXH3zkUiNjFlJE44OA',
+        userToken: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNDkwOTc2NiwiZXhwIjoxNzE0OTQ1NzY2fQ.KNMpCN7_Ck02lC_hI3_6jJb0v_dj1wZTKnkLTsEC2gk',
         sensorTypeId: selectedSensorType,
         sentryId: sentry.id
       });
@@ -70,6 +74,50 @@ const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo })
       toast.error('Failed to add sensor. Please try again.');
     }
   };
+
+  const handleDeleteConfirmation = (sensor) => {
+    setSelectedSensor(sensor);
+    setIsDeleteConfirmationOpen(true);
+  };
+
+  const handleDeleteSensor = async () => {
+    try {
+      // Define the JWT token
+      const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNDkwOTc2NiwiZXhwIjoxNzE0OTQ1NzY2fQ.KNMpCN7_Ck02lC_hI3_6jJb0v_dj1wZTKnkLTsEC2gk";
+      
+      // Make a POST request to delete the sensor
+      const response = await axios.post(
+        'http://202.65.64.38:8082/api/delete-sensor',
+        {
+          token: token,
+          objId: selectedSensor.id // Assuming sensor id is used as objId
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json', // Set content type as application/json
+          },
+        }
+      );
+  
+      console.log('Response from delete sensor API:', response.data); // Log the response data
+      // If the delete operation is successful, you can update the UI accordingly
+  
+      // Remove the deleted sensor from the sensorData state
+      setSensorData(sensorData.filter(sensor => sensor.id !== selectedSensor.id));
+  
+      // Close the confirmation modal
+      setIsDeleteConfirmationOpen(false);
+      
+      // Show success message
+      toast.success('Sensor deleted successfully!');
+    } catch (error) {
+      console.error('Error deleting sensor:', error);
+      // Handle error, display a message to the user, etc.
+      toast.error('Failed to delete sensor. Please try again.');
+    }
+  };  
+
+
 
   return (
     <div className="sentry-info-box">
@@ -113,16 +161,32 @@ const SentryInfo = ({ sentry, showCopyButton, handleViewButtonClickSensorInfo })
                         {sensor.sensorType?.activated ? 'Connected' : 'Error'}
                       </span>
                     </td>
-                    <td>
-                      <button className="mySent-view-button" onClick={() => handleViewButtonClickSensorInfo(sensor)}>
+                    <td style={{ display: 'inline-flex' }}>
+                      <button className="mySent-view-button" style={{ width: '100%' }} onClick={() => handleViewButtonClickSensorInfo(sensor)}>
                         View
                       </button>
+                      <button className="mySent-delete-button" onClick={() => handleDeleteConfirmation(sensor)}>
+                        <img src={trashIcon} alt="Delete" style={{ width: '20px', height: '20px' }} />
+                    </button>
                     </td>
                   </tr>
                 ))
               )}
             </tbody>
-
+            
+              <Modal
+                isOpen={isDeleteConfirmationOpen}
+                onRequestClose={() => setIsDeleteConfirmationOpen(false)}
+                className="add-sensor-modal"
+                overlayClassName="add-sensor-modal-overlay"
+              >
+                <div className="add-sensor-popup">
+                    <h2>Confirm Delete</h2>
+                    <p>Are you sure you want to delete this sensor?</p>
+                      <button onClick={handleDeleteSensor}>Yes</button>
+                      <button onClick={() => setIsDeleteConfirmationOpen(false)}>No</button>
+              </div>
+            </Modal>
           </table>
         </div>
       </div>
