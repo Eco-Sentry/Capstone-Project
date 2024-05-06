@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -23,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 
 import ecosentry.control.datalogger.model.SensorReading;
 import ecosentry.control.datalogger.repository.SensorReadingRepository;
+import ecosentry.control.utilities.GeoUtils;
 
 @RestController
 @RequestMapping("/api")
@@ -72,19 +74,6 @@ public class SensorReadingController {
 
     }
 
-    // WIP
-
-    @GetMapping("/readings")
-    public List<SensorReading> getReadingsByTypeAndTime(
-            @RequestParam UUID sensorType,
-            @RequestParam Instant startTime,
-            @RequestParam Instant endTime) {
-
-        return sensorReadingRepository.findBySensorTypeAndTime(sensorType, startTime, endTime);
-    }
-
-
-
     private static class SendReadingBody {
         
         private UUID sensorId, sentryId;
@@ -103,5 +92,64 @@ public class SensorReadingController {
             return value;
         }
     }
+
+    // To Get readings
+
+    @GetMapping("/readings")
+    public List<SensorReadingResponse> getReadingsByTypeAndTime(
+            @RequestParam UUID sensorType,
+            @RequestParam Instant startTime,
+            @RequestParam Instant endTime,
+            @RequestParam double longitude,
+            @RequestParam double latitude, 
+            @RequestParam double range) {
+
+        List<SensorReading> preRange = sensorReadingRepository.findBySensorTypeAndTime(sensorType, startTime, endTime);
+        List<SensorReadingResponse> postRangeProcessed = new ArrayList<SensorReadingResponse>();
+
+        for (SensorReading myReading : preRange){
+            // isWithinRange(double lat1, double lon1, double lat2, double lon2, double rangeKm)
+            boolean passRangeTest = GeoUtils.isWithinRange(myReading.getLatitude(),
+                                                            myReading.getLongitude(),
+                                                            latitude,
+                                                            longitude,
+                                                            range);
+            if (passRangeTest){
+                postRangeProcessed.add(new SensorReadingResponse(myReading.getReading(),
+                                                                    myReading.getLongitude(),
+                                                                    myReading.getLatitude(),
+                                                                    myReading.getTrust(),
+                                                                    myReading.getDateTime()));
+            }
+        }
+
+        return postRangeProcessed;
+    }
+
+    public class SensorReadingResponse {
+        private double reading;
+        private double longitude, latitude;
+        private double trust;
+        private Instant dateTime;
+
+        SensorReadingResponse(){}
+        SensorReadingResponse(double reading, double longitude, double latitude, double trust, Instant dateTime){
+            this.reading = reading;
+            this.longitude = longitude;
+            this.latitude = latitude;
+            this.trust = trust;
+            this.dateTime = dateTime;
+        }
+
+        public double getReading(){ return reading; }
+        public double getLongitude(){ return longitude; }
+        public double getLatitude(){ return latitude; }
+        public double getTrust(){ return trust; }
+        public Instant getDateTime() { return dateTime; }
+    }
+
+
+
+    
 }
 

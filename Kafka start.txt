@@ -4,4 +4,6 @@
 /opt/homebrew/bin/brew services stop zookeeper
 
 brew services start kafka
+cd kafka_2.13-3.7.0
+bin/kafka-server-start.sh config/server.properties
 

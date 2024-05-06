@@ -13,7 +13,7 @@ public class Sensor {
     private UUID id = UUID.randomUUID();
 
     @ManyToOne
-    @JoinColumn(name = "sentry_id", nullable = false)
+    @JoinColumn(name = "sentry_id", nullable = true)
     private Sentry sentry;
 
     @ManyToOne 

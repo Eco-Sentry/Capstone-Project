@@ -1,5 +1,7 @@
 package ecosentry.control.registration.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +17,7 @@ public class User {
     private String fName;
     private String lName;
     private String email;
+    @JsonIgnore
     private String password;
 
     public User(){}; // Make sure the no-arg constructor is at least protected for JPA

@@ -1,0 +1,5 @@
+2024-04-29 17:28:24.415 AEST [1415170] LOG:  starting PostgreSQL 14.11 (Homebrew) on x86_64-pc-linux-gnu, compiled by gcc-11 (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, 64-bit
+2024-04-29 17:28:24.415 AEST [1415170] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-04-29 17:28:24.417 AEST [1415170] FATAL:  lock file "/tmp/.s.PGSQL.5432.lock" already exists
+2024-04-29 17:28:24.417 AEST [1415170] HINT:  Is another postmaster (PID 1406767) using socket file "/tmp/.s.PGSQL.5432"?
+2024-04-29 17:28:24.419 AEST [1415170] LOG:  database system is shut down

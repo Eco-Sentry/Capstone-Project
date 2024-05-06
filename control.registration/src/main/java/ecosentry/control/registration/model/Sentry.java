@@ -13,7 +13,7 @@ public class Sentry {
     private UUID id = UUID.randomUUID();
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
     private double longitude, latitude, trust;

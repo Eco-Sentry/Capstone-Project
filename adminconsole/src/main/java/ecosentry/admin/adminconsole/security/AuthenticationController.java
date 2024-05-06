@@ -74,5 +74,15 @@ public class AuthenticationController {
     public String loginPage() {
         return "login";  // This will correctly serve your Thymeleaf template
     }
+    // Method to serve the login page
+    @GetMapping("/dashboard")
+    public String dashboardPage() {
+        return "lashboard";  // This will correctly serve your Thymeleaf template
+    }
+    // Method to serve the login page
+    @GetMapping("/template")
+    public String templatePage() {
+        return "template";  // This will correctly serve your Thymeleaf template
+    }
 
 }

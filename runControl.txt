@@ -168,6 +168,14 @@ curl -X POST http://localhost:9069/api/send-data \
 
 
 
+(base) byron@HOM-SER-001:~$ psql -h localhost -p 5433 -U postgres
+psql (14.11 (Homebrew))
+Type "help" for help.
+
+postgres=# /c esusers
+postgres-# \c esusers
+You are now connected to database "esusers" as user "postgres".
+esusers-# 
 
 
 
@@ -182,4 +190,26 @@ curl -X GET "http://localhost:9069/api/readings?sensorType=1a8bd541-627b-4b80-b5
 
 curl -X GET "http://localhost:9069/api/readings?sensorType=1a8bd541-627b-4b80-b519-9c66dc3883e2&minLatitude=-34.50&maxLatitude=-34.30&minLongitude=150.80&maxLongitude=151.00&startTime=2024-04-27T13:37:00Z&endTime=2024-04-27T23:59:59Z"
 
+
+
+
+
+
+
+curl -X POST \
+  http://localhost:8082/api/get-user-info \
+  -H 'Content-Type: text/plain' \
+  -d 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDYxMjUzNSwiZXhwIjoxNzE0NjQ4NTM1fQ.lhL7Ry0FCqb6uLQP3VSQxh7Tjdhs_gKQyiwJXUAgHY8'
+
+curl -X POST \
+  http://localhost:8082/api/get-user-sentries \
+  -H 'Content-Type: text/plain' \
+  -d 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDYxMjUzNSwiZXhwIjoxNzE0NjQ4NTM1fQ.lhL7Ry0FCqb6uLQP3VSQxh7Tjdhs_gKQyiwJXUAgHY8'
+
+curl -X POST http://localhost:8082/api/get-sentry-sensors \
+-H "Content-Type: application/json" \
+-d '{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huLmRvZUBleGFtcGxlLmNvbSIsImlhdCI6MTcxNDYxMjUzNSwiZXhwIjoxNzE0NjQ4NTM1fQ.lhL7Ry0FCqb6uLQP3VSQxh7Tjdhs_gKQyiwJXUAgHY8",
+    "sentryId": "5c91636d-29bc-4564-a632-225fe47ebad4"
+}'
 

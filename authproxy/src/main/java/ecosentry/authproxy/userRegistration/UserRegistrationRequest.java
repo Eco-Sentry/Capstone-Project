@@ -6,6 +6,13 @@ public class UserRegistrationRequest {
     private String email;
     private String password;
 
+    UserRegistrationRequest(String fName, String lName, String email, String password){
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+        this.password = password;
+    }
+
     // Getters and Setters
     public String getFName() {
         return fName;
