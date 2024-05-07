@@ -69,3 +69,4 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         return Boolean.TRUE.equals(isValid);
     }
 }
+

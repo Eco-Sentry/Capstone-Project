@@ -31,15 +31,16 @@ body {
 /* On wide screens, make the navbar 50% taller on hover */
 @media (min-width: 768px) {
     .navbar:hover {
-        height: 130px; /* Increased height */
+        height: 130px;
     }
     .navbar:hover .nav-links {
         display: flex;
         flex-direction: row;
         align-items: center;
+
     }
     .content {
-        margin-left: 200px; /* Adjust content margin when sidebar is visible */
+        margin-left: 300px; /* Adjust content margin when sidebar is visible */
     }
     .sidebar {
         transform: translateX(0); /* Sidebar visible by default on wide screens */
@@ -72,13 +73,14 @@ body {
 /* Sidebar */
 .sidebar {
     background-color: #cecece;
-    width: 200px;
+    padding:20px;
+    width: 300px;
     height: 100vh;
     position: fixed;
     top: 60px;
     left: 0;
     z-index: 500;
-    transform: translateX(-200px);
+    transform: translateX(-300px);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -139,5 +141,6 @@ body {
 .main-div {
     background-color: #e0e0e0;
     padding: 20px;
-    height: 500px;
+    /* height: 500px; */
+    
 }

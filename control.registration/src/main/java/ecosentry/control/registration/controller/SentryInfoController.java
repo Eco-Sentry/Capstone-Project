@@ -1,6 +1,7 @@
 package ecosentry.control.registration.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -152,5 +153,31 @@ public class SentryInfoController {
     public List<SensorType> getMethodName() {
         return sensorTypeRepository.findAll();
     }
+
+    @PostMapping("/get-sensor-type-title")
+    public String getSensorTypeTitle(@RequestBody SensorTypeIdRequest request) throws InterruptedException, ExecutionException, TimeoutException {
+        UUID sensorTypeId = request.getSensorTypeId();
+        Optional<SensorType> mySensorType = sensorTypeRepository.findById(sensorTypeId);
+        if (mySensorType.isPresent()) {
+            SensorType sensorType = mySensorType.get();
+            return sensorType.getSensorType() + " (" + sensorType.getUnit() + ")";
+        } else {
+            throw new RuntimeException("Sensor not found with that ID: " + sensorTypeId);
+        }
+    }
+
+    public static class SensorTypeIdRequest {
+        private UUID sensorTypeId;
     
+        public UUID getSensorTypeId() {
+            return sensorTypeId;
+        }
+    
+        public void setSensorTypeId(UUID sensorTypeId) {
+            this.sensorTypeId = sensorTypeId;
+        }
+    }
+    
+
+        
 }
