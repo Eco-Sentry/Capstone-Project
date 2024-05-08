@@ -141,7 +141,7 @@ public class AuthenticationController {
             if (isAuthenticated) {
                 // Store the token in a cookie
                 Cookie authCookie = new Cookie("AUTH-TOKEN", token);
-                authCookie.setHttpOnly(true); // Enhance security by making the cookie inaccessible to JavaScript
+                // authCookie.setHttpOnly(true); // Enhance security by making the cookie inaccessible to JavaScript
                 authCookie.setPath("/"); // Available to entire application
                 response.addCookie(authCookie);
 
