@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/default.css">
+    <title>Responsive Layout</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Logo</div>
+    </div>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li>Download</li>
+            <li>Other Utilities</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="search-area">
+            <input type="text" class="search-input" placeholder="Search...">
+            <button class="search-button">Search</button>
+        </div>
+        <div class="main-div">
+            <p>Main content area...</p>
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.transform = sidebar.style.transform === 'translateX(-100%)' ? 'translateX(0)' : 'translateX(-100%)';
+        }
+    </script>
+</body>
+</html>
