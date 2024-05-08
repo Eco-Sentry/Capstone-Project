@@ -3,8 +3,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="css/mySentries.css">
-    <title>Sensor Info</title>
+    <link rel="stylesheet" href="css/addSensors.css">
+    <title>Propose a Sensor</title>
 </head>
 <body>
     <div class="navbar">
@@ -12,7 +12,6 @@
         <nav class="nav-links">
             <a th:href="@{home}">Home</a>
             <a th:href="@{about}">About</a>
-            <a th:href="@{guide}">Guide</a>
             <a th:href="@{profile}">Profile</a>
             <a th:href="@{dashboard}">Dashboard</a>
             <a th:href="@{mySentries}">My Sentries</a>
@@ -26,30 +25,17 @@
     </div>
     <div class="content">
         <div class="main-div">
-            <h1>Sensor Info</h1>
-            <div id="sentryTokenDiv" class="token-display">
-                <p><b>Sensor ID:</b> <span id="sensorIdDisplay"></span></p>
-                <button onclick="copyToClipboard()">Copy Sensor ID</button>
-            </div>
-            <div>
-                <label for="startDate">From:</label>
-                <input type="date" id="startDate">
-                <label for="endDate">To:</label>
-                <input type="date" id="endDate">
-                <button onclick="loadGraphData()">Show Graph</button>
-            </div>
-            <div id="graph">
-                Graph Here
+            <h1>Propose a Sensor</h1>
+            <div class="form-container">
+                <div class="form">
+                    <h3>Propose a New Sensor (Coming Soon)</h3>
+                    <p>This feature will allow you to propose new sensors for the system.</p>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const sensorId = getCookie('SENSOR-ID');
-            document.getElementById('sensorIdDisplay').textContent = sensorId;
-        });
-
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -65,30 +51,6 @@
             return cookieValue;
         }
 
-        function loadGraphData() {
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            console.log('Load graph data for:', startDate, 'to', endDate);
-            // call the API to fetch the graph data based on the selected dates
-            // This is like a reload but for now itll just update a placeholder
-            const graphContainer = document.getElementById('graph');
-            graphContainer.textContent = 'Loading graph data...';
-
-            // After fetching data
-            setTimeout(() => {
-                graphContainer.textContent = 'Graph would be displayed here';
-            }, 2000);
-        }
-
-        function copyToClipboard() {
-            const sensorId = document.getElementById('sensorIdDisplay').textContent;
-            navigator.clipboard.writeText(sensorId).then(() => {
-                alert('Copied to Clipboard!');
-            }, (err) => {
-                console.error('Error copying text: ', err);
-            });
-        }
-
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             if (sidebar.style.transform === 'translateX(0px)') {
@@ -101,24 +63,25 @@
         window.addEventListener('resize', function() {
             const sidebar = document.getElementById('sidebar');
             if (window.innerWidth >= 768) {
-                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
+                sidebar.style.transform = 'translateX(0px)';
             } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
+                sidebar.style.transform = 'translateX(-100%)';
                 return;
             } else {
                 sidebar.style.transform = 'translateX(-100%)';
             }
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const navbar = document.querySelector('.navbar');
+
             navbar.addEventListener('click', function(event) {
                 if (window.innerWidth < 768) {
                     navbar.classList.toggle('active');
                     if (navbar.classList.contains('active')) {
-                        navbar.style.height = '100vh'; // Full height
+                        navbar.style.height = '100vh';
                     } else {
-                        navbar.style.height = '60px'; // Default height
+                        navbar.style.height = '60px';
                     }
                 }
             });
@@ -126,17 +89,17 @@
             window.addEventListener('resize', function() {
                 if (window.innerWidth >= 768) {
                     navbar.classList.remove('active');
-                    navbar.style.height = '60px'; // Ensure default height
+                    navbar.style.height = '60px';
                 }
             });
 
             const sidebar = document.getElementById('sidebar');
             if (window.innerWidth >= 768) {
-                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
+                sidebar.style.transform = 'translateX(0px)';
             } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
                 return;
             } else {
-                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
+                sidebar.style.transform = 'translateX(-100%)';
             }
         });
     </script>

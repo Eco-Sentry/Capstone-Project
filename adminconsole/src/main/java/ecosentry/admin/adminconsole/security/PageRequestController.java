@@ -51,4 +51,8 @@ public class PageRequestController {
     public String guidePage() {
         return "guide";  // This will correctly serve your Thymeleaf template
     }
+    @GetMapping("/proposeSensor")
+    public String proposeSensorPage() {
+        return "proposeSensor";  // This will correctly serve your Thymeleaf template
+    }
 }

@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/mySentries.css">
-    <title>Responsive Layout</title>
+    <link rel="stylesheet" href="css/addSensors.css">
+    <title>Sentry Info</title>
 </head>
 <body>
     <div class="navbar">
@@ -20,17 +21,17 @@
     <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
         <a th:href="@{mySentries}">My sentries</a><br/>
-        <a th:href="@{createSentry}">Create a Sentry</a>
+        <a th:href="@{createSentry}">Create a Sentry</a><br/>
+        <a th:href="@{proposeSensor}">Propose a Sensor</a>
     </div>
     <div class="content">
         <div class="main-div">
-            <!-- Main here -->
             <h1>Sentry Info</h1>
-            <!-- <p>Sentry ID: <span id="sentryIdDisplay"></span></p> -->
             <div id="sentryTokenDiv" class="token-display">
                 <p><b>Sentry ID:</b> <span id="sentryIdDisplay"></span></p>
                 <button onclick="copyToClipboard()">Copy Sentry ID</button>
             </div>
+            <button onclick="openAddSensorModal()" style="float: right;">Add Sensor</button>
             <table>
                 <thead>
                     <tr>
@@ -45,23 +46,100 @@
             </table>
         </div>
     </div>
-    
-    
+
+    <!-- Add sensor-->
+    <div id="addSensorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddSensorModal()">&times;</span>
+            <h2>Add Sensor</h2>
+            <form id="addSensorForm">
+                <label for="sensorType">Sensor Type:</label>
+                <select id="sensorType" onchange="updateDescription()"></select>
+                <br><br>
+                <label for="description">Description:</label>
+                <textarea id="description" rows="4" cols="50" readonly></textarea>
+                <br><br>
+                <button type="button" onclick="addSensor()">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete sensor -->
+    <div id="deleteSensorModal" class="modal">
+        <div class="modal-content" style="width: 80%; max-width: 400px; text-align: center;">
+            <span class="close" onclick="closeDeleteSensorModal()">&times;</span>
+            <h2>Confirm Delete</h2>
+            <p>Are you sure you want to delete this sensor?</p>
+            <button onclick="confirmDeleteSensor()">Yes</button>
+            <button onclick="closeDeleteSensorModal()">No</button>
+        </div>
+    </div>
 
     <script>
+        let sensorTypes = [];
+        let sentryId = '';
+        let deleteSensorId = '';
+
         document.addEventListener("DOMContentLoaded", function() {
-            const params = new URLSearchParams(window.location.search);
-            const sentryId = params.get('id');
+            sentryId = getCookie('SENTRY-ID');
             document.getElementById('sentryIdDisplay').textContent = sentryId;
+            fetchSensorTypes();
             fetchSentrySensors(sentryId);
         });
 
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function setCookie(name, value, days) {
+            let expires = '';
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = '; expires=' + date.toUTCString();
+            }
+            document.cookie = name + '=' + (value || '') + expires + '; path=/';
+        }
+
+        function fetchSensorTypes() {
+            fetch('http://202.65.64.38:8082/api/get-sensor-types')
+            .then(response => response.json())
+            .then(data => {
+                sensorTypes = data;
+                populateSensorTypeDropdown();
+            })
+            .catch(error => console.error('Error fetching sensor types:', error));
+        }
+
+        function populateSensorTypeDropdown() {
+            const sensorTypeSelect = document.getElementById('sensorType');
+            sensorTypeSelect.innerHTML = ''; // Reset options
+
+            sensorTypes.forEach(sensor => {
+                const option = document.createElement('option');
+                option.value = sensor.id;
+                option.textContent = sensor.sensorType;
+                sensorTypeSelect.appendChild(option);
+            });
+
+            updateDescription();
+        }
+
         function fetchSentrySensors(sentryId) {
+            const token = getCookie('AUTH-TOKEN');
             const url = 'http://202.65.64.38:8082/api/get-sentry-sensors';
-            const data = {
-                token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNTA3NTQzNiwiZXhwIjoxNzE1MTExNDM2fQ.CtuPpFcDXwUvPNp7ro-D4BfM5AW3CR4rY8IDdV1VcBc",
-                sentryId: sentryId
-            };
+            const data = { token, sentryId };
 
             fetch(url, {
                 method: 'POST',
@@ -86,21 +164,102 @@
                                 <td>${status}</td>
                                 <td>
                                     <button onclick="viewSensorDetails('${sensor.id}')">View</button>
-                                    <button onclick="deleteSensor('${sensor.id}')">Delete</button>
+                                    <button onclick="openDeleteSensorModal('${sensor.id}')">Delete</button>
                                 </td>
                             </tr>`;
                 tableBody.innerHTML += row;
             });
         }
 
-        function viewSensorDetails(sensorId) {
-            console.log('View details for sensor:', sensorId);
-            window.location.href = `sensorInfo?id=${sensorId}`;
+        function updateDescription() {
+            const sensorTypeSelect = document.getElementById('sensorType');
+            const selectedSensorId = sensorTypeSelect.value;
+            const selectedSensor = sensorTypes.find(sensor => sensor.id === selectedSensorId);
+
+            document.getElementById('description').value = selectedSensor ? selectedSensor.description : '';
         }
 
-        function deleteSensor(sensorId) {
-            console.log('Delete sensor:', sensorId);
-            // handle delete here
+        function addSensor() {
+            const token = getCookie('AUTH-TOKEN');
+            const sensorTypeSelect = document.getElementById('sensorType');
+            const selectedSensorId = sensorTypeSelect.value;
+
+            const data = {
+                userToken: token,
+                sensorTypeId: selectedSensorId,
+                sentryId: sentryId
+            };
+
+            fetch('http://202.65.64.38:8082/api/register-sensor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    closeAddSensorModal();
+                    fetchSentrySensors(sentryId);
+                } else {
+                    alert('Failed to add sensor.');
+                }
+            })
+            .catch(error => {
+                console.error('Error adding sensor:', error);
+                alert('Error adding sensor. Please try again.');
+            });
+        }
+
+        function openAddSensorModal() {
+            document.getElementById('addSensorModal').style.display = 'block';
+        }
+
+        function closeAddSensorModal() {
+            document.getElementById('addSensorModal').style.display = 'none';
+        }
+
+        function openDeleteSensorModal(sensorId) {
+            deleteSensorId = sensorId;
+            document.getElementById('deleteSensorModal').style.display = 'block';
+        }
+
+        function closeDeleteSensorModal() {
+            document.getElementById('deleteSensorModal').style.display = 'none';
+        }
+
+        function confirmDeleteSensor() {
+            const token = getCookie('AUTH-TOKEN');
+            if (!token) {
+                console.error('No AUTH-TOKEN found');
+                return; // Exit if no token
+            }
+
+            fetch('http://202.65.64.38:8082/api/delete-sensor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: token, objId: deleteSensorId })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Sensor deleted successfully:', deleteSensorId);
+                    fetchSentrySensors(sentryId); // Refresh the list
+                    closeDeleteSensorModal();
+                } else {
+                    alert('Failed to delete sensor.');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting sensor:', error);
+                alert('Failed to delete sensor. Please try again.');
+            });
+        }
+
+        function viewSensorDetails(sensorId) {
+            setCookie('SENSOR-ID', sensorId, 1); // Store the sensor ID in a cookie for 1 day
+            window.location.href = 'sensorInfo';
         }
 
         function copyToClipboard() {
@@ -108,11 +267,10 @@
             navigator.clipboard.writeText(sentryId).then(() => {
                 alert('Copied to Clipboard!');
             }, (err) => {
-                console.error('Error copying text: ', err);
+                console.error('Error copying text:', err);
             });
         }
-    </script>
-    <script>
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             if (sidebar.style.transform === 'translateX(0px)') {
@@ -121,25 +279,21 @@
                 sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
             }
         }
-        // Add event listener to handle window resizing
+
         window.addEventListener('resize', function() {
             const sidebar = document.getElementById('sidebar');
             if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
-                sidebar.style.transform = 'translateX(0px)';
+                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
             } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
-                sidebar.style.transform = 'translateX(-100%)';
+                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
                 return;
             } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
                 sidebar.style.transform = 'translateX(-100%)';
             }
         });
 
         document.addEventListener('DOMContentLoaded', function () {
             const navbar = document.querySelector('.navbar');
-
             navbar.addEventListener('click', function(event) {
                 if (window.innerWidth < 768) {
                     navbar.classList.toggle('active');
@@ -160,18 +314,13 @@
 
             const sidebar = document.getElementById('sidebar');
             if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
-                sidebar.style.transform = 'translateX(0px)';
+                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
             } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
                 return;
             } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
-                sidebar.style.transform = 'translateX(-100%)';
+                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
             }
         });
-
-        refreshIframe(); // Initial load when everything is set up
     </script>
 </body>
 </html>

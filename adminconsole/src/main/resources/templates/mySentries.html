@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/mySentries.css">
-    <title>Responsive Layout</title>
+    <title>My Sentries</title>
 </head>
 <body>
     <div class="navbar">
@@ -16,26 +16,17 @@
             <a th:href="@{profile}">Profile</a>
             <a th:href="@{dashboard}">Dashboard</a>
             <a th:href="@{mySentries}">My Sentries</a>
-            <!-- <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#profile">Profile</a>
-            <a href="#dashboard">Dashboard</a>
-            <a href="#mySentries">My Sentries</a> -->
         </nav>
     </div>
     <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
         <a th:href="@{mySentries}">My sentries</a><br/>
-        <a th:href="@{createSentry}">Create a Sentry</a>
+        <a th:href="@{createSentry}">Create a Sentry</a><br/>
+        <a th:href="@{proposeSensor}">Propose a Sensor</a>
     </div>
     <div class="content">
         <div class="main-div">
-            <!-- Main here -->
             <h1>My Sentries</h1>
-            <!-- <div class="popup" >
-                <span class="popuptext" id="myPopup">Popup text...</span>
-            </div> -->
-
             <table>
                 <thead>
                     <tr>
@@ -46,22 +37,31 @@
                     </tr>
                 </thead>
                 <tbody id="sentriesBody">
-                    
                 </tbody>
             </table>
         </div>
     </div>
-    
-    
 
+    <!-- Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content" style="width: 80%; max-width: 400px; text-align: center;">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Confirm Delete</h2>
+            <p>Are you sure you want to delete this sentry?</p>
+            <button onclick="confirmDelete()">Yes</button>
+            <button onclick="closeModal()">No</button>
+        </div>
+    </div>
+    
     <script>
+        let deleteSentryId = null;
+
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
                 const cookies = document.cookie.split(';');
                 for (let i = 0; i < cookies.length; i++) {
                     const cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
                     if (cookie.substring(0, name.length + 1) === (name + '=')) {
                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                         break;
@@ -69,6 +69,16 @@
                 }
             }
             return cookieValue;
+        }
+
+        function setCookie(name, value, days) {
+            let expires = '';
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = '; expires=' + date.toUTCString();
+            }
+            document.cookie = name + '=' + (value || '') + expires + '; path=/';
         }
 
         document.addEventListener("DOMContentLoaded", function() {
@@ -82,8 +92,6 @@
                 return; // Exit if no token
             }
             const url = 'http://202.65.64.38:8082/api/get-user-sentries';
-            // const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNTA3NTQzNiwiZXhwIjoxNzE1MTExNDM2fQ.CtuPpFcDXwUvPNp7ro-D4BfM5AW3CR4rY8IDdV1VcBc";
-
 
             fetch(url, {
                 method: 'POST',
@@ -110,14 +118,7 @@
                                 <td>${sentry.latitude}, ${sentry.longitude}</td>
                                 <td>
                                     <button onclick="viewSentry('${sentry.id}')">View</button>
-                                    <div class="popup">
-                                        <p class="popuptext" id="myPopup">
-                                            Are you sure you want to delete this sentry?
-                                            <button onclick="confirmDeleteSentry('${sentry.id}')">Yes</button>
-                                            <button onclick="myFunction()">No</button>
-                                        </p>
-                                        <button onclick="myFunction()" onclick="confirmDeleteSentry('${sentry.id}')">Delete</button>
-                                    </div>
+                                    <button onclick="openModal('${sentry.id}')">Delete</button>
                                 </td>
                             </tr>`;
                 tableBody.innerHTML += row;
@@ -125,14 +126,25 @@
         }
 
         function viewSentry(id) {
-            window.location.href = `sentryInfo?id=${id}`;
+            setCookie('SENTRY-ID', id, 1); // Store sentry ID in a cookie for 1 day
+            window.location.href = 'sentryInfo';
         }
 
-        function confirmDeleteSentry(id) {
-            // if (confirm('Are you sure you want to delete this sentry?')) {
-            //     deleteSentry(id);
-            // }
-            deleteSentry(id);
+        function openModal(id) {
+            deleteSentryId = id;
+            document.getElementById('deleteModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            deleteSentryId = null;
+            document.getElementById('deleteModal').style.display = 'none';
+        }
+
+        function confirmDelete() {
+            if (deleteSentryId) {
+                deleteSentry(deleteSentryId);
+            }
+            closeModal();
         }
 
         function deleteSentry(id) {
@@ -142,7 +154,6 @@
                 return; // Exit if no token
             }
 
-            // const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNTA3NTQzNiwiZXhwIjoxNzE1MTExNDM2fQ.CtuPpFcDXwUvPNp7ro-D4BfM5AW3CR4rY8IDdV1VcBc";
             fetch('http://202.65.64.38:8082/api/delete-sentry', {
                 method: 'POST',
                 headers: {
@@ -152,9 +163,8 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // alert('Sentry deleted successfully!');
-                    console.log('Sentry deleted successfully: ', id);
-                    fetchSentries(); // Refresh the list 
+                    console.log('Sentry deleted successfully:', id);
+                    fetchSentries(); // Refresh the list
                 } else {
                     alert('Failed to delete sentry.');
                 }
@@ -165,13 +175,6 @@
             });
         }
 
-        // When the user clicks on <div>, open the popup
-        function myFunction() {
-        var popup = document.getElementById("myPopup");
-        popup.classList.toggle("show");
-        }
-    </script>
-    <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             if (sidebar.style.transform === 'translateX(0px)') {
@@ -180,25 +183,21 @@
                 sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
             }
         }
-        // Add event listener to handle window resizing
+
         window.addEventListener('resize', function() {
             const sidebar = document.getElementById('sidebar');
             if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
                 sidebar.style.transform = 'translateX(0px)';
             } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
                 sidebar.style.transform = 'translateX(-100%)';
                 return;
             } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
                 sidebar.style.transform = 'translateX(-100%)';
             }
         });
 
         document.addEventListener('DOMContentLoaded', function () {
             const navbar = document.querySelector('.navbar');
-
             navbar.addEventListener('click', function(event) {
                 if (window.innerWidth < 768) {
                     navbar.classList.toggle('active');
@@ -219,17 +218,13 @@
 
             const sidebar = document.getElementById('sidebar');
             if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
-                sidebar.style.transform = 'translateX(0px)';
+                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
             } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
                 return;
             } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
-                sidebar.style.transform = 'translateX(-100%)';
+                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
             }
         });
-
     </script>
 </body>
 </html>
