@@ -142,7 +142,7 @@ def generate_heatmap():
         all_data = pd.concat([all_data, df], ignore_index=True)
 
     all_data.sort_values('dateTime', inplace=True)
-    time_intervals = pd.cut(all_data['dateTime'], bins=100)
+    time_intervals = pd.cut(all_data['dateTime'], bins=24)
     all_data['time_interval'] = time_intervals
     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
 
