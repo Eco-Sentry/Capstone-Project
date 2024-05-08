@@ -8,7 +8,7 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form th:action="@{/login}" method="post" onsubmit="return validateForm()">
+        <form th:action="@{/login-form}" method="post" onsubmit="return validateForm()">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" title="Please enter a valid email address">
@@ -39,3 +39,6 @@
     </script>
 </body>
 </html>
+
+
+

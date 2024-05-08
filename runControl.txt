@@ -213,3 +213,6 @@ curl -X POST http://localhost:8082/api/get-sentry-sensors \
     "sentryId": "5c91636d-29bc-4564-a632-225fe47ebad4"
 }'
 
+psql -h localhost -p 5433 -U ecoadmin -d esusers
+
+
