@@ -47,4 +47,8 @@ public class PageRequestController {
     public String profilePage() {
         return "profile";  // This will correctly serve your Thymeleaf template
     }
+    @GetMapping("/guide")
+    public String guidePage() {
+        return "guide";  // This will correctly serve your Thymeleaf template
+    }
 }
