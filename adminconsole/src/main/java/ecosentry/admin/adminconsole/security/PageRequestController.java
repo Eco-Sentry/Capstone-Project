@@ -12,7 +12,7 @@ public class PageRequestController {
     // Method to serve the login page
     @GetMapping("/dashboard")
     public String dashboardPage() {
-        return "lashboard";  // This will correctly serve your Thymeleaf template
+        return "dashboard";  // This will correctly serve your Thymeleaf template
     }
     // Method to serve the login page
     @GetMapping("/template")
