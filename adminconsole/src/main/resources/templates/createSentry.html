@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/mySentries.css">
+    <title>Responsive Layout</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Logo</div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#profile">Profile</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#mySentries">My Sentries</a>
+        </nav>
+    </div>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
+    <div class="sidebar" id="sidebar">
+        <a th:href="@{mySentries}">My sentries</a><br/>
+        <a th:href="@{createSentry}">Create a Sentry</a>
+    </div>
+    <div class="content">
+        <div class="main-div">
+            <!-- Main here -->
+            <h1>Create a Sentry</h1>
+            <div>
+                <input type="text" id="longitude" placeholder="Longitude" required>
+                <input type="text" id="latitude" placeholder="Latitude" required>
+                <button onclick="handleCreateClick()">Create</button>
+            </div>
+            <div id="sentryTokenDiv" class="token-display" style="display: none;">
+                <p><b>Sentry ID:</b> <span id="sentryId"></span></p>
+                <button onclick="copyToClipboard()">Copy Sentry ID</button>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script>
+        function handleCreateClick() {
+            const longitude = document.getElementById('longitude').value;
+            const latitude = document.getElementById('latitude').value;
+
+            if (!longitude.trim() || !latitude.trim()) {
+                alert('Please fill out all required fields (Longitude, Latitude).');
+                return;
+            }
+
+            if (isNaN(parseFloat(longitude)) || isNaN(parseFloat(latitude))) {
+                alert('Longitude and Latitude must be numeric values.');
+                return;
+            }
+
+            const data = {
+                userToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNTA3NTQzNiwiZXhwIjoxNzE1MTExNDM2fQ.CtuPpFcDXwUvPNp7ro-D4BfM5AW3CR4rY8IDdV1VcBc",
+                longitude: parseFloat(longitude),
+                latitude: parseFloat(latitude)
+            };
+
+            fetch('http://202.65.64.38:8082/api/register-sentry', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sentryId').textContent = data; // Adjust if needed based on actual response structure
+                document.getElementById('sentryTokenDiv').style.display = 'block';
+                console.log('Sentry created with ID:', data);
+            })
+            .catch(error => {
+                console.error('Error creating sentry:', error);
+                alert('Failed to create sentry. Please try again.');
+            });
+        }
+
+        function copyToClipboard() {
+            const sentryId = document.getElementById('sentryId').textContent;
+            navigator.clipboard.writeText(sentryId).then(() => {
+                alert('Copied to Clipboard!');
+            }, (err) => {
+                console.error('Error copying text: ', err);
+            });
+        }
+    </script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.style.transform === 'translateX(0px)') {
+                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
+            } else {
+                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
+            }
+        }
+        // Add event listener to handle window resizing
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth >= 768) {
+                // Ensure sidebar is open on larger screens
+                sidebar.style.transform = 'translateX(0px)';
+            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
+                // Keep current state if the sidebar is already open
+                sidebar.style.transform = 'translateX(-100%)';
+                return;
+            } else {
+                // Ensure sidebar is closed on smaller screens when not specifically toggled
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+
+            navbar.addEventListener('click', function(event) {
+                if (window.innerWidth < 768) {
+                    navbar.classList.toggle('active');
+                    if (navbar.classList.contains('active')) {
+                        navbar.style.height = '100vh'; // Full height
+                    } else {
+                        navbar.style.height = '60px'; // Default height
+                    }
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    navbar.classList.remove('active');
+                    navbar.style.height = '60px'; // Ensure default height
+                }
+            });
+
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth >= 768) {
+                // Ensure sidebar is open on larger screens
+                sidebar.style.transform = 'translateX(0px)';
+            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
+                // Keep current state if the sidebar is already open
+                return;
+            } else {
+                // Ensure sidebar is closed on smaller screens when not specifically toggled
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        });
+
+        refreshIframe(); // Initial load when everything is set up
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/mySentries.css">
+    <title>Responsive Layout</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Logo</div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#profile">Profile</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#mySentries">My Sentries</a>
+        </nav>
+    </div>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
+    <div class="sidebar" id="sidebar">
+        <a th:href="@{mySentries}">My sentries</a><br/>
+        <a th:href="@{createSentry}">Create a Sentry</a>
+    </div>
+    <div class="content">
+        <div class="main-div">
+            <!-- Main here -->
+            <h1>Sentry Info</h1>
+            <!-- <p>Sentry ID: <span id="sentryIdDisplay"></span></p> -->
+            <div id="sentryTokenDiv" class="token-display">
+                <p><b>Sensor ID:</b> <span id="sensorIdDisplay"></span></p>
+                <button onclick="copyToClipboard()">Copy Sensor ID</button>
+            </div>
+            <div>
+                <label for="startDate">From:</label>
+                <input type="date" id="startDate">
+                <label for="endDate">To:</label>
+                <input type="date" id="endDate">
+                <button onclick="loadGraphData()">Show Graph</button>
+            </div>
+            <div id="graph">
+                Graph Here
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+            const sensorId = params.get('id');
+            document.getElementById('sensorIdDisplay').textContent = sensorId;
+        });
+
+        function loadGraphData() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            console.log('Load graph data for:', startDate, 'to', endDate);
+            // call the API to fetch the graph data based on the selected dates
+            // This is like a reload but for now itll just update a placeholder
+            const graphContainer = document.getElementById('graph');
+            graphContainer.textContent = 'Loading graph data...';
+            
+            // After fetching data
+            setTimeout(() => {
+                graphContainer.textContent = 'Graph would be displayed here';
+            }, 2000);
+        }
+
+        function copyToClipboard() {
+            const sentryId = document.getElementById('sensorIdDisplay').textContent;
+            navigator.clipboard.writeText(sentryId).then(() => {
+                alert('Copied to Clipboard!');
+            }, (err) => {
+                console.error('Error copying text: ', err);
+            });
+        }
+    </script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.style.transform === 'translateX(0px)') {
+                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
+            } else {
+                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
+            }
+        }
+        // Add event listener to handle window resizing
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth >= 768) {
+                // Ensure sidebar is open on larger screens
+                sidebar.style.transform = 'translateX(0px)';
+            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
+                // Keep current state if the sidebar is already open
+                sidebar.style.transform = 'translateX(-100%)';
+                return;
+            } else {
+                // Ensure sidebar is closed on smaller screens when not specifically toggled
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+
+            navbar.addEventListener('click', function(event) {
+                if (window.innerWidth < 768) {
+                    navbar.classList.toggle('active');
+                    if (navbar.classList.contains('active')) {
+                        navbar.style.height = '100vh'; // Full height
+                    } else {
+                        navbar.style.height = '60px'; // Default height
+                    }
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    navbar.classList.remove('active');
+                    navbar.style.height = '60px'; // Ensure default height
+                }
+            });
+
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth >= 768) {
+                // Ensure sidebar is open on larger screens
+                sidebar.style.transform = 'translateX(0px)';
+            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
+                // Keep current state if the sidebar is already open
+                return;
+            } else {
+                // Ensure sidebar is closed on smaller screens when not specifically toggled
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        });
+
+        refreshIframe(); // Initial load when everything is set up
+    </script>
+</body>
+</html>

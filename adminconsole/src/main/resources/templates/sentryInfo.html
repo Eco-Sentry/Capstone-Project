@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/mySentries.css">
+    <title>Responsive Layout</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Logo</div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#profile">Profile</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#mySentries">My Sentries</a>
+        </nav>
+    </div>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
+    <div class="sidebar" id="sidebar">
+        <a th:href="@{mySentries}">My sentries</a><br/>
+        <a th:href="@{createSentry}">Create a Sentry</a>
+    </div>
+    <div class="content">
+        <div class="main-div">
+            <!-- Main here -->
+            <h1>Sentry Info</h1>
+            <!-- <p>Sentry ID: <span id="sentryIdDisplay"></span></p> -->
+            <div id="sentryTokenDiv" class="token-display">
+                <p><b>Sentry ID:</b> <span id="sentryIdDisplay"></span></p>
+                <button onclick="copyToClipboard()">Copy Sentry ID</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sensor Type</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="sensorsBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+            const sentryId = params.get('id');
+            document.getElementById('sentryIdDisplay').textContent = sentryId;
+            fetchSentrySensors(sentryId);
+        });
+
+        function fetchSentrySensors(sentryId) {
+            const url = 'http://202.65.64.38:8082/api/get-sentry-sensors';
+            const data = {
+                token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNTA3NTQzNiwiZXhwIjoxNzE1MTExNDM2fQ.CtuPpFcDXwUvPNp7ro-D4BfM5AW3CR4rY8IDdV1VcBc",
+                sentryId: sentryId
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => populateSensorsTable(data))
+            .catch(error => console.error('Error fetching sensors:', error));
+        }
+
+        function populateSensorsTable(sensors) {
+            const tableBody = document.getElementById('sensorsBody');
+            tableBody.innerHTML = ''; 
+            sensors.forEach(sensor => {
+                const status = sensor.sensorType.activated ? 'Active' : 'Inactive';
+                const row = `<tr>
+                                <td>${sensor.sensorType.sensorType}</td>
+                                <td>${sensor.sensorType.description}</td>
+                                <td>${status}</td>
+                                <td>
+                                    <button onclick="viewSensorDetails('${sensor.id}')">View</button>
+                                    <button onclick="deleteSensor('${sensor.id}')">Delete</button>
+                                </td>
+                            </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function viewSensorDetails(sensorId) {
+            console.log('View details for sensor:', sensorId);
+            window.location.href = `sensorInfo?id=${sensorId}`;
+        }
+
+        function deleteSensor(sensorId) {
+            console.log('Delete sensor:', sensorId);
+            // handle delete here
+        }
+
+        function copyToClipboard() {
+            const sentryId = document.getElementById('sentryIdDisplay').textContent;
+            navigator.clipboard.writeText(sentryId).then(() => {
+                alert('Copied to Clipboard!');
+            }, (err) => {
+                console.error('Error copying text: ', err);
+            });
+        }
+    </script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.style.transform === 'translateX(0px)') {
+                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
+            } else {
+                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
+            }
+        }
+        // Add event listener to handle window resizing
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth >= 768) {
+                // Ensure sidebar is open on larger screens
+                sidebar.style.transform = 'translateX(0px)';
+            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
+                // Keep current state if the sidebar is already open
+                sidebar.style.transform = 'translateX(-100%)';
+                return;
+            } else {
+                // Ensure sidebar is closed on smaller screens when not specifically toggled
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+
+            navbar.addEventListener('click', function(event) {
+                if (window.innerWidth < 768) {
+                    navbar.classList.toggle('active');
+                    if (navbar.classList.contains('active')) {
+                        navbar.style.height = '100vh'; // Full height
+                    } else {
+                        navbar.style.height = '60px'; // Default height
+                    }
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    navbar.classList.remove('active');
+                    navbar.style.height = '60px'; // Ensure default height
+                }
+            });
+
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth >= 768) {
+                // Ensure sidebar is open on larger screens
+                sidebar.style.transform = 'translateX(0px)';
+            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
+                // Keep current state if the sidebar is already open
+                return;
+            } else {
+                // Ensure sidebar is closed on smaller screens when not specifically toggled
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        });
+
+        refreshIframe(); // Initial load when everything is set up
+    </script>
+</body>
+</html>
