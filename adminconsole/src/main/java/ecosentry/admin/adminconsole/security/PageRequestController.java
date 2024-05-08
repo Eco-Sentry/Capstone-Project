@@ -35,4 +35,16 @@ public class PageRequestController {
     public String createSentryPage() {
         return "createSentry";  // This will correctly serve your Thymeleaf template
     }
+    @GetMapping("/about")
+    public String aboutPage() {
+        return "about";  // This will correctly serve your Thymeleaf template
+    }
+    @GetMapping("/home")
+    public String homePage() {
+        return "home";  // This will correctly serve your Thymeleaf template
+    }
+    @GetMapping("/profile")
+    public String profilePage() {
+        return "profile";  // This will correctly serve your Thymeleaf template
+    }
 }

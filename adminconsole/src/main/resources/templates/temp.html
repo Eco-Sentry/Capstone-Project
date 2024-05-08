@@ -1,3 +1,93 @@
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/default.css">
+    <title>Responsive Layout</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Logo</div>
+        <nav class="nav-links">
+            <a th:href="@{home}">Home</a>
+            <a th:href="@{about}">About</a>
+            <a th:href="@{profile}">Profile</a>
+            <a th:href="@{dashboard}">Dashboard</a>
+            <a th:href="@{mySentries}">My Sentries</a>
+        </nav>
+    </div>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
+    <div class="sidebar" id="sidebar">
+        
+    </div>
+    <div class="content">
+        <div class="main-div">
+            <h1>About page</h1>
+        </div>
+    </div>
+        
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.style.transform === 'translateX(0px)') {
+                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
+            } else {
+                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
+            }
+        }
+        // Add event listener to handle window resizing
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth >= 768) {
+                // Ensure sidebar is open on larger screens
+                sidebar.style.transform = 'translateX(0px)';
+            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
+                // Keep current state if the sidebar is already open
+                sidebar.style.transform = 'translateX(-100%)';
+                return;
+            } else {
+                // Ensure sidebar is closed on smaller screens when not specifically toggled
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+
+            navbar.addEventListener('click', function(event) {
+                if (window.innerWidth < 768) {
+                    navbar.classList.toggle('active');
+                    if (navbar.classList.contains('active')) {
+                        navbar.style.height = '100vh'; // Full height
+                    } else {
+                        navbar.style.height = '60px'; // Default height
+                    }
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    navbar.classList.remove('active');
+                    navbar.style.height = '60px'; // Ensure default height
+                }
+            });
+
+            const sidebar = document.getElementById('sidebar');
+            if (window.innerWidth >= 768) {
+                // Ensure sidebar is open on larger screens
+                sidebar.style.transform = 'translateX(0px)';
+            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
+                // Keep current state if the sidebar is already open
+                return;
+            } else {
+                // Ensure sidebar is closed on smaller screens when not specifically toggled
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        });
+    </script>
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>

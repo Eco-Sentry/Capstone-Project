@@ -3,7 +3,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="css/mySentries.css">
     <title>Responsive Layout</title>
 </head>
 <body>
@@ -19,76 +18,14 @@
     </div>
     <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
-        <a th:href="@{mySentries}">My sentries</a><br/>
-        <a th:href="@{createSentry}">Create a Sentry</a>
+        
     </div>
     <div class="content">
         <div class="main-div">
-            <!-- Main here -->
-            <h1>Create a Sentry</h1>
-            <div>
-                <input type="text" id="longitude" placeholder="Longitude" required>
-                <input type="text" id="latitude" placeholder="Latitude" required>
-                <button onclick="handleCreateClick()">Create</button>
-            </div>
-            <div id="sentryTokenDiv" class="token-display" style="display: none;">
-                <p><b>Sentry ID:</b> <span id="sentryId"></span></p>
-                <button onclick="copyToClipboard()">Copy Sentry ID</button>
-            </div>
+            <h1>About page</h1>
         </div>
     </div>
-    
-    
-
-    <script>
-        function handleCreateClick() {
-            const longitude = document.getElementById('longitude').value;
-            const latitude = document.getElementById('latitude').value;
-
-            if (!longitude.trim() || !latitude.trim()) {
-                alert('Please fill out all required fields (Longitude, Latitude).');
-                return;
-            }
-
-            if (isNaN(parseFloat(longitude)) || isNaN(parseFloat(latitude))) {
-                alert('Longitude and Latitude must be numeric values.');
-                return;
-            }
-
-            const data = {
-                userToken: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaWNrLnRvb2xlQGdtYWlsLmNvbSIsImlhdCI6MTcxNTA3NTQzNiwiZXhwIjoxNzE1MTExNDM2fQ.CtuPpFcDXwUvPNp7ro-D4BfM5AW3CR4rY8IDdV1VcBc",
-                longitude: parseFloat(longitude),
-                latitude: parseFloat(latitude)
-            };
-
-            fetch('http://202.65.64.38:8082/api/register-sentry', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sentryId').textContent = data; // Adjust if needed based on actual response structure
-                document.getElementById('sentryTokenDiv').style.display = 'block';
-                console.log('Sentry created with ID:', data);
-            })
-            .catch(error => {
-                console.error('Error creating sentry:', error);
-                alert('Failed to create sentry. Please try again.');
-            });
-        }
-
-        function copyToClipboard() {
-            const sentryId = document.getElementById('sentryId').textContent;
-            navigator.clipboard.writeText(sentryId).then(() => {
-                alert('Copied to Clipboard!');
-            }, (err) => {
-                console.error('Error copying text: ', err);
-            });
-        }
-    </script>
+        
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
