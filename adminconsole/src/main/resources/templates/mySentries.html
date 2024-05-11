@@ -20,7 +20,7 @@
     </div>
     <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
-        <a th:href="@{mySentries}">My sentries</a><br/>
+        <a th:href="@{mySentries}" style="margin-top: 18%;">My sentries</a><br/>
         <a th:href="@{createSentry}">Create a Sentry</a><br/>
         <a th:href="@{proposeSensor}">Propose a Sensor</a>
     </div>
@@ -48,8 +48,8 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Confirm Delete</h2>
             <p>Are you sure you want to delete this sentry?</p>
-            <button onclick="confirmDelete()">Yes</button>
-            <button onclick="closeModal()">No</button>
+            <button class="ran-button" onclick="confirmDelete()">Yes</button>
+            <button class="ran-button" onclick="closeModal()">No</button>
         </div>
     </div>
     
@@ -117,8 +117,10 @@
                                 <td>Sentry ${index + 1}</td>
                                 <td>${sentry.latitude}, ${sentry.longitude}</td>
                                 <td>
-                                    <button onclick="viewSentry('${sentry.id}')">View</button>
-                                    <button onclick="openModal('${sentry.id}')">Delete</button>
+                                    <button class= "view-button" onclick="viewSentry('${sentry.id}')">View</button>
+                                    <button class="trash-button" onclick="openModal('${sentry.id}')">
+                                        <img src= "/images/trash.png" class="trash-pic"/>
+                                    </button>
                                 </td>
                             </tr>`;
                 tableBody.innerHTML += row;

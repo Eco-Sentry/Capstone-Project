@@ -20,7 +20,7 @@
     </div>
     <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
-        <a th:href="@{mySentries}">My sentries</a><br/>
+        <a th:href="@{mySentries}" style="margin-top: 18%;">My sentries</a><br/>
         <a th:href="@{createSentry}">Create a Sentry</a><br/>
         <a th:href="@{proposeSensor}">Propose a Sensor</a>
     </div>
@@ -29,13 +29,14 @@
             <!-- Main here -->
             <h1>Create a Sentry</h1>
             <div>
-                <input type="text" id="longitude" placeholder="Longitude" required>
-                <input type="text" id="latitude" placeholder="Latitude" required>
-                <button onclick="handleCreateClick()">Create</button>
+                <input class="create-long-lat" type="text" id="longitude" placeholder="Longitude" required><br>
+                <input class="create-long-lat" type="text" id="latitude" placeholder="Latitude" required>
+                <button class="ran-button" onclick="handleCreateClick()">Create</button>
             </div>
-            <div id="sentryTokenDiv" class="token-display" style="display: none;">
-                <p><b>Sentry ID:</b> <span id="sentryId"></span></p>
-                <button onclick="copyToClipboard()">Copy Sentry ID</button>
+            <div id="sentryTokenDiv" class="creatediv" style="display: none;">
+                <b>Sentry ID</b> <br><br>
+                    <input id="sentryId" class="sentryId-input" type="text" name="sentryId" disabled/>
+                <button class="copy-button" onclick="copyToClipboard()">Copy Sentry ID</button>
             </div>
         </div>
     </div>
@@ -95,7 +96,7 @@
             })
             .then(response => response.text())
             .then(data => {
-                document.getElementById('sentryId').textContent = data; // Adjust if needed based on actual response structure
+                document.getElementById('sentryId').value = data; // Adjust if needed based on actual response structure
                 document.getElementById('sentryTokenDiv').style.display = 'block';
                 console.log('Sentry created with ID:', data);
             })
