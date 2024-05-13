@@ -20,7 +20,7 @@
     </div>
     <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
-        <a th:href="@{mySentries}">My sentries</a><br/>
+        <a th:href="@{mySentries}" style="margin-top: 18%;">My sentries</a><br/>
         <a th:href="@{createSentry}">Create a Sentry</a><br/>
         <a th:href="@{proposeSensor}">Propose a Sensor</a>
     </div>
@@ -28,15 +28,17 @@
         <div class="main-div">
             <h1>Sensor Info</h1>
             <div id="sentryTokenDiv" class="token-display">
-                <p><b>Sensor ID:</b> <span id="sensorIdDisplay"></span></p>
-                <button onclick="copyToClipboard()">Copy Sensor ID</button>
+                <b>Sensor ID:</b>
+                <input id="sensorIdDisplay" class="id-input" type="text" name="sensorId" disabled/> 
+                <!-- <span id="sensorIdDisplay"></span> -->
+                <button class="copy-button" onclick="copyToClipboard()">Copy Sensor ID</button>
             </div>
             <div>
                 <label for="startDate">From:</label>
                 <input type="date" id="startDate">
                 <label for="endDate">To:</label>
                 <input type="date" id="endDate">
-                <button onclick="loadGraphData()">Show Graph</button>
+                <button class="ran-button" onclick="loadGraphData()">Show Graph</button>
             </div>
             <div id="graph">
                 Graph Here
@@ -47,7 +49,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const sensorId = getCookie('SENSOR-ID');
-            document.getElementById('sensorIdDisplay').textContent = sensorId;
+            document.getElementById('sensorIdDisplay').value = sensorId;
         });
 
         function getCookie(name) {

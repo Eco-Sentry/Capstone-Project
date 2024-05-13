@@ -9,7 +9,7 @@
     border: 1px solid #ddd;
     border-radius: 8px;
 }
-input[type="text"], select, textarea {
+.form input[type="text"], select, textarea {
     width: 100%;
     padding: 8px;
     margin: 8px 0;

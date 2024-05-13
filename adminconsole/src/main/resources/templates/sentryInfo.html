@@ -20,7 +20,7 @@
     </div>
     <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
-        <a th:href="@{mySentries}">My sentries</a><br/>
+        <a th:href="@{mySentries}" style="margin-top: 18%;">My sentries</a><br/>
         <a th:href="@{createSentry}">Create a Sentry</a><br/>
         <a th:href="@{proposeSensor}">Propose a Sensor</a>
     </div>
@@ -28,10 +28,12 @@
         <div class="main-div">
             <h1>Sentry Info</h1>
             <div id="sentryTokenDiv" class="token-display">
-                <p><b>Sentry ID:</b> <span id="sentryIdDisplay"></span></p>
-                <button onclick="copyToClipboard()">Copy Sentry ID</button>
+                <b>Sentry ID:</b> 
+                <input id="sentryIdDisplay" class="id-input" type="text" name="sentryId" disabled/>
+                <!-- <span id="sentryIdDisplay"></span> -->
+                <button class="copy-button" onclick="copyToClipboard()">Copy Sentry ID</button>
             </div>
-            <button onclick="openAddSensorModal()" style="float: right;">Add Sensor</button>
+            <button onclick="openAddSensorModal()" class="ran-button" style="display: block; margin-left: auto; margin-right: auto;">Add Sensor</button>
             <table>
                 <thead>
                     <tr>
@@ -59,7 +61,7 @@
                 <label for="description">Description:</label>
                 <textarea id="description" rows="4" cols="50" readonly></textarea>
                 <br><br>
-                <button type="button" onclick="addSensor()">Add</button>
+                <button class="ran-button" type="button" onclick="addSensor()">Add</button>
             </form>
         </div>
     </div>
@@ -70,8 +72,8 @@
             <span class="close" onclick="closeDeleteSensorModal()">&times;</span>
             <h2>Confirm Delete</h2>
             <p>Are you sure you want to delete this sensor?</p>
-            <button onclick="confirmDeleteSensor()">Yes</button>
-            <button onclick="closeDeleteSensorModal()">No</button>
+            <button class="ran-button" onclick="confirmDeleteSensor()">Yes</button>
+            <button class="ran-button" onclick="closeDeleteSensorModal()">No</button>
         </div>
     </div>
 
@@ -82,7 +84,7 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             sentryId = getCookie('SENTRY-ID');
-            document.getElementById('sentryIdDisplay').textContent = sentryId;
+            document.getElementById('sentryIdDisplay').value = sentryId;
             fetchSensorTypes();
             fetchSentrySensors(sentryId);
         });
@@ -163,8 +165,10 @@
                                 <td>${sensor.sensorType.description}</td>
                                 <td>${status}</td>
                                 <td>
-                                    <button onclick="viewSensorDetails('${sensor.id}')">View</button>
-                                    <button onclick="openDeleteSensorModal('${sensor.id}')">Delete</button>
+                                    <button class= "view-button" onclick="viewSensorDetails('${sensor.id}')">View</button>
+                                    <button class="trash-button" onclick="openDeleteSensorModal('${sensor.id}')">
+                                        <img src= "/images/trash.png" class="trash-pic"/>
+                                    </button>
                                 </td>
                             </tr>`;
                 tableBody.innerHTML += row;

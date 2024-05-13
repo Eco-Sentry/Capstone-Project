@@ -1,0 +1,85 @@
+.section {
+    flex: 1; /* Each section takes equal space */
+    text-align: left;
+    height: 100vh;
+  }
+  .image {
+    background-image: url('../images/background.jpg');
+    background-repeat:no-repeat;
+    background-size:contain;
+    width: 100%; 
+    height: 100%; 
+    position: absolute;
+    background-size: cover;  
+    background-position: center; 
+  }
+  .column {
+    flex: 33.33%;
+    padding: 10px;
+  }
+  .row {
+    display: flex;
+  }
+  .title {
+    font-size: 300%;
+    color: #103438;
+    margin-top: 20%;
+    margin-left: 20%;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .intro {
+    font-size: 30px; 
+    color: #103438;
+    min-width: 150px; 
+    margin-top: 32%; 
+    margin-right: 20%;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 1em; 
+    max-width: 90%; 
+  }
+  .mission {
+    font-size: 50%;
+    color: #b0dcc7;
+    margin-top: 5%;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .homePage-ourMission-table {
+    width: 100%;
+    font-size: 30px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .homePage-ourMission-table-c1 {
+    width: 40%;
+    background-color: #DED3BB;
+  }
+  
+  .homePage-ourMission-table-c2 {
+    width: 60%;
+    background-color: #b0dcc7;
+    font-size: 60%;
+    padding: 5%;
+  }
+
+  .homePage-aboutUs-table {
+    width: 100%;
+    margin: auto;
+    font-size: 30px;
+    margin-bottom: 2%;
+    text-align: center;
+  }
+  
+  .homePage-aboutUs-table-c1 {
+    width: 60%;
+    background-color: #b0dcc7;
+    font-size: 60%;
+    padding: 5%;
+  }
+  
+  .homePage-aboutUs-table-c2 {
+    width: 40%;
+    background-color: #DED3BB;
+    
+  }

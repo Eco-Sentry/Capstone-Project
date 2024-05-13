@@ -3,7 +3,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
-    <title>Responsive Layout</title>
+    <link rel="stylesheet" href="css/profile.css">
+    <title>My Profile</title>
 </head>
 <body>
     <div class="navbar">
@@ -17,17 +18,86 @@
             <a th:href="@{mySentries}">My Sentries</a>
         </nav>
     </div>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
-    <div class="sidebar" id="sidebar">
-        
-    </div>
-    <div class="content">
-        <div class="main-div">
-            <h1>Profile page</h1>
+    <!-- <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button> -->
+    <!-- <div class="sidebar" id="sidebar">
+
+    </div> -->
+    <!-- <div class="content"> -->
+        <div class="main-div" style="background-color: transparent;">
+            <!-- <h1>My Profile</h1>
+            <img th:src= "@{/images/userpfp.png}" class="profile-pic"/> -->
+            <div class="account-container">
+                <h1 style="margin-bottom: 1%; margin-top: 5%;">My Profile</h1>
+                <img th:src= "@{/images/userpfp.png}" class="profile-pic" style="margin-bottom: 2%;"/>
+                <form>
+                  <div class="form-group">
+                    <label for="firstName">First Name</label><br>
+                    <input id="firstName" class="account-input" type="text" name="firstName" disabled />
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name</label><br>
+                    <input id="lastName" class="account-input" type="text" name="lastName" disabled />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label><br>
+                    <input id="email" class="account-input" type="email" name="email" disabled />
+                  </div>
+                </form>
+              </div>
+
+            <!-- <div class="profile-info">
+                <img th:src= "@{/images/userpfp.png}" class="profile-pic"/>
+                <h2>User Information</h2>
+                <p><strong>First Name:</strong> <span id="firstName"></span></p>
+                <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+                <p><strong>Email:</strong> <span id="email"></span></p>
+            </div> -->
         </div>
-    </div>
-        
+    <!-- </div> -->
+
     <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function fetchUserInfo() {
+            const token = getCookie('AUTH-TOKEN');
+            if (!token) {
+                console.error('No AUTH-TOKEN found');
+                return; // Exit if no token
+            }
+
+            fetch('http://202.65.64.38:8082/api/get-user-info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: token
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('firstName').value = data.fname;
+                document.getElementById('lastName').value = data.lname;
+                document.getElementById('email').value = data.email;
+            })
+            .catch(error => console.error('Error fetching user info:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchUserInfo();
+        });
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             if (sidebar.style.transform === 'translateX(0px)') {
@@ -36,7 +106,7 @@
                 sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
             }
         }
-        // Add event listener to handle window resizing
+
         window.addEventListener('resize', function() {
             const sidebar = document.getElementById('sidebar');
             if (window.innerWidth >= 768) {
