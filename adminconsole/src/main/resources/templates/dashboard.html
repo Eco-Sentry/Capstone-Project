@@ -187,6 +187,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
     <title>Responsive Layout</title>
+
+    <style>
+        #searchList {
+          height: 200px;
+          overflow-y: auto;
+          border: 1px solid #ccc;
+          width: 300px;
+          padding: 5px;
+        }
+        .item {
+          margin: 5px;
+        }
+      </style>
+
 </head>
 <body>
     <div class="navbar">
@@ -208,6 +222,9 @@
             <input type="number" id="rangeInput" value="1000000">
             <button onclick="refreshIframe()">Refresh</button>
         </div>
+
+        <input type="text" id="searchInput" onkeyup="filterList()" placeholder="Search for names...">
+        <div id="searchList"></div>
     </div>
     <div class="content">
         <div class="search-area">
@@ -218,6 +235,56 @@
             <iframe id="dataFrame" style="width: 100%; height: 600px; border: none;"></iframe>
         </div>
     </div>
+    <script>
+        // Function to fetch sensor types from the API
+        async function fetchSensorTypes() {
+          try {
+            const response = await fetch('http://202.65.64.38:8082/api/get-sensor-types');
+            const data = await response.json();
+            // Sort data by popularity in descending order
+            data.sort((a, b) => b.popularity - a.popularity);
+            populateList(data);
+          } catch (error) {
+            console.error('Error fetching sensor types:', error);
+          }
+        }
+        
+        // Function to populate the list with items
+        function populateList(sensorTypes) {
+          const listDiv = document.getElementById('searchList');
+          sensorTypes.forEach(sensor => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.style.display = ''; // Make sure all items are visible initially
+            itemDiv.innerHTML = `<input type="checkbox" id="${sensor.id}"> ${sensor.sensorType}`;
+            itemDiv.dataset.popularity = sensor.popularity; // Store popularity as a data attribute
+            listDiv.appendChild(itemDiv);
+          });
+        }
+        
+        // Function to filter the list based on search input
+        function filterList() {
+          var input, filter, div, items, txtValue, itemPopularity, popularityFilter;
+          input = document.getElementById('searchInput');
+          filter = input.value.toUpperCase();
+          div = document.getElementById('searchList');
+          items = div.getElementsByClassName('item');
+          for (let i = 0; i < items.length; i++) {
+            txtValue = items[i].textContent || items[i].innerText;
+            itemPopularity = items[i].dataset.popularity;
+            popularityFilter = filter.match(/\d+/) ? filter.match(/\d+/)[0] : null; // Extract numbers from filter input
+            if (txtValue.toUpperCase().indexOf(filter.replace(/\d+/g, '').trim()) > -1 && 
+                (popularityFilter === null || itemPopularity === popularityFilter)) {
+              items[i].style.display = "";
+            } else {
+              items[i].style.display = "none";
+            }
+          }
+        }
+        
+        // Initial fetch of sensor types when the document loads
+        document.addEventListener('DOMContentLoaded', fetchSensorTypes);
+    </script>
     <script>
         function setupDateTimeInputs() {
             const now = new Date();
@@ -285,7 +352,7 @@
             const endTime = formatDateTimeForAPI(document.getElementById('endTimeInput').value);
             const range = document.getElementById('rangeInput').value;
 
-            fetch('http://202.65.64.38:5000/generate-multi-sensor-graph', {
+            fetch('https://www.eco-sentry.com/generate-multi-sensor-graph', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -296,7 +363,7 @@
                     longitude: "150.89494",
                     latitude: "-34.39212",
                     range,
-                    sensorTypes: ["b53a5c22-63c0-4201-9df3-bc16d0d263b5", "ba280d1f-e1ee-4cff-b695-101e3a9e211b"]
+                    sensorTypes: ["e2e6a327-2893-42ba-8d8a-e333ffbb47d8", "b49403dc-c78c-4059-a161-3c221a6e5ce3", "a7bb8f75-6ec9-4f6d-b46e-ad35047d2aa8", "585db9bb-c5de-467a-94f3-01fd59446886", "24e4390c-afe3-4e8b-bd73-29dc3ddc8ea1", "8c660a0e-c08f-4282-9c3e-e890ab338fb0"]
                 })
             }).then(response => response.text())
             .then(html => {

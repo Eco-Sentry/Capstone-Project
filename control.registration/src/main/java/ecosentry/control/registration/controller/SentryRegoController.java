@@ -162,6 +162,9 @@ public class SentryRegoController {
         }
 
         Sensor sensor = sensorOptional.get();
+        SensorType sensorType = sensor.getSensorType();
+        sensorType.addPopularity();
+        sensorTypeRepository.save(sensorType);
 
         return sensor.getSensorType().getId().toString();
     }

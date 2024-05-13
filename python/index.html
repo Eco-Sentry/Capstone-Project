@@ -12,18 +12,20 @@
         const iframe = document.getElementById('dataFrame');
     
         function loadIframeContent() {
-            fetch('http://localhost:5001/generate-heatmap', {
+            fetch('http://localhost:5002/generate-scatter-plot', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    startTime: "2024-05-07T06:00:00.923Z",
-                    endTime: "2024-05-08T06:04:20.923Z",
+                    startTime: "2024-05-08T06:00:00.923Z",
+                    endTime: "2024-05-09T06:04:20.923Z",
                     longitude: "150.89494",
                     latitude: "-34.39212",
                     range: "1000000",
-                    sensorTypes: ["ba280d1f-e1ee-4cff-b695-101e3a9e211b"]
+                    numBins: 1000,
+                    sensorA: "b53a5c22-63c0-4201-9df3-bc16d0d263b5",
+                    sensorB: "ba280d1f-e1ee-4cff-b695-101e3a9e211b"
                 })
             }).then(response => response.text())
             .then(html => {
