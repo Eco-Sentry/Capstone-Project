@@ -233,14 +233,144 @@
     </div>
     <div class="content">
         <div class="search-area">
-            <input type="text" class="search-input" placeholder="Search...">
-            <button class="search-button">Search</button>
+            <input type="text" class="search-input" id="address" placeholder="Search..." oninput="showSuggestions()" >
+            <button class="search-button" onclick="geocode()">Search</button>
+            
+
+
+            <!-- <input type="text" id="address" placeholder="Enter address" oninput="showSuggestions()">
+            <button onclick="geocode()">Search</button>
+            </br>
+            <div id="suggestions"></div>
+            </br> -->
+            
+            
+
         </div>
+        <div id="suggestions"></div>
+        <p id="result"></p>
+
+        
         <div class="main-div">
             <iframe id="dataFrame" style="width: 100%; height: 600px; border: none;"></iframe>
         </div>
     </div>
     <script>
+        // function showSuggestions() {
+        //     const address = document.getElementById('address').value;
+        //     if (address.length < 3) {
+        //         document.getElementById('suggestions').innerHTML = '';
+        //         return;
+        //     }
+
+        //     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&addressdetails=1&limit=3`;
+
+        //     fetch(url)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             const suggestions = document.getElementById('suggestions');
+        //             suggestions.innerHTML = '';
+        //             if (data.length > 0) {
+        //                 data.forEach(item => {
+        //                     const suggestion = document.createElement('div');
+        //                     suggestion.classList.add('suggestion');
+        //                     suggestion.innerText = item.display_name;
+        //                     suggestion.onclick = () => {
+        //                         document.getElementById('address').value = item.display_name;
+        //                         suggestions.innerHTML = '';
+        //                     };
+        //                     suggestions.appendChild(suggestion);
+        //                 });
+        //             } else {
+        //                 suggestions.innerHTML = '<div class="suggestion">No results found</div>';
+        //             }
+        //         })
+        //         .catch(error => {
+        //             console.error('Error:', error);
+        //         });
+        // }
+
+        // function geocode() {
+        //     const address = document.getElementById('address').value;
+        //     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+
+        //     fetch(url)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             if (data.length > 0) {
+        //                 const result = data[0];
+        //                 document.getElementById('result').innerText = `Latitude: ${result.lat}, Longitude: ${result.lon}`;
+        //             } else {
+        //                 document.getElementById('result').innerText = 'No results found';
+        //             }
+        //         })
+        //         .catch(error => {
+        //             console.error('Error:', error);
+        //             document.getElementById('result').innerText = 'An error occurred';
+        //         });
+        // }
+        let debounceTimeout;
+
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimeout);
+                debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        const showSuggestions = debounce(function() {
+            const address = document.getElementById('address').value;
+            if (address.length < 3) {
+                document.getElementById('suggestions').innerHTML = '';
+                return;
+            }
+
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&addressdetails=1&limit=3`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const suggestions = document.getElementById('suggestions');
+                    suggestions.innerHTML = '';
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            const suggestion = document.createElement('div');
+                            suggestion.classList.add('suggestion');
+                            suggestion.innerText = item.display_name;
+                            suggestion.onclick = () => {
+                                document.getElementById('address').value = item.display_name;
+                                suggestions.innerHTML = '';
+                            };
+                            suggestions.appendChild(suggestion);
+                        });
+                    } else {
+                        suggestions.innerHTML = '<div class="suggestion">No results found</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }, 1000);
+
+        function geocode() {
+            const address = document.getElementById('address').value;
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const result = data[0];
+                        document.getElementById('result').innerText = `Latitude: ${result.lat}, Longitude: ${result.lon}`;
+                    } else {
+                        document.getElementById('result').innerText = 'No results found';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('result').innerText = 'An error occurred';
+                });
+        }
         // Function to fetch sensor types from the API
         async function fetchSensorTypes() {
           try {
