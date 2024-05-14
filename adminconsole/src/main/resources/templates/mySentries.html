@@ -91,7 +91,7 @@
                 console.error('No AUTH-TOKEN found');
                 return; // Exit if no token
             }
-            const url = 'http://202.65.64.38:8082/api/get-user-sentries';
+            const url = 'https://www.eco-sentry.com/api/get-user-sentries';
 
             fetch(url, {
                 method: 'POST',
@@ -156,7 +156,7 @@
                 return; // Exit if no token
             }
 
-            fetch('http://202.65.64.38:8082/api/delete-sentry', {
+            fetch('https://www.eco-sentry.com/api/delete-sentry', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

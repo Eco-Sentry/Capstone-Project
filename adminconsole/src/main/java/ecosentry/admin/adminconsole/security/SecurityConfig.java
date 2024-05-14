@@ -82,6 +82,7 @@ public class SecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/about", HttpMethod.GET.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/login", HttpMethod.GET.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/css/**", HttpMethod.GET.name())).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/images/**", HttpMethod.GET.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/js/**", HttpMethod.GET.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/api/login", HttpMethod.POST.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/login-form", HttpMethod.POST.name())).permitAll()

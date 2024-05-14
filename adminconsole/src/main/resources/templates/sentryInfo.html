@@ -115,7 +115,7 @@
         }
 
         function fetchSensorTypes() {
-            fetch('http://202.65.64.38:8082/api/get-sensor-types')
+            fetch('https://www.eco-sentry.com/api/get-sensor-types')
             .then(response => response.json())
             .then(data => {
                 sensorTypes = data;
@@ -140,7 +140,7 @@
 
         function fetchSentrySensors(sentryId) {
             const token = getCookie('AUTH-TOKEN');
-            const url = 'http://202.65.64.38:8082/api/get-sentry-sensors';
+            const url = 'https://www.eco-sentry.com/api/get-sentry-sensors';
             const data = { token, sentryId };
 
             fetch(url, {
@@ -194,7 +194,7 @@
                 sentryId: sentryId
             };
 
-            fetch('http://202.65.64.38:8082/api/register-sensor', {
+            fetch('https://www.eco-sentry.com/api/register-sensor', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -239,7 +239,7 @@
                 return; // Exit if no token
             }
 
-            fetch('http://202.65.64.38:8082/api/delete-sensor', {
+            fetch('https://www.eco-sentry.com/api/delete-sensor', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
