@@ -269,7 +269,7 @@
         function copyToClipboard() {
             const sentryId = document.getElementById('sentryIdDisplay').value;
             navigator.clipboard.writeText(sentryId).then(() => {
-                alert('Copied to Clipboard!');
+                // alert('Copied to Clipboard!');
             }, (err) => {
                 console.error('Error copying text:', err);
             });
