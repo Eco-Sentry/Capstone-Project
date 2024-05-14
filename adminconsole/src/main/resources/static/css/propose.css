@@ -1,0 +1,51 @@
+.form-container {
+    background: #FFF3E4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    height: 120px; 
+}
+
+.ran-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #103438;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.ran-button:hover{
+    border: 1px solid;
+    border-color: #232E3A;
+    background-color: white; 
+    color: #232E3A;
+}

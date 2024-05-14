@@ -30,7 +30,6 @@
             <div id="sentryTokenDiv" class="token-display">
                 <b>Sentry ID:</b> 
                 <input id="sentryIdDisplay" class="id-input" type="text" name="sentryId" disabled/>
-                <!-- <span id="sentryIdDisplay"></span> -->
                 <button class="copy-button" onclick="copyToClipboard()">Copy Sentry ID</button>
             </div>
             <button onclick="openAddSensorModal()" class="ran-button" style="display: block; margin-left: auto; margin-right: auto;">Add Sensor</button>
@@ -165,7 +164,7 @@
                                 <td>${sensor.sensorType.description}</td>
                                 <td>${status}</td>
                                 <td>
-                                    <button class= "view-button" onclick="viewSensorDetails('${sensor.id}')">View</button>
+                                    <button class="view-button" onclick="viewSensorDetails('${sensor.id}', '${sensor.sensorType.id}')">View</button>
                                     <button class="trash-button" onclick="openDeleteSensorModal('${sensor.id}')">
                                         <img src= "/images/trash.png" class="trash-pic"/>
                                     </button>
@@ -261,13 +260,14 @@
             });
         }
 
-        function viewSensorDetails(sensorId) {
+        function viewSensorDetails(sensorId, sensorTypeId) {
             setCookie('SENSOR-ID', sensorId, 1); // Store the sensor ID in a cookie for 1 day
+            setCookie('SENSOR-TYPE-ID', sensorTypeId, 1);
             window.location.href = 'sensorInfo';
         }
 
         function copyToClipboard() {
-            const sentryId = document.getElementById('sentryIdDisplay').textContent;
+            const sentryId = document.getElementById('sentryIdDisplay').value;
             navigator.clipboard.writeText(sentryId).then(() => {
                 alert('Copied to Clipboard!');
             }, (err) => {

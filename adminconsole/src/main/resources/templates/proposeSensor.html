@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
-    <link rel="stylesheet" href="css/addSensors.css">
+    <link rel="stylesheet" href="css/propose.css">
     <title>Propose a Sensor</title>
 </head>
 <body>
@@ -28,8 +28,24 @@
             <h1>Propose a Sensor</h1>
             <div class="form-container">
                 <div class="form">
-                    <h3>Propose a New Sensor (Coming Soon)</h3>
-                    <p>This feature will allow you to propose new sensors for the system.</p>
+                    <!-- <h1>Propose a Sensor</h1> -->
+                    <div class="form-container">
+                        <form id="proposeSensorForm">
+                            <div class="form-group">
+                                <label for="sensorType">Sensor Type:</label>
+                                <input type="text" id="sensorType" name="sensorType" required placeholder="Enter sensor type">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <textarea id="description" name="description" required placeholder="Describe the sensor"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="unit">Unit of Measurement:</label>
+                                <input type="text" id="unit" name="unit" required placeholder="Enter unit (e.g., 'C' for Celsius)">
+                            </div>
+                            <button type="button" class="ran-button" onclick="submitSensorProposal()">Submit Proposal</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,6 +65,38 @@
                 }
             }
             return cookieValue;
+        }
+
+        function submitSensorProposal() {
+            const token = getCookie('AUTH-TOKEN');
+            const data = {
+                userToken: token,
+                sensorType: document.getElementById('sensorType').value,
+                description: document.getElementById('description').value,
+                unit: document.getElementById('unit').value
+            };
+
+            fetch('https://www.eco-sentry.com/api/propose-sensor-type', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.text(); // Changed from response.json() to response.text()
+            })
+            .then(data => {
+                console.log('Response:', data); // Log the response to see the exact string
+                // alert('Sensor proposal submitted successfully. Sensor ID: ' + data);
+            })
+            .catch(error => {
+                console.error('Error proposing sensor:', error);
+                alert('Failed to submit sensor proposal. Error: ' + error.message);
+            });
         }
 
         function toggleSidebar() {

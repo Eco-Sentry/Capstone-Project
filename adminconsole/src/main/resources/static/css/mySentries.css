@@ -7,6 +7,7 @@ table {
     margin-left: auto;
     margin-right: auto;
     max-width: 100%;
+    overflow-x: auto;
 }
 th, td {
     padding: 8px;
@@ -17,6 +18,25 @@ th {
     background-color: #fff;
     border-radius: 150px;
 }
+
+@media (max-width: 768px) {
+  table, th, td {
+      font-size: 14px; /* Smaller font size for small screens */
+  }
+  .token-display, .ran-button {
+      width: 100%; /* Ensures full width usage */
+      text-align: center; /* Center aligns the text for better visual */
+  }
+  .id-input, .copy-button {
+      width: 90%; /* Adjust input and button width to fit smaller screens */
+      margin: 10px auto; /* Centers the elements horizontally */
+  }
+  .ran-button {
+      display: block; /* Ensures the button takes the full available width */
+  }
+}
+
+
 .token-display {
     margin-top: 10px;
     padding: 10px;

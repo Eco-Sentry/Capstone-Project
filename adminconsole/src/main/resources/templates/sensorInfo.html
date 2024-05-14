@@ -29,8 +29,7 @@
             <h1>Sensor Info</h1>
             <div id="sentryTokenDiv" class="token-display">
                 <b>Sensor ID:</b>
-                <input id="sensorIdDisplay" class="id-input" type="text" name="sensorId" disabled/> 
-                <!-- <span id="sensorIdDisplay"></span> -->
+                <input id="sensorIdDisplay" class="id-input" type="text" name="sensorId" disabled/>
                 <button class="copy-button" onclick="copyToClipboard()">Copy Sensor ID</button>
             </div>
             <div>
@@ -40,17 +39,74 @@
                 <input type="date" id="endDate">
                 <button class="ran-button" onclick="loadGraphData()">Show Graph</button>
             </div>
-            <div id="graph">
-                Graph Here
-            </div>
+            <iframe id="graphFrame" style="width: 100%; height: 500px;"></iframe>
         </div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            setupDateTimeInputs();
             const sensorId = getCookie('SENSOR-ID');
             document.getElementById('sensorIdDisplay').value = sensorId;
         });
+
+        function setupDateTimeInputs() {
+            const endDate = new Date();
+            const startDate = new Date(endDate.getTime() - 7 * 24 * 60 * 60 * 1000); // One week ago
+            document.getElementById('startDate').value = startDate.toISOString().split('T')[0];
+            document.getElementById('endDate').value = endDate.toISOString().split('T')[0];
+        }
+
+        function setupDateTimeInputs() {
+            const endDate = new Date();
+            const startDate = new Date(endDate.getTime() - 7 * 24 * 60 * 60 * 1000); // Set default dates as one week range
+            document.getElementById('startDate').value = startDate.toISOString().split('T')[0];
+            document.getElementById('endDate').value = endDate.toISOString().split('T')[0];
+        }
+
+        function loadGraphData() {
+            // This function now fetches the sentry details first
+            const sentryId = getCookie('SENTRY-ID');
+            const token = getCookie('AUTH-TOKEN');
+            fetch('https://www.eco-sentry.com/api/get-sentry-sensors', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ token, sentryId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    const { longitude, latitude } = data[0].sentry;
+                    // console.log(longitude, latitude);
+                    submitGraphRequest(longitude, latitude);
+                } else {
+                    console.error('No data available for this sentry');
+                }
+            })
+            .catch(error => console.error('Failed to fetch sentry details:', error));
+        }
+
+        function submitGraphRequest(longitude, latitude) {
+            const startDate = document.getElementById('startDate').value + "T00:00:00.000Z";
+            const endDate = document.getElementById('endDate').value + "T23:59:59.999Z";
+            const range = "1000000"; // 1km range
+            const sensorTypes = [getCookie('SENSOR-TYPE-ID')];
+
+            fetch('https://www.eco-sentry.com/generate-multi-sensor-graph', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ startTime: startDate, endTime: endDate, longitude, latitude, range, sensorTypes })
+            })
+            .then(response => response.text())
+            .then(html => {
+                const iframe = document.getElementById('graphFrame');
+                iframe.contentWindow.document.open();
+                iframe.contentWindow.document.write(html);
+                iframe.contentWindow.document.close();
+            })
+            .catch(error => console.error('Error loading the graph:', error));
+        }
+
 
         function getCookie(name) {
             let cookieValue = null;
@@ -67,25 +123,10 @@
             return cookieValue;
         }
 
-        function loadGraphData() {
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            console.log('Load graph data for:', startDate, 'to', endDate);
-            // call the API to fetch the graph data based on the selected dates
-            // This is like a reload but for now itll just update a placeholder
-            const graphContainer = document.getElementById('graph');
-            graphContainer.textContent = 'Loading graph data...';
-
-            // After fetching data
-            setTimeout(() => {
-                graphContainer.textContent = 'Graph would be displayed here';
-            }, 2000);
-        }
-
         function copyToClipboard() {
-            const sensorId = document.getElementById('sensorIdDisplay').textContent;
+            const sensorId = document.getElementById('sensorIdDisplay').value;
             navigator.clipboard.writeText(sensorId).then(() => {
-                alert('Copied to Clipboard!');
+                // alert('Copied to Clipboard!');
             }, (err) => {
                 console.error('Error copying text: ', err);
             });
@@ -140,6 +181,7 @@
             } else {
                 sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
             }
+            loadGraphData();
         });
     </script>
 </body>
