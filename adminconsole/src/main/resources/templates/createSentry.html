@@ -107,7 +107,7 @@
         }
 
         function copyToClipboard() {
-            const sentryId = document.getElementById('sentryId').textContent;
+            const sentryId = document.getElementById('sentryId').value;
             navigator.clipboard.writeText(sentryId).then(() => {
                 alert('Copied to Clipboard!');
             }, (err) => {

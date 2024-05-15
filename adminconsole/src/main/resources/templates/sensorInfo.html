@@ -89,7 +89,7 @@
         function submitGraphRequest(longitude, latitude) {
             const startDate = document.getElementById('startDate').value + "T00:00:00.000Z";
             const endDate = document.getElementById('endDate').value + "T23:59:59.999Z";
-            const range = "1000000"; // 1km range
+            const range = "1"; // 1km range
             const sensorTypes = [getCookie('SENSOR-TYPE-ID')];
 
             fetch('https://www.eco-sentry.com/generate-multi-sensor-graph', {
