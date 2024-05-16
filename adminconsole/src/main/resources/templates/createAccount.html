@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Create Account</h2>
+        <form th:action="@{/create-account}" method="post" onsubmit="return validateAndSubmitForm()">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="newEmail">Email:</label>
+                <input type="email" id="newEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">Password:</label>
+                <input type="password" id="newPassword" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Create Account</button>
+                <hr>
+                <button type="button" onclick="window.location.href='login'">Back to Login</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateAndSubmitForm() {
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var email = document.getElementById('newEmail').value;
+            var password = document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                alert('All fields are required!');
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return false;
+            }
+
+            var userData = {
+                fName: firstName,
+                lName: lastName,
+                email: email,
+                password: password
+            };
+
+            fetch('https://www.eco-sentry.com/loginService/createUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = 'login'; 
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to create account. Please try again.');
+            });
+
+            return false; 
+        }
+    </script>
+</body>
+</html>

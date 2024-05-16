@@ -52,6 +52,18 @@
             <button class="ran-button" onclick="closeModal()">No</button>
         </div>
     </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content" style="width: 80%; max-width: 400px; text-align: center;">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Edit Sentry Coordinates</h2>
+            <form id="editForm">
+                <input type="text" class="editLocation" id="editLatitude" placeholder="Latitude" required>
+                <input type="text" class="editLocation" id="editLongitude" placeholder="Longitude" required>
+                <button type="button" class="ran-button" onclick="submitEdit()" style="margin-top: 10px;">Save Changes</button>
+            </form>
+        </div>
+    </div>
     
     <script>
         let deleteSentryId = null;
@@ -118,6 +130,9 @@
                                 <td>${sentry.latitude}, ${sentry.longitude}</td>
                                 <td>
                                     <button class= "view-button" onclick="viewSentry('${sentry.id}')">View</button>
+                                    <button class="trash-button" onclick="openEditModal('${sentry.id}')">
+                                        <img src="/images/edit.png" class="trash-pic"/>
+                                    </button>
                                     <button class="trash-button" onclick="openModal('${sentry.id}')">
                                         <img src= "/images/trash.png" class="trash-pic"/>
                                     </button>
@@ -175,6 +190,23 @@
                 console.error('Error deleting sentry:', error);
                 alert('Failed to delete sentry. Please try again.');
             });
+        }
+
+        function openEditModal(id) {
+            deleteSentryId = id;  // Reusing for edit as well, or use a new variable if needed
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        function submitEdit() {
+            const latitude = document.getElementById('editLatitude').value;
+            const longitude = document.getElementById('editLongitude').value;
+            console.log('Editing sentry:', deleteSentryId, 'New coordinates:', latitude, longitude);
+            // fetch HERE-----------
+            closeEditModal();
         }
 
         function toggleSidebar() {

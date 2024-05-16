@@ -55,4 +55,8 @@ public class PageRequestController {
     public String proposeSensorPage() {
         return "proposeSensor";  // This will correctly serve your Thymeleaf template
     }
+    @GetMapping("/createAccount")
+    public String createAccountPage() {
+        return "createAccount";  // This will correctly serve your Thymeleaf template
+    }
 }

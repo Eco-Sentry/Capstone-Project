@@ -19,24 +19,6 @@ th {
     border-radius: 150px;
 }
 
-@media (max-width: 768px) {
-  table, th, td {
-      font-size: 14px; /* Smaller font size for small screens */
-  }
-  .token-display, .ran-button {
-      width: 100%; /* Ensures full width usage */
-      text-align: center; /* Center aligns the text for better visual */
-  }
-  .id-input, .copy-button {
-      width: 90%; /* Adjust input and button width to fit smaller screens */
-      margin: 10px auto; /* Centers the elements horizontally */
-  }
-  .ran-button {
-      display: block; /* Ensures the button takes the full available width */
-  }
-}
-
-
 .token-display {
     margin-top: 10px;
     padding: 10px;
@@ -217,4 +199,41 @@ input[type="date"] {
   border-color: #232E3A;
   background-color: white; 
   color: #232E3A;
+}
+
+.editLocation{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  table, th, td {
+      font-size: 14px; /* Smaller font size for small screens */
+  }
+  .token-display, .ran-button {
+      width: 100%; /* Ensures full width usage */
+      text-align: center; /* Center aligns the text for better visual */
+  }
+  .id-input, .copy-button {
+      width: 90%; /* Adjust input and button width to fit smaller screens */
+      margin: 10px auto; /* Centers the elements horizontally */
+  }
+  .ran-button {
+      display: block; /* Ensures the button takes the full available width */
+  }
+  .create-long-lat{
+    width: 100%;
+    padding: 12px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: block;
+    background-color: #B0DCC7;
+  }
 }
