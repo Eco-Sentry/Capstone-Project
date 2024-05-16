@@ -78,7 +78,7 @@ public class SecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/", HttpMethod.GET.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/home", HttpMethod.GET.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/dashboard", HttpMethod.GET.name())).permitAll()
-                .requestMatchers(new AntPathRequestMatcher("/guides", HttpMethod.GET.name())).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/guide", HttpMethod.GET.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/about", HttpMethod.GET.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/login", HttpMethod.GET.name())).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/createAccount", HttpMethod.GET.name())).permitAll()
