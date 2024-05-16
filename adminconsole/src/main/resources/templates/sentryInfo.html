@@ -158,7 +158,7 @@
             const tableBody = document.getElementById('sensorsBody');
             tableBody.innerHTML = ''; 
             sensors.forEach(sensor => {
-                const status = sensor.sensorType.activated ? 'Active' : 'Inactive';
+                const status = sensor.active ? 'Active' : 'Inactive';
                 const row = `<tr>
                                 <td>${sensor.sensorType.sensorType}</td>
                                 <td>${sensor.sensorType.description}</td>
