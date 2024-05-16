@@ -17,7 +17,7 @@
             <a th:href="@{dashboard}">Dashboard</a>
             <a th:href="@{mySentries}">My Sentries</a>
         </nav>
-        <button onclick="setCookie('AUTH-TOKEN', 0, 1)">Log out</button>
+        <button onclick="eraseCookie('AUTH-TOKEN')">Log out</button>
     </div>
     <!-- <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button> -->
     <!-- <div class="sidebar" id="sidebar">
@@ -80,6 +80,10 @@
                 expires = '; expires=' + date.toUTCString();
             }
             document.cookie = name + '=' + (value || '') + expires + '; path=/';
+        }
+
+        function eraseCookie(name) {   
+            document.cookie = name+'=; Max-Age=-99999999;';  
         }
 
         function fetchUserInfo() {
