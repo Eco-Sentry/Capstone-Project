@@ -17,6 +17,7 @@
             <a th:href="@{dashboard}">Dashboard</a>
             <a th:href="@{mySentries}">My Sentries</a>
         </nav>
+        <button onclick="setCookie('AUTH-TOKEN', 0, 1)">Log out</button>
     </div>
     <!-- <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button> -->
     <!-- <div class="sidebar" id="sidebar">
@@ -69,6 +70,16 @@
                 }
             }
             return cookieValue;
+        }
+
+        function setCookie(name, value, days) {
+            let expires = '';
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = '; expires=' + date.toUTCString();
+            }
+            document.cookie = name + '=' + (value || '') + expires + '; path=/';
         }
 
         function fetchUserInfo() {
