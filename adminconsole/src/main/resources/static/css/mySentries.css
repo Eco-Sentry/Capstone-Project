@@ -3,6 +3,7 @@ table {
     margin-top: 2%;
     background-color: #FFF3E4;
     width: 100%;
+    padding: 8px;
     /* border-collapse: collapse; */
     margin-left: auto;
     margin-right: auto;
@@ -16,7 +17,8 @@ th, td {
 }
 th {
     background-color: #fff;
-    border-radius: 150px;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .token-display {
@@ -26,6 +28,19 @@ th {
     /* border: 1px solid #ccc; */
 }
 
+h1{
+  font-size: 50px;
+}
+
+.main-div {
+  background-color: white;
+  padding: 20px;
+  /* border: 1px solid; */
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* height: 500px; */
+  
+}
 
 .creatediv {
     margin-top: 10px;
@@ -54,8 +69,8 @@ th {
 
 .create-long-lat{
   width: 20%; 
-  padding: 8px 10px; 
-  margin: 8px 0; 
+  padding: 8px 8px; 
+  margin: 4px 0; 
   box-sizing: border-box; 
   border: 1px solid #ccc; 
   border-radius: 4px; 
@@ -235,5 +250,8 @@ input[type="date"] {
     border-radius: 4px;
     display: block;
     background-color: #B0DCC7;
+  }
+  h1{
+    font-size: 35px;
   }
 }

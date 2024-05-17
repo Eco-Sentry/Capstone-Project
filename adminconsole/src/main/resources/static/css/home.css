@@ -8,7 +8,7 @@
 }
 
 .image {
-  background-image: url('../images/background.jpg');
+  background-image: url('../images/BackgroundFinal.png');
   background-size: cover;
   background-position: center;
   position: absolute;
@@ -19,24 +19,33 @@
 }
 
 .column {
-  flex: 1; /* Make columns flexible */
+  flex: 1; /* Each column takes equal space */
   padding: 10px;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+  text-align: center; /* Center text */
 }
 
 .row {
   width: 100%;
   display: flex;
   flex-wrap: wrap; /* Allow wrapping on small screens */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.title, .intro {
-  margin-top: 15%; /* Adjusted margin */
-}
+/* .title, .intro {
+  margin-top: 15%; 
+} */
 
 .title {
-  font-size: 300%;
+  font-size: 650%;
   color: #103438;
-  margin-left: 20%;
+  padding-top: 25%;
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -44,7 +53,9 @@
   font-size: 26px; /* Adjust font size for readability */
   color: #103438;
   padding: 1em;
-  margin-right: 20%;
+  padding-left: 15%;
+  padding-right: 15%;
+  /* margin-right: 20%; */
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -52,10 +63,10 @@
   width: 100%;
   margin: auto;
   text-align: center;
-  font-size: 26px;
+  font-size: 30px;
 }
 
-.homePage-ourMission-table td, .homePage-aboutUs-table td {
+.homePage-ourMission-table tr, .homePage-aboutUs-table tr {
   padding: 10px; /* Add padding for spacing */
 }
 
@@ -68,6 +79,16 @@
   .column {
       width: 100%; /* Full width for small screens */
       padding: 5px;
+  }
+
+  .title{
+    font-size: 40px;
+    /* margin-top: 18%; */
+    /* margin-bottom: -17%; */
+  }
+
+  .intro{
+    font-size: 24.5px;
   }
 
   .intro, .title {
@@ -84,6 +105,16 @@
   .homePage-ourMission-table, .homePage-aboutUs-table {
       font-size: 24px; /* Adjust font size for smaller screens */
   }
+
+  .homePage-ourMission-table-c1 {
+    padding-top: 0; /* Reduced padding to decrease space above 'Mission' */
+    margin-top: -30%;
+    padding-bottom: 20px; /* Adjust padding as needed */
+  }
+
+  .homePage-ourMission-table-c2, .homePage-aboutUs-table-c2 {
+    padding: 20px;
+  }
 }
 
   .mission {
@@ -93,28 +124,31 @@
     font-family: 'Times New Roman', Times, serif;
   }
   
+  .homePage-ourMission-table-c1, .homePage-ourMission-table-c2, .homePage-aboutUs-table-c1, .homePage-aboutUs-table-c2 {
+    display: block;
+    width: 80%; /* Ensure full width for responsive design */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+  }
+  
   .homePage-ourMission-table-c1 {
-    width: 40%;
-    background-color: #DED3BB;
+    padding: 20px; /* Add padding for spacing */
+    padding-bottom: 80px;
   }
   
   .homePage-ourMission-table-c2 {
-    width: 60%;
     background-color: #b0dcc7;
-    font-size: 60%;
-    padding: 5%;
+    padding: 40px;
+    margin-bottom: -2%;
   }
-
   
   .homePage-aboutUs-table-c1 {
-    width: 60%;
-    background-color: #b0dcc7;
-    font-size: 60%;
-    padding: 5%;
+    padding: 80px;
+    padding-bottom: -80px;
   }
   
   .homePage-aboutUs-table-c2 {
-    width: 40%;
-    background-color: #DED3BB;
-    
+    background-color: #b0dcc7;
+    padding: 40px;
   }

@@ -31,6 +31,16 @@
     height: 120px; 
 }
 
+.main-div {
+    background-color: white;
+    padding: 20px;
+    /* border: 1px solid; */
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    /* height: 500px; */
+    
+  }
+
 .ran-button {
     display: block;
     width: 100%;
@@ -49,3 +59,14 @@
     background-color: white; 
     color: #232E3A;
 }
+
+h1{
+    font-size: 50px;
+}
+
+@media (max-width: 768px) {
+    h1{
+      font-size: 35px;
+      text-align: center;
+    }
+  }

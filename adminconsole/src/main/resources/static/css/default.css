@@ -72,7 +72,7 @@ body {
 
 /* Sidebar */
 .sidebar {
-    background-color: #c0c0c0;
+    background-color: #FFF3E4;
     padding:20px;
     width: 300px;
     height: 100vh;
@@ -101,7 +101,7 @@ body {
 }
 
 .sidebar a {
-    color: #fff;
+    color: #103438;
     text-decoration: none;
     display: block;  /* Makes each link fill the horizontal space, good for clicking/tapping */
     margin-top: 10px;  
@@ -148,7 +148,7 @@ body {
 }
 
 .main-div {
-    background-color: #e0e0e0;
+    background-color: white;
     padding: 20px;
     /* height: 500px; */
     
