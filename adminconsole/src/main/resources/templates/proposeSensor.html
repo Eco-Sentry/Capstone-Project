@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/propose.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Propose a Sensor</title>
 </head>
 <body>
@@ -54,6 +55,7 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         function getCookie(name) {
             let cookieValue = null;
@@ -90,15 +92,30 @@
                 if (!response.ok) {
                     throw new Error('Network response was not ok: ' + response.statusText);
                 }
-                return response.text(); // Changed from response.json() to response.text()
+                return response.text();
             })
             .then(data => {
-                console.log('Response:', data); // Log the response to see the exact string
-                // alert('Sensor proposal submitted successfully. Sensor ID: ' + data);
+                console.log('Response:', data); // Log the response for debugging
+                Toastify({
+                    // text: "Sensor proposal submitted successfully. Sensor ID: " + data,
+                    text: "Sensor proposal submitted successfully.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#4CAF50",
+                }).showToast();
             })
             .catch(error => {
                 console.error('Error proposing sensor:', error);
-                alert('Failed to submit sensor proposal. Error: ' + error.message);
+                Toastify({
+                    text: "Failed to submit sensor proposal. Error: " + error.message,
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
             });
         }
 

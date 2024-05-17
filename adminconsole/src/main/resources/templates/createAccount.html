@@ -6,6 +6,7 @@
     <title>Create Account</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
     <div class="login-container">
@@ -13,23 +14,23 @@
         <form th:action="@{/create-account}" method="post" onsubmit="return validateAndSubmitForm()">
             <div class="form-group">
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName" required>
+                <input type="text" id="firstName" name="firstName">
             </div>
             <div class="form-group">
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" required>
+                <input type="text" id="lastName" name="lastName">
             </div>
             <div class="form-group">
                 <label for="newEmail">Email:</label>
-                <input type="email" id="newEmail" name="email" required>
+                <input type="email" id="newEmail" name="email">
             </div>
             <div class="form-group">
                 <label for="newPassword">Password:</label>
-                <input type="password" id="newPassword" name="password" required>
+                <input type="password" id="newPassword" name="password">
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <input type="password" id="confirmPassword" name="confirmPassword">
             </div>
             <div class="form-group">
                 <button type="submit">Create Account</button>
@@ -39,8 +40,15 @@
         </form>
     </div>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
-        function validateAndSubmitForm() {
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            form.onsubmit = validateAndSubmitForm;
+        });
+    
+        function validateAndSubmitForm(event) {
+            event.preventDefault();  // Stop the form from submitting immediately
             var firstName = document.getElementById('firstName').value;
             var lastName = document.getElementById('lastName').value;
             var email = document.getElementById('newEmail').value;
@@ -48,22 +56,64 @@
             var confirmPassword = document.getElementById('confirmPassword').value;
 
             if (!firstName || !lastName || !email || !password || !confirmPassword) {
-                alert('All fields are required!');
-                return false;
+                Toastify({
+                    text: "All fields are required!",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
+                return;
             }
-
+    
+            if (password.length < 8) {
+                Toastify({
+                    text: "Password must be at least 8 characters long.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
+                return;
+            }
+    
+            if (!/[A-Z]/.test(password)) {
+                Toastify({
+                    text: "Password must contain at least one uppercase letter.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
+                return;
+            }
+    
             if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return false;
+                Toastify({
+                    text: "Passwords do not match!",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
+                return;
             }
-
+    
+            submitUserData(firstName, lastName, email, password);
+        }
+    
+        function submitUserData(firstName, lastName, email, password) {
             var userData = {
                 fName: firstName,
                 lName: lastName,
                 email: email,
                 password: password
             };
-
+    
             fetch('https://www.eco-sentry.com/loginService/createUser', {
                 method: 'POST',
                 headers: {
@@ -71,17 +121,27 @@
                 },
                 body: JSON.stringify(userData)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 console.log('Success:', data);
                 window.location.href = 'login'; 
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Failed to create account. Please try again.');
+                Toastify({
+                    text: "Failed to create account. Please try again.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
             });
-
-            return false; 
         }
     </script>
 </body>

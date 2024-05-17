@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/mySentries.css">
     <link rel="stylesheet" href="css/addSensors.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Sentry Info</title>
 </head>
 <body>
@@ -79,6 +80,7 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         let sensorTypes = [];
         let sentryId = '';
@@ -209,13 +211,28 @@
                 if (response.ok) {
                     closeAddSensorModal();
                     fetchSentrySensors(sentryId);
+                    Toastify({
+                        text: "Sensor added successfully!",
+                        duration: 3000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#4CAF50",
+                    }).showToast();
                 } else {
-                    alert('Failed to add sensor.');
+                    throw new Error('Failed to add sensor');
                 }
             })
             .catch(error => {
                 console.error('Error adding sensor:', error);
-                alert('Error adding sensor. Please try again.');
+                Toastify({
+                    text: "Error adding sensor. Please try again.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
             });
         }
 
@@ -255,13 +272,28 @@
                     console.log('Sensor deleted successfully:', deleteSensorId);
                     fetchSentrySensors(sentryId); // Refresh the list
                     closeDeleteSensorModal();
+                    Toastify({
+                        text: "Sensor deleted successfully!",
+                        duration: 3000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#4CAF50",
+                    }).showToast();
                 } else {
-                    alert('Failed to delete sensor.');
+                    throw new Error('Failed to delete sensor');
                 }
             })
             .catch(error => {
                 console.error('Error deleting sensor:', error);
-                alert('Failed to delete sensor. Please try again.');
+                Toastify({
+                    text: "Failed to delete sensor. Please try again.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
             });
         }
 
@@ -273,10 +305,29 @@
 
         function copyToClipboard() {
             const sentryId = document.getElementById('sentryIdDisplay').value;
+            // navigator.clipboard.writeText(sentryId).then(() => {
+            //     alert('Copied to Clipboard!');
+            // }, (err) => {
+            //     console.error('Error copying text:', err);
             navigator.clipboard.writeText(sentryId).then(() => {
-                // alert('Copied to Clipboard!');
+                Toastify({
+                    text: "Copied to Clipboard!",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#4CAF50",
+                }).showToast();
             }, (err) => {
                 console.error('Error copying text:', err);
+                Toastify({
+                    text: "Failed to copy text. Please try again.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
             });
         }
 

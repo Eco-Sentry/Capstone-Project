@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/mySentries.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>My Sentries</title>
 </head>
 <body>
@@ -68,6 +69,7 @@
         </div>
     </div>
     
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         let deleteSentryId = null;
 
@@ -185,13 +187,28 @@
                 if (response.ok) {
                     console.log('Sentry deleted successfully:', id);
                     fetchSentries(); // Refresh the list
+                    Toastify({
+                        text: "Sentry deleted successfully.",
+                        duration: 3000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "#4CAF50",
+                    }).showToast();
                 } else {
-                    alert('Failed to delete sentry.');
+                    throw new Error('Failed to delete sentry.');
                 }
             })
             .catch(error => {
                 console.error('Error deleting sentry:', error);
-                alert('Failed to delete sentry. Please try again.');
+                Toastify({
+                    text: "Failed to delete sentry. Please try again.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
             });
         }
 

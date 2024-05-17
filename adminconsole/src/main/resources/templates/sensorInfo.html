@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/mySentries.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Sensor Info</title>
 </head>
 <body>
@@ -46,6 +47,7 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             setupDateTimeInputs();
@@ -128,10 +130,29 @@
 
         function copyToClipboard() {
             const sensorId = document.getElementById('sensorIdDisplay').value;
-            navigator.clipboard.writeText(sensorId).then(() => {
-                // alert('Copied to Clipboard!');
+            // navigator.clipboard.writeText(sensorId).then(() => {
+            //     alert('Copied to Clipboard!');
+            // }, (err) => {
+            //     console.error('Error copying text: ', err);
+            navigator.clipboard.writeText(sentryId).then(() => {
+                Toastify({
+                    text: "Copied to Clipboard!",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#4CAF50",
+                }).showToast();
             }, (err) => {
-                console.error('Error copying text: ', err);
+                console.error('Error copying text:', err);
+                Toastify({
+                    text: "Failed to copy text. Please try again.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
             });
         }
 

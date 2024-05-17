@@ -49,14 +49,16 @@ button {
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #5cb85c;
+    background-color: #103438;
     color: white;
     font-size: 16px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #4cae4c;
+    background-color: white;
+    color: #232E3A;
+    border: 1px solid #103438;
 }
 
 @media (max-width: 768px) {
