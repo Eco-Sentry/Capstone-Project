@@ -4,8 +4,13 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -74,27 +79,40 @@ public class SensorReadingController {
 
     }
 
-    private static class SendReadingBody {
-        
-        private UUID sensorId, sentryId;
-        double value;
-
-        
-
-        // Getters
-        public UUID getSensorId(){
-            return sensorId;
-        }
-        public UUID getSentryId(){
-            return sentryId;
-        }
-        public double getValue(){
-            return value;
-        }
-    }
+    
 
     // To Get readings
 
+    // @GetMapping("/readings")
+    // public List<SensorReadingResponse> getReadingsByTypeAndTime(
+    //         @RequestParam UUID sensorType,
+    //         @RequestParam Instant startTime,
+    //         @RequestParam Instant endTime,
+    //         @RequestParam double longitude,
+    //         @RequestParam double latitude, 
+    //         @RequestParam double range) {
+
+    //     List<SensorReading> preRange = sensorReadingRepository.findBySensorTypeAndTime(sensorType, startTime, endTime);
+    //     List<SensorReadingResponse> postRangeProcessed = new ArrayList<SensorReadingResponse>();
+
+    //     for (SensorReading myReading : preRange){
+    //         // isWithinRange(double lat1, double lon1, double lat2, double lon2, double rangeKm)
+    //         boolean passRangeTest = GeoUtils.isWithinRange(myReading.getLatitude(),
+    //                                                         myReading.getLongitude(),
+    //                                                         latitude,
+    //                                                         longitude,
+    //                                                         range);
+    //         if (passRangeTest){
+    //             postRangeProcessed.add(new SensorReadingResponse(myReading.getReading(),
+    //                                                                 myReading.getLongitude(),
+    //                                                                 myReading.getLatitude(),
+    //                                                                 myReading.getTrust(),
+    //                                                                 myReading.getDateTime()));
+    //         }
+    //     }
+
+    //     return postRangeProcessed;
+    // }
     @GetMapping("/readings")
     public List<SensorReadingResponse> getReadingsByTypeAndTime(
             @RequestParam UUID sensorType,
@@ -105,27 +123,49 @@ public class SensorReadingController {
             @RequestParam double range) {
 
         List<SensorReading> preRange = sensorReadingRepository.findBySensorTypeAndTime(sensorType, startTime, endTime);
-        List<SensorReadingResponse> postRangeProcessed = new ArrayList<SensorReadingResponse>();
+        List<SensorReadingResponse> postRangeProcessed = new ArrayList<>();
 
-        for (SensorReading myReading : preRange){
-            // isWithinRange(double lat1, double lon1, double lat2, double lon2, double rangeKm)
+        for (SensorReading myReading : preRange) {
             boolean passRangeTest = GeoUtils.isWithinRange(myReading.getLatitude(),
-                                                            myReading.getLongitude(),
-                                                            latitude,
-                                                            longitude,
-                                                            range);
-            if (passRangeTest){
+                                                        myReading.getLongitude(),
+                                                        latitude,
+                                                        longitude,
+                                                        range);
+            if (passRangeTest) {
                 postRangeProcessed.add(new SensorReadingResponse(myReading.getReading(),
-                                                                    myReading.getLongitude(),
-                                                                    myReading.getLatitude(),
-                                                                    myReading.getTrust(),
-                                                                    myReading.getDateTime()));
+                                                                myReading.getLongitude(),
+                                                                myReading.getLatitude(),
+                                                                myReading.getTrust(),
+                                                                myReading.getDateTime()));
             }
         }
 
-        return postRangeProcessed;
+        // Perform reservoir sampling to select up to 10,000 items
+        List<SensorReadingResponse> sampledList = new ArrayList<>();
+        Random rand = new Random();
+        int count = 0;
+
+        for (SensorReadingResponse response : postRangeProcessed) {
+            if (count < 10000) {
+                sampledList.add(response);
+            } else {
+                int r = rand.nextInt(count + 1);
+                if (r < 10000) {
+                    sampledList.set(r, response);
+                }
+            }
+            count++;
+        }
+
+        // Sort the sampled list by dateTime to maintain the original order
+        sampledList.sort(Comparator.comparing(SensorReadingResponse::getDateTime));
+
+        return sampledList;
     }
 
+
+
+    
     public class SensorReadingResponse {
         private double reading;
         private double longitude, latitude;
@@ -148,6 +188,61 @@ public class SensorReadingController {
         public Instant getDateTime() { return dateTime; }
     }
 
+
+    private static class SendReadingBody {
+        
+        private UUID sensorId, sentryId;
+        double value;
+
+        
+
+        // Getters
+        public UUID getSensorId(){
+            return sensorId;
+        }
+        public UUID getSentryId(){
+            return sentryId;
+        }
+        public double getValue(){
+            return value;
+        }
+    }
+
+
+    @GetMapping("/recent-reading")
+    public SensorReadingResponse getMostRecentReadingTimeBySensorId(
+            @RequestParam UUID sensorId, @RequestParam UUID sensorTypeId) {
+
+        // Calculate the timestamp for "now minus ten minutes" in GMT/UTC
+        Instant startTime = Instant.now().minus(10, ChronoUnit.MINUTES);
+        Instant endTime = Instant.now();
+
+        // Retrieve recent readings by sensor type within the last ten minutes
+        List<SensorReading> recentReadings = sensorReadingRepository.findBySensorTypeAndTime(sensorTypeId, startTime, endTime);
+
+        // Filter readings by sensorId
+        List<SensorReading> filteredReadings = recentReadings.stream()
+                .filter(reading -> sensorId.equals(reading.getSensorId()))
+                .collect(Collectors.toList());
+
+        if (filteredReadings.isEmpty()) {
+            // Handle the case where no readings are found
+            throw new RuntimeException("No sensor readings found");
+        }
+
+        // Get the most recent reading
+        SensorReading mostRecentReading = filteredReadings.get(0);
+
+        SensorReadingResponse sensorReadingResponse = new SensorReadingResponse(
+                mostRecentReading.getReading(),
+                mostRecentReading.getLongitude(),
+                mostRecentReading.getLatitude(),
+                mostRecentReading.getTrust(),
+                mostRecentReading.getDateTime()
+        );
+        System.out.println("TESTING    " + sensorReadingResponse);
+        return sensorReadingResponse;
+    }
 
 
     

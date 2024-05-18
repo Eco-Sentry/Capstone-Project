@@ -59,4 +59,8 @@ public class PageRequestController {
     public String createAccountPage() {
         return "createAccount";  // This will correctly serve your Thymeleaf template
     }
+    @GetMapping("/")
+    public String defaultHome() {
+        return "home";  // This will correctly serve your Thymeleaf template
+    }
 }

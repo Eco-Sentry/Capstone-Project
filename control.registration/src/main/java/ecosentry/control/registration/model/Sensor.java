@@ -15,6 +15,7 @@ public class Sensor {
     @ManyToOne
     @JoinColumn(name = "sentry_id", nullable = true)
     private Sentry sentry;
+    private boolean activated = false;
 
     @ManyToOne 
     @JoinColumn(name = "sensor_type_id")
@@ -38,6 +39,9 @@ public class Sensor {
     public SensorType getSensorType(){
         return sensorType;
     }
+    public boolean getActive(){
+        return activated;
+    }
 
     // Setters
     public void setSentry(Sentry sentry){
@@ -45,5 +49,8 @@ public class Sensor {
     }
     public void setSensorType(SensorType sensorType){
         this.sensorType = sensorType;
+    }
+    public void setActive(boolean status){
+        activated = status;
     }
 }

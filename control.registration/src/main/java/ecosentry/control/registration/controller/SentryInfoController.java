@@ -1,5 +1,7 @@
 package ecosentry.control.registration.controller;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import ecosentry.control.registration.model.Sensor;
 import ecosentry.control.registration.model.SensorType;
@@ -107,6 +110,7 @@ public class SentryInfoController {
             throw new RuntimeException("User not found with that email: " + isValid);
         }
         
+        
         return sentryRepository.findByUserId(user.getId());
     }
     
@@ -134,6 +138,29 @@ public class SentryInfoController {
         }
     }
 
+    
+    public class SensorReadingResponse {
+        private double reading;
+        private double longitude, latitude;
+        private double trust;
+        private Instant dateTime;
+
+        SensorReadingResponse(){}
+        SensorReadingResponse(double reading, double longitude, double latitude, double trust, Instant dateTime){
+            this.reading = reading;
+            this.longitude = longitude;
+            this.latitude = latitude;
+            this.trust = trust;
+            this.dateTime = dateTime;
+        }
+
+        public double getReading(){ return reading; }
+        public double getLongitude(){ return longitude; }
+        public double getLatitude(){ return latitude; }
+        public double getTrust(){ return trust; }
+        public Instant getDateTime() { return dateTime; }
+    }
+
     @PostMapping("/get-sentry-sensors")
     public List<Sensor> getSentrySensors(@RequestBody GetUserSentriesDTO getUserSentriesDTO) throws InterruptedException, ExecutionException, TimeoutException {
         String isValid = tokenService.validateToken(getUserSentriesDTO.getToken());
@@ -145,8 +172,36 @@ public class SentryInfoController {
             // Handle the case where the user is not found, e.g., throw an exception or return an error message
             throw new RuntimeException("User not found with that email: " + isValid);
         }
+
+        List<Sensor> mySensors = sensorRepository.findBySentryId(getUserSentriesDTO.getSentryId());
+
+        for (final Sensor sensorUpdate : mySensors) {
+            try {
+                String url = "http://localhost:9069/api/recent-reading?sensorId=" + sensorUpdate.getId().toString() + "&sensorTypeId=" + sensorUpdate.getSensorType().getId().toString();
+                System.out.println(sensorUpdate.getId().toString() + " : " + sensorUpdate.getSensorType().getId().toString());
+                RestTemplate restTemplate = new RestTemplate();
+                String response = restTemplate.getForObject(url, String.class);
+
+
+                System.out.println(response);
+                if (response != null) {
+                    sensorUpdate.setActive(true);
+                } else {
+                    System.out.println("GET request failed: No response received");
+                    sensorUpdate.setActive(false);
+                }
+
+                
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                sensorUpdate.setActive(false);
+            }
+
+            System.out.println(sensorUpdate.getActive());
+        }
         
-        return sensorRepository.findBySentryId(getUserSentriesDTO.getSentryId());
+        return mySensors;
     }
 
     @GetMapping("/get-sensor-types")
