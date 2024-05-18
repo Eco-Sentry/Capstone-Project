@@ -74,12 +74,26 @@
             const latitude = document.getElementById('latitude').value;
 
             if (!longitude.trim() || !latitude.trim()) {
-                alert('Please fill out all required fields (Longitude, Latitude).');
+                Toastify({
+                    text: "Please fill out all required fields (Longitude, Latitude).",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
                 return;
             }
 
             if (isNaN(parseFloat(longitude)) || isNaN(parseFloat(latitude))) {
-                alert('Longitude and Latitude must be numeric values.');
+                Toastify({
+                    text: "Longitude and Latitude must be numeric values.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
                 return;
             }
 
@@ -102,10 +116,25 @@
                 document.getElementById('sentryId').value = data; // Adjust if needed based on actual response structure
                 document.getElementById('sentryTokenDiv').style.display = 'block';
                 console.log('Sentry created with ID:', data);
+                Toastify({
+                    text: "Sentry created successfully.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#4CAF50",
+                }).showToast();
             })
             .catch(error => {
                 console.error('Error creating sentry:', error);
-                alert('Failed to create sentry. Please try again.');
+                Toastify({
+                    text: "Failed to create sentry. Please try again.",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#D32F2F",
+                }).showToast();
             });
         }
 
