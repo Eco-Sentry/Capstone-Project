@@ -1,0 +1,33 @@
+  .ran-button{
+    background-color: #103438; 
+    border: none; 
+    color: white; 
+    padding: 5px 10px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 14px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+  }
+  
+  .ran-button:hover{
+    border: 1px solid;
+    border-color: #232E3A;
+    background-color: white; 
+    color: #232E3A;
+  }
+
+  @media (max-width: 768px) {
+    h1{
+      font-size: 35px;
+      text-align: center;
+    }
+    .guide-content{
+        text-align: center;
+    }
+    .ran-button{
+        width: 100%;
+    }
+  }

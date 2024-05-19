@@ -4,6 +4,7 @@
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/guide.css">
     <title>Guide</title>
 </head>
 <body>
@@ -20,40 +21,33 @@
             <a th:href="@{mySentries}">My Sentries</a>
         </nav>
     </div>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
+    <!-- <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
         
-    </div>
+    </div> -->
     <div class="content">
         <div class="main-div">
             <h1 style="font-size: 50px;">Guide page</h1>
+            <div class="guide-content" id="guide-content">
+                THE GUIDE WILL GO HERE <br>
+                Content here<br>
+                END
+            </div>
+            <br>
+            <button class="ran-button" onclick="downloadPDF()">Download as PDF</button>
         </div>
     </div>
         
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.style.transform === 'translateX(0px)') {
-                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
-            } else {
-                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
-            }
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.text(document.getElementById('guide-content').innerText, 10, 10);
+            doc.save('Guide.pdf');
         }
-        // Add event listener to handle window resizing
-        window.addEventListener('resize', function() {
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
-                sidebar.style.transform = 'translateX(0px)';
-            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
-                sidebar.style.transform = 'translateX(-100%)';
-                return;
-            } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
-                sidebar.style.transform = 'translateX(-100%)';
-            }
-        });
+
 
         document.addEventListener('DOMContentLoaded', function () {
             const navbar = document.querySelector('.navbar');
@@ -75,18 +69,6 @@
                     navbar.style.height = '60px'; // Ensure default height
                 }
             });
-
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
-                sidebar.style.transform = 'translateX(0px)';
-            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
-                return;
-            } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
-                sidebar.style.transform = 'translateX(-100%)';
-            }
         });
     </script>
 </body>

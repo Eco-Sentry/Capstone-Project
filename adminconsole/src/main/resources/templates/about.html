@@ -4,6 +4,7 @@
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/about.css">
     <title>About Us</title>
 </head>
 <body>
@@ -20,40 +21,98 @@
             <a th:href="@{mySentries}">My Sentries</a>
         </nav>
     </div>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
+    <!-- <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
         
-    </div>
-    <div class="content">
+    </div> -->
+    <!-- <div class="content"> -->
         <div class="main-div">
-            <h1 style="font-size: 50px;">About page</h1>
+            <h1 style="font-size: 50px;">About</h1>
+            <h1 style="margin-left: 5%;">What We Do</h1>
+            <div class="about-content">
+                <div class="about-row">
+                    <div class="about-column">
+                        <div class="about-box">At EcoSentry, we specialize in developing a modifiable 
+                            sensor device paired with a user-friendly interface that effortlessly 
+                            display data over time through dynamic graphs and robust data collection 
+                            features. Our innovative approach integrates an open-source code, allowing 
+                            for customization and flexibility to various environmental monitoring needs. 
+                            Whether it’s tracking air quality or temperature fluctuations, our sensor 
+                            stations provide users with accurate and real-time data for proactive 
+                            environmental management.
+                        </div>
+                    </div>
+                    <div class="about-column">
+                        <div class="about-box">
+                            <b>Entire Sentry</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/EcosentrySet.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="about-row">
+                    <div class="about-column">
+                        <div class="about-box">
+                            <b>PM2.5 Air Quality Sensor</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/sensor1.png">
+                        </div>
+                        <div class="about-box">
+                            <b>Temperature and Humidity sensor</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/sensor2.png">
+                        </div>
+                    </div>
+                    <div class="about-column">
+                        <div class="about-box">
+                            <b>Arduino UNO R4 WiFi</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/Arduino.png">
+                        </div>
+                        <div class="about-box">
+                            <b>Breadboard</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/btreadboard.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="about-row">
+                    <div class="about-column">
+                        <div class="about-box">
+                            <b>Charger</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/charger.png">
+                        </div>
+                    </div>
+                    <div class="about-column">
+                        <div class="about-box">
+                            <!-- Text -->
+                            <b>Wires</b><br><br>
+                            <img class="images" style="width: 70%;" alt="Sentry" src="/images/aboutPics/wire.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="about-row">
+                    <div class="about-column">
+                        <div class="about-box">
+                            <b>Case base</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/case.png">
+                        </div>
+                        <div class="about-box">
+                            <b>Case lid</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/casing.png">
+                        </div>
+                    </div>
+                    <div class="about-column">
+                        <div class="about-box">
+                            <b>Enclosure used between sentry boxes</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/cap.png">
+                        </div>
+                        <div class="about-box">
+                            <b>Enclosure for the charger cable</b><br><br>
+                            <img class="images" alt="Sentry" src="/images/aboutPics/cap2.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    <!-- </div> -->
         
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.style.transform === 'translateX(0px)') {
-                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
-            } else {
-                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
-            }
-        }
-        // Add event listener to handle window resizing
-        window.addEventListener('resize', function() {
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
-                sidebar.style.transform = 'translateX(0px)';
-            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
-                sidebar.style.transform = 'translateX(-100%)';
-                return;
-            } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
-                sidebar.style.transform = 'translateX(-100%)';
-            }
-        });
 
         document.addEventListener('DOMContentLoaded', function () {
             const navbar = document.querySelector('.navbar');
@@ -75,18 +134,6 @@
                     navbar.style.height = '60px'; // Ensure default height
                 }
             });
-
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
-                sidebar.style.transform = 'translateX(0px)';
-            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
-                return;
-            } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
-                sidebar.style.transform = 'translateX(-100%)';
-            }
         });
     </script>
 </body>
