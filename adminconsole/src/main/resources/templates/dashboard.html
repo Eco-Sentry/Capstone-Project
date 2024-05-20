@@ -236,6 +236,10 @@
             <input type="radio" name="graphType" value="heatmap">
             Heatmap
         </label>
+        <label>
+            <input type="radio" name="graphType" value="scatter">
+            Scatter Plot
+        </label>
 
 
 
@@ -270,7 +274,7 @@
 
         
         <div class="main-div">
-            <iframe id="dataFrame" style="width: 100%; height: 600px; border: none;"></iframe>
+            <iframe id="dataFrame" style="width: 100%; height: 80vh; border: none;"></iframe>
         </div>
     </div>
     <script>
@@ -615,10 +619,24 @@
                     longitude: fullLong,
                     latitude: fullLat,
                     range,
-                    sensorTypes: getCheckedSensorIds()
+                    sensorType: getCheckedSensorIds()
                 });
-                alert(bodyJSON);
+
+                
             }
+            else if (selectedGraphType === 'scatter') {
+                url = 'https://www.eco-sentry.com/generate-scatter-plot';
+                bodyJSON = JSON.stringify({
+                    startTime,
+                    endTime,
+                    longitude: fullLong,
+                    latitude: fullLat,
+                    range,
+                    sensorA: getCheckedSensorIds()[0],
+                    sensorB: getCheckedSensorIds()[1]
+                });
+            }
+
 
             fetch(url, {
                 method: 'POST',

@@ -155,7 +155,7 @@ def generate_scatter_plot():
 
     start_time = datetime.fromisoformat(params['startTime'].replace('Z', '')).replace(tzinfo=None)
     end_time = datetime.fromisoformat(params['endTime'].replace('Z', '')).replace(tzinfo=None)
-    num_bins = params.get('numBins', 50)
+    num_bins = params.get('numBins', 500)
 
     readings_a, readings_b = [], []
     for sensor_id in [sensor_a, sensor_b]:

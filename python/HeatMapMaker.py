@@ -1173,183 +1173,232 @@
 
 
 
-from flask import Flask, Response, request
+# from flask import Flask, Response, request
+# import requests
+# import pandas as pd
+# import numpy as np
+# import plotly.graph_objs as go
+# from plotly.io import to_html
+# from flask_cors import CORS
+# from datetime import datetime
+# from scipy.interpolate import griddata
+
+# app = Flask(__name__)
+# CORS(app)
+
+# def fetch_and_process_data(sensor, params):
+#     """Fetch sensor data and return as DataFrame."""
+#     response = requests.get("http://localhost:9069/api/readings", params={
+#         "sensorType": sensor,
+#         "startTime": params['startTime'],
+#         "endTime": params['endTime'],
+#         "longitude": params['longitude'],
+#         "latitude": params['latitude'],
+#         "range": params['range']
+#     })
+#     if response.status_code == 200:
+#         data = response.json()
+#         df = pd.DataFrame(data)
+
+#         def apply_datetime_format(dt_str):
+#             if '.' in dt_str:
+#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
+#             else:
+#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
+
+#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
+#         return df
+#     else:
+#         print(f"Error fetching data for sensor {sensor}: {response.status_code}")
+#         return pd.DataFrame()
+
+# @app.route('/generate-heatmap', methods=['POST'])
+# def generate_heatmap():
+#     params = request.json
+#     all_data = pd.DataFrame()
+
+#     for sensor in params['sensorTypes']:
+#         df = fetch_and_process_data(sensor, params)
+#         all_data = pd.concat([all_data, df], ignore_index=True)
+
+#     all_data.sort_values('dateTime', inplace=True)
+#     time_intervals = pd.cut(all_data['dateTime'], bins=24)
+#     all_data['time_interval'] = time_intervals
+#     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
+
+#     # Define the grid for interpolation
+#     lat_min, lat_max = all_data['latitude'].min(), all_data['latitude'].max()
+#     lon_min, lon_max = all_data['longitude'].min(), all_data['longitude'].max()
+#     lat_grid, lon_grid = np.mgrid[lat_min:lat_max:100j, lon_min:lon_max:100j]
+
+#     # Calculate overall min and max readings for the color scale
+#     overall_min = all_data['reading'].min()
+#     overall_max = all_data['reading'].max()
+
+#     frames = []
+#     for interval in sorted(all_data['time_interval'].unique()):
+#         interval_data = all_data[all_data['time_interval'] == interval]
+#         if not interval_data.empty:
+#             # Perform nearest neighbor interpolation
+#             grid_z = griddata(
+#                 (interval_data['latitude'], interval_data['longitude']),
+#                 interval_data['reading'],
+#                 (lat_grid, lon_grid),
+#                 method='nearest'
+#             )
+
+#             frame = go.Frame(
+#                 data=[
+#                     go.Heatmap(
+#                         z=grid_z,
+#                         x=np.linspace(lon_min, lon_max, 100),
+#                         y=np.linspace(lat_min, lat_max, 100),
+#                         colorscale=[
+#                             [0, "blue"],
+#                             [0.2, "cyan"],
+#                             [0.4, "green"],
+#                             [0.6, "yellow"],
+#                             [0.8, "orange"],
+#                             [1, "red"]
+#                         ],
+#                         zmin=overall_min,
+#                         zmax=overall_max,
+#                         opacity=0.75,
+#                         showscale=False
+#                     ),
+#                     go.Scattermapbox(
+#                         lat=interval_data['latitude'],
+#                         lon=interval_data['longitude'],
+#                         mode='markers',
+#                         marker=go.scattermapbox.Marker(
+#                             size=1,
+#                             color='rgba(255, 255, 255, 0)',
+#                         ),
+#                         hoverinfo='none'
+#                     )
+#                 ],
+#                 name=f"frame{interval}"
+#             )
+#             frames.append(frame)
+
+#     # Create the initial figure with the first interval's data
+#     initial_data = frames[0]['data']
+
+#     fig = go.Figure(
+#         data=initial_data,
+#         layout=go.Layout(
+#             sliders=[{
+#                 'active': 0,
+#                 'currentvalue': {"prefix": "Time Interval: "},
+#                 'steps': [{
+#                     'method': "animate",
+#                     'args': [[f'frame{idx}'], {"mode": "immediate", "frame": {"duration": 500, "redraw": True}, "transition": {"duration": 0}}],
+#                     'label': time_labels[idx]
+#                 } for idx in range(len(time_labels))]
+#             }],
+#             mapbox=dict(
+#                 style="open-street-map",
+#                 center=dict(lat=float(params['latitude']), lon=float(params['longitude'])),
+#                 zoom=10,
+#             ),
+#             updatemenus=[{
+#                 'buttons': [
+#                     {'label': 'Play', 'method': 'animate', 'args': [None, {"frame": {"duration": 500, "redraw": True}, "fromcurrent": True, "transition": {"duration": 0}}]},
+#                     {'label': 'Pause', 'method': 'animate', 'args': [[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate", "transition": {"duration": 0}}]}
+#                 ],
+#                 'direction': 'left',
+#                 'pad': {'r': 10, 't': 87},
+#                 'showactive': False,
+#                 'type': 'buttons',
+#                 'x': 0.1,
+#                 'xanchor': 'right',
+#                 'y': 0,
+#                 'yanchor': 'top'
+#             }],
+#             coloraxis=dict(
+#                 colorscale='Viridis',
+#                 cmin=overall_min,
+#                 cmax=overall_max,
+#                 colorbar=dict(
+#                     title="Reading",
+#                     titleside="right",
+#                     tickmode="array",
+#                     ticks="outside",
+#                     ticksuffix=" ",
+#                     showticksuffix="all",
+#                     tickvals=np.linspace(overall_min, overall_max, num=10),
+#                 )
+#             ),
+#         ),
+#         frames=frames
+#     )
+
+#     # Add initial data
+#     fig.add_traces(initial_data)
+
+#     fig.update_layout(
+#         mapbox_layers=[{
+#             'source': {
+#                 'type': 'raster',
+#                 'tiles': ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+#                 'tileSize': 256
+#             },
+#             'below': 'traces'
+#         }]
+#     )
+
+#     graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
+#     return Response(graph_html, mimetype='text/html')
+
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=5001, debug=True)
+
 import requests
-import pandas as pd
-import numpy as np
-import plotly.graph_objs as go
-from plotly.io import to_html
+from flask import Flask, Response, request, jsonify
 from flask_cors import CORS
-from datetime import datetime
-from scipy.interpolate import griddata
+import plotly.express as px
+import pandas as pd
+import json
 
 app = Flask(__name__)
 CORS(app)
 
-def fetch_and_process_data(sensor, params):
-    """Fetch sensor data and return as DataFrame."""
-    response = requests.get("http://localhost:9069/api/readings", params={
-        "sensorType": sensor,
-        "startTime": params['startTime'],
-        "endTime": params['endTime'],
-        "longitude": params['longitude'],
-        "latitude": params['latitude'],
-        "range": params['range']
-    })
-    if response.status_code == 200:
-        data = response.json()
-        df = pd.DataFrame(data)
-
-        def apply_datetime_format(dt_str):
-            if '.' in dt_str:
-                return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-            else:
-                return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-        df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-        return df
-    else:
-        print(f"Error fetching data for sensor {sensor}: {response.status_code}")
-        return pd.DataFrame()
-
 @app.route('/generate-heatmap', methods=['POST'])
 def generate_heatmap():
     params = request.json
-    all_data = pd.DataFrame()
 
-    for sensor in params['sensorTypes']:
-        df = fetch_and_process_data(sensor, params)
-        all_data = pd.concat([all_data, df], ignore_index=True)
+    # Load your GeoJSON file (ensure the file path is correct)
+    with open('/home/byron/Documents/GitHub/Capstone-Project/python/suburb-10-nsw.geojson') as f:
+        geojson = json.load(f)
 
-    all_data.sort_values('dateTime', inplace=True)
-    time_intervals = pd.cut(all_data['dateTime'], bins=24)
-    all_data['time_interval'] = time_intervals
-    time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
+    # Simulate data fetch; this should ideally be replaced with actual data fetching logic
+    # Assume we have a dictionary with suburb names and some data points (make sure the suburb names match those in the GeoJSON)
+    data = {
+        "Sydney": 300,
+        "Newcastle": 290,
+        "Wollongong": 250,
+        "Albury": 150,
+        # Add other suburbs as necessary
+    }
 
-    # Define the grid for interpolation
-    lat_min, lat_max = all_data['latitude'].min(), all_data['latitude'].max()
-    lon_min, lon_max = all_data['longitude'].min(), all_data['longitude'].max()
-    lat_grid, lon_grid = np.mgrid[lat_min:lat_max:100j, lon_min:lon_max:100j]
+    # Create DataFrame
+    df = pd.DataFrame(list(data.items()), columns=['Suburb', 'Reading'])
 
-    # Calculate overall min and max readings for the color scale
-    overall_min = all_data['reading'].min()
-    overall_max = all_data['reading'].max()
-
-    frames = []
-    for interval in sorted(all_data['time_interval'].unique()):
-        interval_data = all_data[all_data['time_interval'] == interval]
-        if not interval_data.empty:
-            # Perform nearest neighbor interpolation
-            grid_z = griddata(
-                (interval_data['latitude'], interval_data['longitude']),
-                interval_data['reading'],
-                (lat_grid, lon_grid),
-                method='nearest'
-            )
-
-            frame = go.Frame(
-                data=[
-                    go.Heatmap(
-                        z=grid_z,
-                        x=np.linspace(lon_min, lon_max, 100),
-                        y=np.linspace(lat_min, lat_max, 100),
-                        colorscale=[
-                            [0, "blue"],
-                            [0.2, "cyan"],
-                            [0.4, "green"],
-                            [0.6, "yellow"],
-                            [0.8, "orange"],
-                            [1, "red"]
-                        ],
-                        zmin=overall_min,
-                        zmax=overall_max,
-                        opacity=0.75,
-                        showscale=False
-                    ),
-                    go.Scattermapbox(
-                        lat=interval_data['latitude'],
-                        lon=interval_data['longitude'],
-                        mode='markers',
-                        marker=go.scattermapbox.Marker(
-                            size=1,
-                            color='rgba(255, 255, 255, 0)',
-                        ),
-                        hoverinfo='none'
-                    )
-                ],
-                name=f"frame{interval}"
-            )
-            frames.append(frame)
-
-    # Create the initial figure with the first interval's data
-    initial_data = frames[0]['data']
-
-    fig = go.Figure(
-        data=initial_data,
-        layout=go.Layout(
-            sliders=[{
-                'active': 0,
-                'currentvalue': {"prefix": "Time Interval: "},
-                'steps': [{
-                    'method': "animate",
-                    'args': [[f'frame{idx}'], {"mode": "immediate", "frame": {"duration": 500, "redraw": True}, "transition": {"duration": 0}}],
-                    'label': time_labels[idx]
-                } for idx in range(len(time_labels))]
-            }],
-            mapbox=dict(
-                style="open-street-map",
-                center=dict(lat=float(params['latitude']), lon=float(params['longitude'])),
-                zoom=10,
-            ),
-            updatemenus=[{
-                'buttons': [
-                    {'label': 'Play', 'method': 'animate', 'args': [None, {"frame": {"duration": 500, "redraw": True}, "fromcurrent": True, "transition": {"duration": 0}}]},
-                    {'label': 'Pause', 'method': 'animate', 'args': [[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate", "transition": {"duration": 0}}]}
-                ],
-                'direction': 'left',
-                'pad': {'r': 10, 't': 87},
-                'showactive': False,
-                'type': 'buttons',
-                'x': 0.1,
-                'xanchor': 'right',
-                'y': 0,
-                'yanchor': 'top'
-            }],
-            coloraxis=dict(
-                colorscale='Viridis',
-                cmin=overall_min,
-                cmax=overall_max,
-                colorbar=dict(
-                    title="Reading",
-                    titleside="right",
-                    tickmode="array",
-                    ticks="outside",
-                    ticksuffix=" ",
-                    showticksuffix="all",
-                    tickvals=np.linspace(overall_min, overall_max, num=10),
-                )
-            ),
-        ),
-        frames=frames
+    # Plot
+    fig = px.choropleth(
+        df,
+        geojson=geojson,
+        locations='Suburb',
+        featureidkey="properties.SUBURB_NAME",  # Adjust 'SUBURB_NAME' based on your GeoJSON properties
+        color='Reading',
+        color_continuous_scale="Viridis",
+        projection="mercator"
     )
+    fig.update_geos(fitbounds="locations", visible=False)
 
-    # Add initial data
-    fig.add_traces(initial_data)
-
-    fig.update_layout(
-        mapbox_layers=[{
-            'source': {
-                'type': 'raster',
-                'tiles': ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-                'tileSize': 256
-            },
-            'below': 'traces'
-        }]
-    )
-
-    graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
+    # Convert to HTML
+    graph_html = px.to_html(fig, full_html=False, include_plotlyjs='cdn')
     return Response(graph_html, mimetype='text/html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
-

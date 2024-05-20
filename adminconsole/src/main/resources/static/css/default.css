@@ -151,7 +151,7 @@ body {
     background-color: white;
     padding: 20px;
     /* height: 500px; */
-    
+    min-height: 80vh;
 }
 
 
