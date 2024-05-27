@@ -201,6 +201,7 @@
         .item {
           margin: 5px;
         }
+
       </style>
 
 </head>
@@ -246,7 +247,7 @@
         <div>
             <input type="datetime-local" id="startTimeInput" value="2024-05-06T04:01">
             <input type="datetime-local" id="endTimeInput" value="2024-05-06T06:40">
-            <input type="number" id="rangeInput" value="1000000">
+            <input type="number" id="rangeInput" value="50">
             <button onclick="refreshIframe()">Refresh</button>
         </div>
 
@@ -332,8 +333,8 @@
         //         });
         // }
         let debounceTimeout;
-        var fullLong;
-        var fullLat;
+        var fullLong = 150.8949804;
+        var fullLat = -34.3923891;
         function debounce(func, delay) {
             return function(...args) {
                 clearTimeout(debounceTimeout);
@@ -652,6 +653,51 @@
                 doc.close();
             }).catch(error => console.error('Error loading the iframe content:', error));
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         document.addEventListener('DOMContentLoaded', function () {
             const navbar = document.querySelector('.navbar');

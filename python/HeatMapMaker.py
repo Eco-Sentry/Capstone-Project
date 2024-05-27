@@ -1,1404 +1,182 @@
 
-# from flask import Flask, Response, request
-# import requests
-# import pandas as pd
-# import numpy as np
-# import plotly.graph_objs as go
-# from plotly.io import to_html
-# from flask_cors import CORS
-# from datetime import datetime
-
-# app = Flask(__name__)
-# CORS(app)
-
-# def fetch_and_process_data(sensor, params):
-#     """Fetch sensor data and return as DataFrame."""
-#     response = requests.get("http://localhost:9069/api/readings", params={
-#         "sensorType": sensor,
-#         "startTime": params['startTime'],
-#         "endTime": params['endTime'],
-#         "longitude": params['longitude'],
-#         "latitude": params['latitude'],
-#         "range": params['range']
-#     })
-#     if response.status_code == 200:
-#         data = response.json()
-#         df = pd.DataFrame(data)
-        
-#         def apply_datetime_format(dt_str):
-#             if '.' in dt_str:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-#             else:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-#         return df
-#     else:
-#         print(f"Error fetching data for sensor {sensor}: {response.status_code}")
-#         return pd.DataFrame()
-
-# @app.route('/generate-heatmap', methods=['POST'])
-# def generate_heatmap():
-#     params = request.json
-#     all_data = pd.DataFrame()
-
-#     for sensor in params['sensorTypes']:
-#         df = fetch_and_process_data(sensor, params)
-#         all_data = pd.concat([all_data, df], ignore_index=True)
-
-#     all_data.sort_values('dateTime', inplace=True)
-#     time_intervals = pd.cut(all_data['dateTime'], bins=24)
-#     all_data['time_interval'] = time_intervals
-#     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
-
-#     # Group by time intervals and geographical bins, calculate mean
-#     grouped = all_data.groupby(['time_interval', pd.cut(all_data['latitude'], 20), pd.cut(all_data['longitude'], 20)], observed=True)
-#     avg_readings = grouped['reading'].mean().reset_index(name='avg_reading')
-#     avg_lat = grouped['latitude'].mean().reset_index(name='avg_latitude')
-#     avg_long = grouped['longitude'].mean().reset_index(name='avg_longitude')
-
-#     # Merge average readings, latitude, and longitude
-#     avg_data = avg_readings.merge(avg_lat).merge(avg_long)
-
-#     # Calculate overall min and max readings for the color scale
-#     overall_min = avg_data['avg_reading'].min()
-#     overall_max = avg_data['avg_reading'].max()
-
-#     fig = go.Figure()
-#     for interval in sorted(avg_data['time_interval'].unique()):
-#         interval_data = avg_data[avg_data['time_interval'] == interval]
-#         if not interval_data.empty:
-#             fig.add_trace(
-#                 go.Densitymapbox(
-#                     lat=interval_data['avg_latitude'],
-#                     lon=interval_data['avg_longitude'],
-#                     z=interval_data['avg_reading'],
-#                     visible=False,  # Initially invisible; visible when corresponding slider is activated
-#                     radius=20,  # Increase the radius for larger heatmap areas
-#                     opacity=0.75,  # Set fixed opacity
-#                     zmin=overall_min,  # Set min value for the color scale
-#                     zmax=overall_max,   # Set max value for the color scale
-#                     colorscale=[
-#                         [0, "blue"],
-#                         [0.2, "cyan"],
-#                         [0.4, "green"],
-#                         [0.6, "yellow"],
-#                         [0.8, "orange"],
-#                         [1, "red"]
-#                     ]  # Wide range of colors
-#                 )
-#             )
-
-#     fig.data[0].visible = True  # Set the first trace to visible by default
-
-#     sliders = [{
-#         'active': 0,
-#         'currentvalue': {"prefix": "Time Interval: "},
-#         'steps': [{
-#             'method': "update",
-#             'args': [{"visible": [i == idx for i in range(len(fig.data))]},
-#                      {"title": f"Time Interval: {time_labels[idx]}"}],
-#             'label': time_labels[idx]
-#         } for idx in range(len(time_labels))]
-#     }]
-
-#     fig.update_layout(
-#         sliders=sliders,
-#         mapbox_style="open-street-map",
-#         mapbox=dict(center=dict(lat=0, lon=0), zoom=1),
-#         coloraxis_colorbar=dict(
-#             title="Reading",
-#             titleside="right",
-#             tickmode="array",
-#             ticks="outside",
-#             ticksuffix=" ",
-#             showticksuffix="all",
-#             tickvals=np.linspace(overall_min, overall_max, num=10),
-#         )
-#     )
-
-#     graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
-#     return Response(graph_html, mimetype='text/html')
-
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5001, debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from flask import Flask, Response, request
-# import requests
-# import pandas as pd
-# import numpy as np
-# import plotly.graph_objs as go
-# from plotly.io import to_html
-# from flask_cors import CORS
-# from datetime import datetime
-
-# app = Flask(__name__)
-# CORS(app)
-
-# def fetch_and_process_data(sensor, params):
-#     """Fetch sensor data and return as DataFrame."""
-#     response = requests.get("http://localhost:9069/api/readings", params={
-#         "sensorType": sensor,
-#         "startTime": params['startTime'],
-#         "endTime": params['endTime'],
-#         "longitude": params['longitude'],
-#         "latitude": params['latitude'],
-#         "range": params['range']
-#     })
-#     if response.status_code == 200:
-#         data = response.json()
-#         df = pd.DataFrame(data)
-        
-#         def apply_datetime_format(dt_str):
-#             if '.' in dt_str:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-#             else:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-#         return df
-#     else:
-#         print(f"Error fetching data for sensor {sensor}: {response.status_code}")
-#         return pd.DataFrame()
-
-# @app.route('/generate-heatmap', methods=['POST'])
-# def generate_heatmap():
-#     params = request.json
-#     all_data = pd.DataFrame()
-
-#     for sensor in params['sensorTypes']:
-#         df = fetch_and_process_data(sensor, params)
-#         all_data = pd.concat([all_data, df], ignore_index=True)
-
-#     all_data.sort_values('dateTime', inplace=True)
-#     time_intervals = pd.cut(all_data['dateTime'], bins=24)
-#     all_data['time_interval'] = time_intervals
-#     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
-
-#     # Group by time intervals and geographical bins, calculate mean
-#     grouped = all_data.groupby(['time_interval', pd.cut(all_data['latitude'], 20), pd.cut(all_data['longitude'], 20)], observed=True)
-#     avg_readings = grouped['reading'].mean().reset_index(name='avg_reading')
-#     avg_lat = grouped['latitude'].mean().reset_index(name='avg_latitude')
-#     avg_long = grouped['longitude'].mean().reset_index(name='avg_longitude')
-
-#     # Merge average readings, latitude, and longitude
-#     avg_data = avg_readings.merge(avg_lat).merge(avg_long)
-
-#     # Calculate overall min and max readings for the color scale
-#     overall_min = avg_data['avg_reading'].min()
-#     overall_max = avg_data['avg_reading'].max()
-
-#     fig = go.Figure()
-#     for interval in sorted(avg_data['time_interval'].unique()):
-#         interval_data = avg_data[avg_data['time_interval'] == interval]
-#         if not interval_data.empty:
-#             fig.add_trace(
-#                 go.Densitymapbox(
-#                     lat=interval_data['avg_latitude'],
-#                     lon=interval_data['avg_longitude'],
-#                     z=interval_data['avg_reading'],
-#                     visible=False,  # Initially invisible; visible when corresponding slider is activated
-#                     radius=100,  # Further increase the radius for larger and more spread-out heatmap areas
-#                     opacity=0.75,  # Set fixed opacity
-#                     zmin=overall_min,  # Set min value for the color scale
-#                     zmax=overall_max,   # Set max value for the color scale
-#                     colorscale=[
-#                         [0, "blue"],
-#                         [0.2, "cyan"],
-#                         [0.4, "green"],
-#                         [0.6, "yellow"],
-#                         [0.8, "orange"],
-#                         [1, "red"]
-#                     ]  # Wide range of colors
-#                 )
-#             )
-
-#     fig.data[0].visible = True  # Set the first trace to visible by default
-
-#     sliders = [{
-#         'active': 0,
-#         'currentvalue': {"prefix": "Time Interval: "},
-#         'steps': [{
-#             'method': "update",
-#             'args': [{"visible": [i == idx for i in range(len(fig.data))]},
-#                      {"title": f"Time Interval: {time_labels[idx]}"}],
-#             'label': time_labels[idx]
-#         } for idx in range(len(time_labels))]
-#     }]
-
-#     fig.update_layout(
-#         sliders=sliders,
-#         mapbox_style="open-street-map",
-#         mapbox=dict(center=dict(lat=0, lon=0), zoom=1),
-#         coloraxis_colorbar=dict(
-#             title="Reading",
-#             titleside="right",
-#             tickmode="array",
-#             ticks="outside",
-#             ticksuffix=" ",
-#             showticksuffix="all",
-#             tickvals=np.linspace(overall_min, overall_max, num=10),
-#         )
-#     )
-
-#     graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
-#     return Response(graph_html, mimetype='text/html')
-
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5001, debug=True)
-
-
-
-
-
-
-
-
-# from flask import Flask, Response, request
-# import requests
-# import pandas as pd
-# import numpy as np
-# import plotly.graph_objs as go
-# from plotly.io import to_html
-# from flask_cors import CORS
-# from datetime import datetime
-
-# app = Flask(__name__)
-# CORS(app)
-
-# def fetch_and_process_data(sensor, params):
-#     """Fetch sensor data and return as DataFrame."""
-#     response = requests.get("http://localhost:9069/api/readings", params={
-#         "sensorType": sensor,
-#         "startTime": params['startTime'],
-#         "endTime": params['endTime'],
-#         "longitude": params['longitude'],
-#         "latitude": params['latitude'],
-#         "range": params['range']
-#     })
-#     if response.status_code == 200:
-#         data = response.json()
-#         df = pd.DataFrame(data)
-        
-#         def apply_datetime_format(dt_str):
-#             if '.' in dt_str:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-#             else:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-#         return df
-#     else:
-#         print(f"Error fetching data for sensor {sensor}: {response.status_code}")
-#         return pd.DataFrame()
-
-# @app.route('/generate-heatmap', methods=['POST'])
-# def generate_heatmap():
-#     params = request.json
-#     all_data = pd.DataFrame()
-
-#     for sensor in params['sensorTypes']:
-#         df = fetch_and_process_data(sensor, params)
-#         all_data = pd.concat([all_data, df], ignore_index=True)
-
-#     all_data.sort_values('dateTime', inplace=True)
-#     time_intervals = pd.cut(all_data['dateTime'], bins=24)
-#     all_data['time_interval'] = time_intervals
-#     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
-
-#     # Group by time intervals and geographical bins, calculate mean
-#     grouped = all_data.groupby(['time_interval', pd.cut(all_data['latitude'], 20), pd.cut(all_data['longitude'], 20)], observed=True)
-#     avg_readings = grouped['reading'].mean().reset_index(name='avg_reading')
-#     avg_lat = grouped['latitude'].mean().reset_index(name='avg_latitude')
-#     avg_long = grouped['longitude'].mean().reset_index(name='avg_longitude')
-
-#     # Merge average readings, latitude, and longitude
-#     avg_data = avg_readings.merge(avg_lat).merge(avg_long)
-
-#     # Calculate overall min and max readings for the color scale
-#     overall_min = avg_data['avg_reading'].min()
-#     overall_max = avg_data['avg_reading'].max()
-
-#     fig = go.Figure()
-#     for interval in sorted(avg_data['time_interval'].unique()):
-#         interval_data = avg_data[avg_data['time_interval'] == interval]
-#         if not interval_data.empty:
-#             fig.add_trace(
-#                 go.Densitymapbox(
-#                     lat=interval_data['avg_latitude'],
-#                     lon=interval_data['avg_longitude'],
-#                     z=interval_data['avg_reading'],
-#                     visible=False,  # Initially invisible; visible when corresponding slider is activated
-#                     radius=100,  # Further increase the radius for larger and more spread-out heatmap areas
-#                     opacity=0.75,  # Set fixed opacity
-#                     zmin=overall_min,  # Set min value for the color scale
-#                     zmax=overall_max,   # Set max value for the color scale
-#                     colorscale=[
-#                         [0, "blue"],
-#                         [0.2, "cyan"],
-#                         [0.4, "green"],
-#                         [0.6, "yellow"],
-#                         [0.8, "orange"],
-#                         [1, "red"]
-#                     ]  # Wide range of colors
-#                 )
-#             )
-
-#     fig.data[0].visible = True  # Set the first trace to visible by default
-
-#     sliders = [{
-#         'active': 0,
-#         'currentvalue': {"prefix": "Time Interval: "},
-#         'steps': [{
-#             'method': "update",
-#             'args': [{"visible": [i == idx for i in range(len(fig.data))]},
-#                      {"title": f"Time Interval: {time_labels[idx]}"}],
-#             'label': time_labels[idx]
-#         } for idx in range(len(time_labels))]
-#     }]
-
-#     fig.update_layout(
-#         sliders=sliders,
-#         mapbox_style="open-street-map",
-#         mapbox=dict(center=dict(lat=0, lon=0), zoom=1),
-#         coloraxis_colorbar=dict(
-#             title="Reading",
-#             titleside="right",
-#             tickmode="array",
-#             ticks="outside",
-#             ticksuffix=" ",
-#             showticksuffix="all",
-#             tickvals=np.linspace(overall_min, overall_max, num=10),
-#         )
-#     )
-
-#     graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
-#     return Response(graph_html, mimetype='text/html')
-
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5001, debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from flask import Flask, Response, request, send_file
-# import requests
-# import pandas as pd
-# import numpy as np
-# import matplotlib
-# matplotlib.use('Agg')  # Use Agg backend for non-GUI environments
-# import matplotlib.pyplot as plt
-# from matplotlib.colors import Normalize
-# from scipy.interpolate import griddata
-# import folium
-# from folium import raster_layers
-# from flask_cors import CORS
-# from io import BytesIO
-# import os
-# import logging
-
-# app = Flask(__name__)
-# CORS(app)
-
-# # Set up logging
-# logging.basicConfig(level=logging.DEBUG)
-
-# def fetch_and_process_data(sensor, params):
-#     """Fetch sensor data and return as DataFrame."""
-#     response = requests.get("http://localhost:9069/api/readings", params={
-#         "sensorType": sensor,
-#         "startTime": params['startTime'],
-#         "endTime": params['endTime'],
-#         "longitude": params['longitude'],
-#         "latitude": params['latitude'],
-#         "range": params['range']
-#     })
-#     if response.status_code == 200:
-#         data = response.json()
-#         df = pd.DataFrame(data)
-        
-#         def apply_datetime_format(dt_str):
-#             if '.' in dt_str:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-#             else:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-#         return df
-#     else:
-#         logging.error(f"Error fetching data for sensor {sensor}: {response.status_code}")
-#         return pd.DataFrame()
-
-# @app.route('/generate-heatmap', methods=['POST'])
-# def generate_heatmap():
-#     try:
-#         params = request.json
-#         logging.info("Received request with params: %s", params)
-#         all_data = pd.DataFrame()
-
-#         for sensor in params['sensorTypes']:
-#             df = fetch_and_process_data(sensor, params)
-#             all_data = pd.concat([all_data, df], ignore_index=True)
-
-#         all_data.sort_values('dateTime', inplace=True)
-#         time_intervals = pd.cut(all_data['dateTime'], bins=24)
-#         all_data['time_interval'] = time_intervals
-#         time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
-
-#         # Create grid
-#         lat_range = np.linspace(all_data['latitude'].min(), all_data['latitude'].max(), 200)
-#         lon_range = np.linspace(all_data['longitude'].min(), all_data['longitude'].max(), 200)
-#         lon_grid, lat_grid = np.meshgrid(lon_range, lat_range)
-
-#         overall_min = all_data['reading'].min()
-#         overall_max = all_data['reading'].max()
-
-#         # Generate interpolated frames
-#         frames = []
-#         for interval in sorted(all_data['time_interval'].unique()):
-#             interval_data = all_data[all_data['time_interval'] == interval]
-#             if not interval_data.empty:
-#                 grid_z = griddata(
-#                     (interval_data['longitude'], interval_data['latitude']),
-#                     interval_data['reading'],
-#                     (lon_grid, lat_grid),
-#                     method='cubic'
-#                 )
-#                 frames.append((grid_z, interval))
-
-#         # Generate images and save them
-#         image_files = []
-#         for grid_z, interval in frames:
-#             fig, ax = plt.subplots(figsize=(8, 6))
-#             norm = Normalize(vmin=overall_min, vmax=overall_max)
-#             cax = ax.imshow(grid_z, extent=(lon_range.min(), lon_range.max(), lat_range.min(), lat_range.max()),
-#                             origin='lower', cmap='RdYlBu_r', norm=norm, alpha=0.5)  # Adjust alpha for transparency
-#             plt.axis('off')  # Hide axes
-
-#             # Save image to a temporary file
-#             temp_file_path = f'heatmap_{interval}.png'
-#             fig.savefig(temp_file_path, bbox_inches='tight', pad_inches=0, transparent=True)
-#             plt.close(fig)
-#             logging.info("Saved heatmap image: %s", temp_file_path)
-#             image_files.append(temp_file_path)
-
-#         # Create Folium map and add images as overlays
-#         center = [all_data['latitude'].mean(), all_data['longitude'].mean()]
-#         map_ = folium.Map(location=center, zoom_start=10)
-
-#         for temp_file_path, interval in zip(image_files, time_labels):
-#             img_overlay = raster_layers.ImageOverlay(
-#                 name=f'Heatmap {interval}',
-#                 image=temp_file_path,
-#                 bounds=[[lat_range.min(), lon_range.min()], [lat_range.max(), lon_range.max()]],
-#                 opacity=0.5,  # Adjust opacity for transparency
-#                 interactive=True,
-#                 cross_origin=False,
-#                 zindex=1
-#             )
-#             img_overlay.add_to(map_)
-
-#         folium.LayerControl().add_to(map_)
-#         map_file_path = os.path.join(os.getcwd(), 'map_with_heatmap.html')
-#         map_.save(map_file_path)
-#         logging.info("Saved Folium map: %s", map_file_path)
-
-#         # Clean up the temporary image files
-#         for temp_file_path in image_files:
-#             os.remove(temp_file_path)
-#             logging.info("Removed temporary image file: %s", temp_file_path)
-
-#         return send_file(map_file_path, mimetype='text/html')
-
-#     except Exception as e:
-#         logging.error("An error occurred: %s", e)
-#         return Response(f"An error occurred: {e}", status=500)
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5001, debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from flask import Flask, Response, request
-# import requests
-# import pandas as pd
-# import numpy as np
-# import plotly.graph_objs as go
-# from plotly.io import to_html
-# from flask_cors import CORS
-# from datetime import datetime
-
-# app = Flask(__name__)
-# CORS(app)
-
-# def fetch_and_process_data(sensor, params):
-#     """Fetch sensor data and return as DataFrame."""
-#     response = requests.get("http://localhost:9069/api/readings", params={
-#         "sensorType": sensor,
-#         "startTime": params['startTime'],
-#         "endTime": params['endTime'],
-#         "longitude": params['longitude'],
-#         "latitude": params['latitude'],
-#         "range": params['range']
-#     })
-#     if response.status_code == 200:
-#         data = response.json()
-#         df = pd.DataFrame(data)
-
-#         def apply_datetime_format(dt_str):
-#             if '.' in dt_str:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-#             else:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-#         return df
-#     else:
-#         print(f"Error fetching data for sensor {sensor}: {response.status_code}")
-#         return pd.DataFrame()
-
-# @app.route('/generate-heatmap', methods=['POST'])
-# def generate_heatmap():
-#     params = request.json
-#     all_data = pd.DataFrame()
-
-#     for sensor in params['sensorTypes']:
-#         df = fetch_and_process_data(sensor, params)
-#         all_data = pd.concat([all_data, df], ignore_index=True)
-
-#     all_data.sort_values('dateTime', inplace=True)
-#     time_intervals = pd.cut(all_data['dateTime'], bins=24)
-#     all_data['time_interval'] = time_intervals
-#     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
-
-#     # Group by time intervals and geographical bins, calculate mean
-#     grouped = all_data.groupby(['time_interval', pd.cut(all_data['latitude'], 20), pd.cut(all_data['longitude'], 20)], observed=True)
-#     avg_readings = grouped['reading'].mean().reset_index(name='avg_reading')
-#     avg_lat = grouped['latitude'].mean().reset_index(name='avg_latitude')
-#     avg_long = grouped['longitude'].mean().reset_index(name='avg_longitude')
-
-#     # Merge average readings, latitude, and longitude
-#     avg_data = avg_readings.merge(avg_lat).merge(avg_long)
-
-#     # Calculate overall min and max readings for the color scale
-#     overall_min = avg_data['avg_reading'].min()
-#     overall_max = avg_data['avg_reading'].max()
-
-#     # Ensure the radius is treated as a numeric value
-#     radius = float(params['range'])
-#     latitude = float(params['latitude'])
-#     longitude = float(params['longitude'])
-
-#     fig = go.Figure()
-#     for interval in sorted(avg_data['time_interval'].unique()):
-#         interval_data = avg_data[avg_data['time_interval'] == interval]
-#         if not interval_data.empty:
-#             fig.add_trace(
-#                 go.Scattermapbox(
-#                     lat=interval_data['avg_latitude'],
-#                     lon=interval_data['avg_longitude'],
-#                     mode='markers',
-#                     marker=go.scattermapbox.Marker(
-#                         size=interval_data['avg_reading'],  # Use reading values to determine marker size
-#                         color=interval_data['avg_reading'],
-#                         colorscale=[
-#                             [0, "blue"],
-#                             [0.2, "cyan"],
-#                             [0.4, "green"],
-#                             [0.6, "yellow"],
-#                             [0.8, "orange"],
-#                             [1, "red"]
-#                         ],  # Wide range of colors
-#                         cmin=overall_min,
-#                         cmax=overall_max,
-#                         sizemin=5,  # Minimum size for visibility
-#                         sizemode='area',
-#                         opacity=0.75
-#                     ),
-#                     visible=False  # Initially invisible; visible when corresponding slider is activated
-#                 )
-#             )
-
-#     fig.data[0].visible = True  # Set the first trace to visible by default
-
-#     sliders = [{
-#         'active': 0,
-#         'currentvalue': {"prefix": "Time Interval: "},
-#         'steps': [{
-#             'method': "update",
-#             'args': [{"visible": [i == idx for i in range(len(fig.data))]},
-#                      {"title": f"Time Interval: {time_labels[idx]}"}],
-#             'label': time_labels[idx]
-#         } for idx in range(len(time_labels))]
-#     }]
-
-#     fig.update_layout(
-#         sliders=sliders,
-#         mapbox_style="open-street-map",
-#         mapbox=dict(center=dict(lat=latitude, lon=longitude), zoom=10),
-#         coloraxis_colorbar=dict(
-#             title="Reading",
-#             titleside="right",
-#             tickmode="array",
-#             ticks="outside",
-#             ticksuffix=" ",
-#             showticksuffix="all",
-#             tickvals=np.linspace(overall_min, overall_max, num=10),
-#         )
-#     )
-
-#     graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
-#     return Response(graph_html, mimetype='text/html')
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5001, debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from flask import Flask, Response, request
-# import requests
-# import pandas as pd
-# import numpy as np
-# import plotly.graph_objs as go
-# from plotly.io import to_html
-# from flask_cors import CORS
-# from datetime import datetime
-# from scipy.interpolate import griddata
-
-# app = Flask(__name__)
-# CORS(app)
-
-# def fetch_and_process_data(sensor, params):
-#     """Fetch sensor data and return as DataFrame."""
-#     response = requests.get("http://localhost:9069/api/readings", params={
-#         "sensorType": sensor,
-#         "startTime": params['startTime'],
-#         "endTime": params['endTime'],
-#         "longitude": params['longitude'],
-#         "latitude": params['latitude'],
-#         "range": params['range']
-#     })
-#     if response.status_code == 200:
-#         data = response.json()
-#         df = pd.DataFrame(data)
-
-#         def apply_datetime_format(dt_str):
-#             if '.' in dt_str:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-#             else:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-#         return df
-#     else:
-#         print(f"Error fetching data for sensor {sensor}: {response.status_code}")
-#         return pd.DataFrame()
-
-# @app.route('/generate-heatmap', methods=['POST'])
-# def generate_heatmap():
-#     params = request.json
-#     all_data = pd.DataFrame()
-
-#     for sensor in params['sensorTypes']:
-#         df = fetch_and_process_data(sensor, params)
-#         all_data = pd.concat([all_data, df], ignore_index=True)
-
-#     all_data.sort_values('dateTime', inplace=True)
-#     time_intervals = pd.cut(all_data['dateTime'], bins=24)
-#     all_data['time_interval'] = time_intervals
-#     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
-
-#     latitude = float(params['latitude'])
-#     longitude = float(params['longitude'])
-#     range_km = float(params['range'])  # Assume range is given in kilometers
-
-#     # Convert range in kilometers to degrees (approximation, 1 degree ~ 111 km)
-#     range_deg = range_km / 111.0
-
-#     lat_min = latitude - range_deg
-#     lat_max = latitude + range_deg
-#     lon_min = longitude - range_deg
-#     lon_max = longitude + range_deg
-
-#     # Generate a grid of points within the specified range
-#     num_points = 30  # Increase number of points in the grid for higher resolution
-#     grid_lat, grid_lon = np.mgrid[lat_min:lat_max:num_points*1j, lon_min:lon_max:num_points*1j]
-
-#     fig = go.Figure()
-
-#     for interval in sorted(all_data['time_interval'].unique()):
-#         interval_data = all_data[all_data['time_interval'] == interval]
-
-#         if not interval_data.empty:
-#             points = interval_data[['latitude', 'longitude']].values
-#             values = interval_data['reading'].values
-
-#             # Check if points and values are correct
-#             print(f"Interval: {interval}")
-#             print(f"Points: {points}")
-#             print(f"Values: {values}")
-
-#             # Interpolate the readings to the grid points
-#             grid_z = griddata(points, values, (grid_lat, grid_lon), method='nearest')  # Use nearest interpolation
-
-#             # Check if grid_z has been populated correctly
-#             print(f"Grid Z: {grid_z}")
-
-#             fig.add_trace(
-#                 go.Densitymapbox(
-#                     lat=grid_lat.flatten(),
-#                     lon=grid_lon.flatten(),
-#                     z=grid_z.flatten(),
-#                     radius=20,  # Adjust radius for appropriate smoothing
-#                     colorscale=[
-#                         [0, "blue"],
-#                         [0.2, "cyan"],
-#                         [0.4, "green"],
-#                         [0.6, "yellow"],
-#                         [0.8, "orange"],
-#                         [1, "red"]
-#                     ],
-#                     zmin=all_data['reading'].min(),
-#                     zmax=all_data['reading'].max(),
-#                     visible=False  # Initially invisible; visible when corresponding slider is activated
-#                 )
-#             )
-
-#     fig.data[0].visible = True  # Set the first trace to visible by default
-
-#     sliders = [{
-#         'active': 0,
-#         'currentvalue': {"prefix": "Time Interval: "},
-#         'steps': [{
-#             'method': "update",
-#             'args': [{"visible": [i == idx for i in range(len(fig.data))]},
-#                      {"title": f"Time Interval: {time_labels[idx]}"}],
-#             'label': time_labels[idx]
-#         } for idx in range(len(time_labels))]
-#     }]
-
-#     fig.update_layout(
-#         sliders=sliders,
-#         mapbox_style="open-street-map",
-#         mapbox=dict(center=dict(lat=latitude, lon=longitude), zoom=10),
-#         margin={"r":0,"t":0,"l":0,"b":0}
-#     )
-
-#     graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
-#     return Response(graph_html, mimetype='text/html')
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5001, debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-# from flask import Flask, Response, request
-# import requests
-# import pandas as pd
-# import numpy as np
-# import plotly.graph_objs as go
-# from plotly.io import to_html
-# from flask_cors import CORS
-# from datetime import datetime
-
-# app = Flask(__name__)
-# CORS(app)
-
-# def fetch_and_process_data(sensor, params):
-#     """Fetch sensor data and return as DataFrame."""
-#     response = requests.get("http://localhost:9069/api/readings", params={
-#         "sensorType": sensor,
-#         "startTime": params['startTime'],
-#         "endTime": params['endTime'],
-#         "longitude": params['longitude'],
-#         "latitude": params['latitude'],
-#         "range": params['range']
-#     })
-#     if response.status_code == 200:
-#         data = response.json()
-#         df = pd.DataFrame(data)
-
-#         def apply_datetime_format(dt_str):
-#             if '.' in dt_str:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-#             else:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-#         return df
-#     else:
-#         print(f"Error fetching data for sensor {sensor}: {response.status_code}")
-#         return pd.DataFrame()
-
-# @app.route('/generate-heatmap', methods=['POST'])
-# def generate_heatmap():
-#     params = request.json
-#     all_data = pd.DataFrame()
-
-#     for sensor in params['sensorTypes']:
-#         df = fetch_and_process_data(sensor, params)
-#         all_data = pd.concat([all_data, df], ignore_index=True)
-
-#     all_data.sort_values('dateTime', inplace=True)
-#     time_intervals = pd.cut(all_data['dateTime'], bins=24)
-#     all_data['time_interval'] = time_intervals
-#     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
-
-#     # Group by time intervals and geographical bins, calculate mean
-#     grouped = all_data.groupby(['time_interval', pd.cut(all_data['latitude'], 20), pd.cut(all_data['longitude'], 20)], observed=True)
-#     avg_readings = grouped['reading'].mean().reset_index(name='avg_reading')
-#     avg_lat = grouped['latitude'].mean().reset_index(name='avg_latitude')
-#     avg_long = grouped['longitude'].mean().reset_index(name='avg_longitude')
-
-#     # Merge average readings, latitude, and longitude
-#     avg_data = avg_readings.merge(avg_lat).merge(avg_long)
-
-#     # Calculate overall min and max readings for the color scale
-#     overall_min = avg_data['avg_reading'].min()
-#     overall_max = avg_data['avg_reading'].max()
-
-#     # Ensure the radius is treated as a numeric value
-#     radius = float(params['range'])
-#     latitude = float(params['latitude'])
-#     longitude = float(params['longitude'])
-
-#     fig = go.Figure()
-#     for interval in sorted(avg_data['time_interval'].unique()):
-#         interval_data = avg_data[avg_data['time_interval'] == interval]
-#         if not interval_data.empty:
-#             fig.add_trace(
-#                 go.Scattermapbox(
-#                     lat=interval_data['avg_latitude'],
-#                     lon=interval_data['avg_longitude'],
-#                     mode='markers',
-#                     marker=go.scattermapbox.Marker(
-#                         size=interval_data['avg_reading'],  # Use reading values to determine marker size
-#                         color=interval_data['avg_reading'],
-#                         colorscale=[
-#                             [0, "blue"],
-#                             [0.2, "cyan"],
-#                             [0.4, "green"],
-#                             [0.6, "yellow"],
-#                             [0.8, "orange"],
-#                             [1, "red"]
-#                         ],  # Wide range of colors
-#                         cmin=overall_min,
-#                         cmax=overall_max,
-#                         sizemin=5,  # Minimum size for visibility
-#                         sizemode='area',
-#                         opacity=0.75
-#                     ),
-#                     visible=False  # Initially invisible; visible when corresponding slider is activated
-#                 )
-#             )
-
-#     fig.data[0].visible = True  # Set the first trace to visible by default
-
-#     sliders = [{
-#         'active': 0,
-#         'currentvalue': {"prefix": "Time Interval: "},
-#         'steps': [{
-#             'method': "update",
-#             'args': [{"visible": [i == idx for i in range(len(fig.data))]},
-#                      {"title": f"Time Interval: {time_labels[idx]}"}],
-#             'label': time_labels[idx]
-#         } for idx in range(len(time_labels))]
-#     }]
-
-#     fig.update_layout(
-#         sliders=sliders,
-#         mapbox_style="open-street-map",
-#         mapbox=dict(center=dict(lat=latitude, lon=longitude), zoom=10),
-#         coloraxis_colorbar=dict(
-#             title="Reading",
-#             titleside="right",
-#             tickmode="array",
-#             ticks="outside",
-#             ticksuffix=" ",
-#             showticksuffix="all",
-#             tickvals=np.linspace(overall_min, overall_max, num=10),
-#         )
-#     )
-
-#     graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
-#     return Response(graph_html, mimetype='text/html')
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5001, debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from flask import Flask, Response, request
-# import requests
-# import pandas as pd
-# import numpy as np
-# import plotly.graph_objs as go
-# from plotly.io import to_html
-# from flask_cors import CORS
-# from datetime import datetime
-# from scipy.interpolate import griddata
-
-# app = Flask(__name__)
-# CORS(app)
-
-# def fetch_and_process_data(sensor, params):
-#     """Fetch sensor data and return as DataFrame."""
-#     response = requests.get("http://localhost:9069/api/readings", params={
-#         "sensorType": sensor,
-#         "startTime": params['startTime'],
-#         "endTime": params['endTime'],
-#         "longitude": params['longitude'],
-#         "latitude": params['latitude'],
-#         "range": params['range']
-#     })
-#     if response.status_code == 200:
-#         data = response.json()
-#         df = pd.DataFrame(data)
-
-#         def apply_datetime_format(dt_str):
-#             if '.' in dt_str:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-#             else:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-#         return df
-#     else:
-#         print(f"Error fetching data for sensor {sensor}: {response.status_code}")
-#         return pd.DataFrame()
-
-# @app.route('/generate-heatmap', methods=['POST'])
-# def generate_heatmap():
-#     params = request.json
-#     all_data = pd.DataFrame()
-
-#     for sensor in params['sensorTypes']:
-#         df = fetch_and_process_data(sensor, params)
-#         all_data = pd.concat([all_data, df], ignore_index=True)
-
-#     all_data.sort_values('dateTime', inplace=True)
-#     time_intervals = pd.cut(all_data['dateTime'], bins=24)
-#     all_data['time_interval'] = time_intervals
-#     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
-
-#     # Define the grid for interpolation
-#     lat_min, lat_max = all_data['latitude'].min(), all_data['latitude'].max()
-#     lon_min, lon_max = all_data['longitude'].min(), all_data['longitude'].max()
-#     lat_grid, lon_grid = np.mgrid[lat_min:lat_max:100j, lon_min:lon_max:100j]
-
-#     fig = go.Figure()
-#     for interval in sorted(all_data['time_interval'].unique()):
-#         interval_data = all_data[all_data['time_interval'] == interval]
-#         if not interval_data.empty:
-#             # Perform linear interpolation
-#             grid_z = griddata(
-#                 (interval_data['latitude'], interval_data['longitude']),
-#                 interval_data['reading'],
-#                 (lat_grid, lon_grid),
-#                 method='linear'
-#             )
-
-#             # Remove points where interpolation is not possible
-#             mask = ~np.isnan(grid_z)
-#             lat_flat = lat_grid[mask]
-#             lon_flat = lon_grid[mask]
-#             reading_flat = grid_z[mask]
-
-#             fig.add_trace(
-#                 go.Scattermapbox(
-#                     lat=lat_flat,
-#                     lon=lon_flat,
-#                     mode='markers',
-#                     marker=go.scattermapbox.Marker(
-#                         size=10,
-#                         color=reading_flat,
-#                         colorscale=[
-#                             [0, "blue"],
-#                             [0.2, "cyan"],
-#                             [0.4, "green"],
-#                             [0.6, "yellow"],
-#                             [0.8, "orange"],
-#                             [1, "red"]
-#                         ],
-#                         cmin=reading_flat.min(),
-#                         cmax=reading_flat.max(),
-#                         opacity=0.75
-#                     ),
-#                     visible=False  # Initially invisible; visible when corresponding slider is activated
-#                 )
-#             )
-
-#     fig.data[0].visible = True  # Set the first trace to visible by default
-
-#     sliders = [{
-#         'active': 0,
-#         'currentvalue': {"prefix": "Time Interval: "},
-#         'steps': [{
-#             'method': "update",
-#             'args': [{"visible": [i == idx for i in range(len(fig.data))]},
-#                      {"title": f"Time Interval: {time_labels[idx]}"}],
-#             'label': time_labels[idx]
-#         } for idx in range(len(time_labels))]
-#     }]
-
-#     # Convert latitude and longitude to float
-#     latitude = float(params['latitude'])
-#     longitude = float(params['longitude'])
-
-#     fig.update_layout(
-#         sliders=sliders,
-#         mapbox_style="open-street-map",
-#         mapbox=dict(center=dict(lat=latitude, lon=longitude), zoom=10),
-#         coloraxis_colorbar=dict(
-#             title="Reading",
-#             titleside="right",
-#             tickmode="array",
-#             ticks="outside",
-#             ticksuffix=" ",
-#             showticksuffix="all",
-#             tickvals=np.linspace(reading_flat.min(), reading_flat.max(), num=10),
-#         )
-#     )
-
-#     graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
-#     return Response(graph_html, mimetype='text/html')
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5001, debug=True)
-
-
-
-
-
-# from flask import Flask, Response, request
-# import requests
-# import pandas as pd
-# import numpy as np
-# import plotly.graph_objs as go
-# from plotly.io import to_html
-# from flask_cors import CORS
-# from datetime import datetime
-# from scipy.interpolate import griddata
-
-# app = Flask(__name__)
-# CORS(app)
-
-# def fetch_and_process_data(sensor, params):
-#     """Fetch sensor data and return as DataFrame."""
-#     response = requests.get("http://localhost:9069/api/readings", params={
-#         "sensorType": sensor,
-#         "startTime": params['startTime'],
-#         "endTime": params['endTime'],
-#         "longitude": params['longitude'],
-#         "latitude": params['latitude'],
-#         "range": params['range']
-#     })
-#     if response.status_code == 200:
-#         data = response.json()
-#         df = pd.DataFrame(data)
-
-#         def apply_datetime_format(dt_str):
-#             if '.' in dt_str:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%S.%fZ', utc=True)
-#             else:
-#                 return pd.to_datetime(dt_str, format='%Y-%m-%dT%H:%M:%SZ', utc=True)
-
-#         df['dateTime'] = df['dateTime'].apply(apply_datetime_format)
-#         return df
-#     else:
-#         print(f"Error fetching data for sensor {sensor}: {response.status_code}")
-#         return pd.DataFrame()
-
-# @app.route('/generate-heatmap', methods=['POST'])
-# def generate_heatmap():
-#     params = request.json
-#     all_data = pd.DataFrame()
-
-#     for sensor in params['sensorTypes']:
-#         df = fetch_and_process_data(sensor, params)
-#         all_data = pd.concat([all_data, df], ignore_index=True)
-
-#     all_data.sort_values('dateTime', inplace=True)
-#     time_intervals = pd.cut(all_data['dateTime'], bins=24)
-#     all_data['time_interval'] = time_intervals
-#     time_labels = [f"{intv.left.strftime('%Y-%m-%d %H:%M:%S')} to {intv.right.strftime('%Y-%m-%d %H:%M:%S')}" for intv in time_intervals.cat.categories]
-
-#     # Define the grid for interpolation
-#     lat_min, lat_max = all_data['latitude'].min(), all_data['latitude'].max()
-#     lon_min, lon_max = all_data['longitude'].min(), all_data['longitude'].max()
-#     lat_grid, lon_grid = np.mgrid[lat_min:lat_max:100j, lon_min:lon_max:100j]
-
-#     # Calculate overall min and max readings for the color scale
-#     overall_min = all_data['reading'].min()
-#     overall_max = all_data['reading'].max()
-
-#     frames = []
-#     for interval in sorted(all_data['time_interval'].unique()):
-#         interval_data = all_data[all_data['time_interval'] == interval]
-#         if not interval_data.empty:
-#             # Perform nearest neighbor interpolation
-#             grid_z = griddata(
-#                 (interval_data['latitude'], interval_data['longitude']),
-#                 interval_data['reading'],
-#                 (lat_grid, lon_grid),
-#                 method='nearest'
-#             )
-
-#             frame = go.Frame(
-#                 data=[
-#                     go.Heatmap(
-#                         z=grid_z,
-#                         x=np.linspace(lon_min, lon_max, 100),
-#                         y=np.linspace(lat_min, lat_max, 100),
-#                         colorscale=[
-#                             [0, "blue"],
-#                             [0.2, "cyan"],
-#                             [0.4, "green"],
-#                             [0.6, "yellow"],
-#                             [0.8, "orange"],
-#                             [1, "red"]
-#                         ],
-#                         zmin=overall_min,
-#                         zmax=overall_max,
-#                         opacity=0.75,
-#                         showscale=False
-#                     ),
-#                     go.Scattermapbox(
-#                         lat=interval_data['latitude'],
-#                         lon=interval_data['longitude'],
-#                         mode='markers',
-#                         marker=go.scattermapbox.Marker(
-#                             size=1,
-#                             color='rgba(255, 255, 255, 0)',
-#                         ),
-#                         hoverinfo='none'
-#                     )
-#                 ],
-#                 name=f"frame{interval}"
-#             )
-#             frames.append(frame)
-
-#     # Create the initial figure with the first interval's data
-#     initial_data = frames[0]['data']
-
-#     fig = go.Figure(
-#         data=initial_data,
-#         layout=go.Layout(
-#             sliders=[{
-#                 'active': 0,
-#                 'currentvalue': {"prefix": "Time Interval: "},
-#                 'steps': [{
-#                     'method': "animate",
-#                     'args': [[f'frame{idx}'], {"mode": "immediate", "frame": {"duration": 500, "redraw": True}, "transition": {"duration": 0}}],
-#                     'label': time_labels[idx]
-#                 } for idx in range(len(time_labels))]
-#             }],
-#             mapbox=dict(
-#                 style="open-street-map",
-#                 center=dict(lat=float(params['latitude']), lon=float(params['longitude'])),
-#                 zoom=10,
-#             ),
-#             updatemenus=[{
-#                 'buttons': [
-#                     {'label': 'Play', 'method': 'animate', 'args': [None, {"frame": {"duration": 500, "redraw": True}, "fromcurrent": True, "transition": {"duration": 0}}]},
-#                     {'label': 'Pause', 'method': 'animate', 'args': [[None], {"frame": {"duration": 0, "redraw": False}, "mode": "immediate", "transition": {"duration": 0}}]}
-#                 ],
-#                 'direction': 'left',
-#                 'pad': {'r': 10, 't': 87},
-#                 'showactive': False,
-#                 'type': 'buttons',
-#                 'x': 0.1,
-#                 'xanchor': 'right',
-#                 'y': 0,
-#                 'yanchor': 'top'
-#             }],
-#             coloraxis=dict(
-#                 colorscale='Viridis',
-#                 cmin=overall_min,
-#                 cmax=overall_max,
-#                 colorbar=dict(
-#                     title="Reading",
-#                     titleside="right",
-#                     tickmode="array",
-#                     ticks="outside",
-#                     ticksuffix=" ",
-#                     showticksuffix="all",
-#                     tickvals=np.linspace(overall_min, overall_max, num=10),
-#                 )
-#             ),
-#         ),
-#         frames=frames
-#     )
-
-#     # Add initial data
-#     fig.add_traces(initial_data)
-
-#     fig.update_layout(
-#         mapbox_layers=[{
-#             'source': {
-#                 'type': 'raster',
-#                 'tiles': ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-#                 'tileSize': 256
-#             },
-#             'below': 'traces'
-#         }]
-#     )
-
-#     graph_html = to_html(fig, full_html=False, include_plotlyjs='cdn')
-#     return Response(graph_html, mimetype='text/html')
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5001, debug=True)
-
 import requests
 from flask import Flask, Response, request, jsonify
 from flask_cors import CORS
 import plotly.express as px
 import pandas as pd
 import json
+import geopandas as gpd
+from shapely.geometry import Point
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 app = Flask(__name__)
 CORS(app)
 
+# Load the GeoJSON file with suburb boundaries
+suburb_geojson_path = '/home/byron/Documents/GitHub/Capstone-Project/python/suburb-10-nsw.geojson'
+suburb_gdf = gpd.read_file(suburb_geojson_path)
+
+# Reproject to a projected CRS
+suburb_gdf = suburb_gdf.to_crs(epsg=3577)  # Example EPSG for Australia, you may need to adjust this
+
+def get_suburb_from_coordinates(lat, lon):
+    """Get the suburb name from latitude and longitude using GeoPandas."""
+    point = Point(lon, lat)
+    point_gdf = gpd.GeoDataFrame([{'geometry': point}], crs='EPSG:4326')
+    point_gdf = point_gdf.to_crs(epsg=3577)
+    point = point_gdf.iloc[0].geometry
+
+    for index, row in suburb_gdf.iterrows():
+        if row['geometry'].contains(point):
+            return row['nsw_loca_2']  # Adjusted to match the actual property name in your GeoJSON
+    return None
+
+def get_data_from_api(sensor_type, start_time, end_time, longitude, latitude, range_km):
+    """Fetch data from API based on sensor type and location."""
+    try:
+        response = requests.get("http://localhost:9069/api/readings", params={
+            "sensorType": sensor_type,
+            "startTime": start_time,
+            "endTime": end_time,
+            "longitude": longitude,
+            "latitude": latitude,
+            "range": range_km
+        })
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print(f"Error fetching data: {response.status_code}, {response.text}")
+            return []
+    except Exception as e:
+        print(f"Exception during data fetch: {str(e)}")
+        return []
+
+def process_suburb_check(lat, lon, avg_reading):
+    suburb = get_suburb_from_coordinates(lat, lon)
+    print(f"Coordinates ({lat}, {lon}) map to suburb: {suburb}")
+    if suburb:
+        return suburb, avg_reading
+    else:
+        print(f"Suburb not found for coordinates: ({lat}, {lon})")
+        return None, None
+
 @app.route('/generate-heatmap', methods=['POST'])
 def generate_heatmap():
     params = request.json
+    sensor_type = params.get('sensorType', 'default_sensor')  # Example sensor type, adjust as needed
+    start_time = params.get('startTime', '2024-01-01T00:00:00Z')
+    end_time = params.get('endTime', '2024-01-02T00:00:00Z')
+    range_km = params.get('range', 10)
+    range_meters = float(range_km) * 1000  # Convert range to meters for distance calculations
 
-    # Load your GeoJSON file (ensure the file path is correct)
+    # Load your GeoJSON file
     with open('/home/byron/Documents/GitHub/Capstone-Project/python/suburb-10-nsw.geojson') as f:
         geojson = json.load(f)
 
-    # Simulate data fetch; this should ideally be replaced with actual data fetching logic
-    # Assume we have a dictionary with suburb names and some data points (make sure the suburb names match those in the GeoJSON)
-    data = {
-        "Sydney": 300,
-        "Newcastle": 290,
-        "Wollongong": 250,
-        "Albury": 150,
-        # Add other suburbs as necessary
-    }
+    # Get data from API
+    data = get_data_from_api(sensor_type, start_time, end_time, params['longitude'], params['latitude'], range_km)
+    print("Data fetched from API:", data)
+
+    if not data:
+        return jsonify({"error": "No data fetched from API"}), 400
+
+    # Aggregate data points at the same coordinates
+    coord_data = {}
+    for item in data:
+        lat = item.get('latitude')
+        lon = item.get('longitude')
+        reading = item.get('reading')
+        if lat is not None and lon is not None and reading is not None:
+            coord = (lat, lon)
+            if coord in coord_data:
+                coord_data[coord].append(reading)
+            else:
+                coord_data[coord] = [reading]
+
+    # Collapse data at the same coordinates by averaging readings
+    collapsed_data = [(lat, lon, sum(readings) / len(readings)) for (lat, lon), readings in coord_data.items()]
+    print("Collapsed data:", collapsed_data)
+
+    # Process the data to map to suburbs using multithreading
+    suburb_data = {}
+    with ThreadPoolExecutor() as executor:
+        futures = {executor.submit(process_suburb_check, lat, lon, avg_reading): (lat, lon) for lat, lon, avg_reading in collapsed_data}
+        for future in as_completed(futures):
+            suburb, avg_reading = future.result()
+            if suburb:
+                if suburb in suburb_data:
+                    suburb_data[suburb].append(avg_reading)
+                else:
+                    suburb_data[suburb] = [avg_reading]
+
+    # Aggregate data per suburb (e.g., averaging readings)
+    aggregated_data = {suburb: sum(readings) / len(readings) for suburb, readings in suburb_data.items()}
+    print("Aggregated data per suburb:", aggregated_data)
+
+    # Predict values for suburbs without data
+    def calculate_distance(point1, point2):
+        return point1.distance(point2)
+
+    suburb_gdf['centroid'] = suburb_gdf.geometry.centroid
+    suburbs_with_data = {suburb: value for suburb, value in aggregated_data.items()}
+
+    def process_prediction(suburb):
+        suburb_centroid = suburb_gdf[suburb_gdf['nsw_loca_2'] == suburb].iloc[0].centroid
+        distances = []
+        for other_suburb, value in suburbs_with_data.items():
+            other_centroid = suburb_gdf[suburb_gdf['nsw_loca_2'] == other_suburb].iloc[0].centroid
+            distance = calculate_distance(suburb_centroid, other_centroid)
+            if distance <= range_meters:
+                distances.append((distance, value))
+        distances.sort(key=lambda x: x[0])
+        if len(distances) >= 2:
+            nearest_values = [value for _, value in distances[:2]]
+            predicted_value = sum(nearest_values) / len(nearest_values)
+            return suburb, predicted_value
+        return suburb, None
+
+    with ThreadPoolExecutor() as executor:
+        futures = {executor.submit(process_prediction, suburb): suburb for suburb in suburb_gdf['nsw_loca_2'] if suburb not in suburbs_with_data}
+        for future in as_completed(futures):
+            suburb, predicted_value = future.result()
+            if predicted_value is not None:
+                aggregated_data[suburb] = predicted_value
+
+    print("Aggregated data with predictions:", aggregated_data)
+
+    # Filter suburbs to keep only those within the range
+    center_point = Point(params['longitude'], params['latitude'])
+    center_point_gdf = gpd.GeoDataFrame([{'geometry': center_point}], crs='EPSG:4326')
+    center_point_gdf = center_point_gdf.to_crs(epsg=3577)
+    center_point = center_point_gdf.iloc[0].geometry
+
+    filtered_suburbs = {suburb: value for suburb, value in aggregated_data.items()
+                        if suburb_gdf[suburb_gdf['nsw_loca_2'] == suburb].iloc[0].centroid.distance(center_point) <= range_meters}
+    print("Filtered suburbs within range:", filtered_suburbs)
 
     # Create DataFrame
-    df = pd.DataFrame(list(data.items()), columns=['Suburb', 'Reading'])
+    df = pd.DataFrame(list(filtered_suburbs.items()), columns=['Suburb', 'Reading'])
+    print("DataFrame for plotting:", df)
+
+    if df.empty:
+        return jsonify({"error": "No data to plot after filtering"}), 400
 
     # Plot
     fig = px.choropleth(
         df,
         geojson=geojson,
         locations='Suburb',
-        featureidkey="properties.SUBURB_NAME",  # Adjust 'SUBURB_NAME' based on your GeoJSON properties
+        featureidkey="properties.nsw_loca_2",  # Adjusted to match the actual property name in your GeoJSON
         color='Reading',
         color_continuous_scale="Viridis",
         projection="mercator"
     )
     fig.update_geos(fitbounds="locations", visible=False)
 
-    # Convert to HTML
-    graph_html = px.to_html(fig, full_html=False, include_plotlyjs='cdn')
+    # Convert to HTML using the correct method
+    graph_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
     return Response(graph_html, mimetype='text/html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
+
