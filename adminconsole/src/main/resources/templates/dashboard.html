@@ -1,166 +1,3 @@
-<!-- <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/default.css">
-    <title>Responsive Layout</title>
-</head>
-<body>
-    <div class="navbar">
-        <div class="logo">Logo</div>
-        <nav class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#profile">Profile</a>
-            <a href="#dashboard">Dashboard</a>
-        </nav>
-    </div>
-    <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
-    <div class="sidebar" id="sidebar">
-        <div>
-            <input type="datetime-local" id="startTimeInput" value="2024-05-06T04:01">
-            <input type="datetime-local" id="endTimeInput" value="2024-05-06T06:40">
-            <input type="number" id="rangeInput" value="1000000">
-            <button onclick="refreshIframe()">Refresh</button>
-            <iframe id="dataFrame" style="width: 100%; height: 600px; border: none;"></iframe>
-        </div>
-    </div>
-    <div class="content">
-        <div class="search-area">
-            <input type="text" class="search-input" placeholder="Search...">
-            <button class="search-button">Search</button>
-        </div>
-        <div class="main-div">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <iframe id="dataFrame" style="width: 100%; height: 600px; border: none;"></iframe>
-            <script>
-                const iframe = document.getElementById('dataFrame');
-            
-                function refreshIframe() {
-                    const startTime = document.getElementById('startTimeInput').value;
-                    const endTime = document.getElementById('endTimeInput').value;
-                    const range = document.getElementById('rangeInput').value;
-            
-                    fetch('http://202.65.64.38:5000/generate-multi-sensor-graph', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            startTime,
-                            endTime,
-                            longitude: "150.89494",
-                            latitude: "-34.39212",
-                            range,
-                            sensorTypes: ["ba280d1f-e1ee-4cff-b695-101e3a9e211b", "b53a5c22-63c0-4201-9df3-bc16d0d263b5"]
-                        })
-                    }).then(response => response.text())
-                    .then(html => {
-                        const doc = iframe.contentWindow.document;
-                        doc.open();
-                        doc.write(html);
-                        doc.close();
-                    }).catch(error => console.error('Error loading the iframe content:', error));
-                }
-            
-                refreshIframe(); // Initial load
-            
-            </script>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.style.transform === 'translateX(0px)') {
-                sidebar.style.transform = 'translateX(-100%)'; // Hide the sidebar
-            } else {
-                sidebar.style.transform = 'translateX(0px)'; // Show the sidebar
-            }
-        }
-        // Add event listener to handle window resizing
-        window.addEventListener('resize', function() {
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
-                sidebar.style.transform = 'translateX(0px)';
-            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
-                sidebar.style.transform = 'translateX(-100%)';
-                return;
-            } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
-                sidebar.style.transform = 'translateX(-100%)';
-            }
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            const navbar = document.querySelector('.navbar');
-
-            navbar.addEventListener('click', function(event) {
-                if (window.innerWidth < 768) {
-                    navbar.classList.toggle('active');
-                    if (navbar.classList.contains('active')) {
-                        navbar.style.height = '100vh'; // Full height
-                    } else {
-                        navbar.style.height = '60px'; // Default height
-                    }
-                }
-            });
-
-            window.addEventListener('resize', function() {
-                if (window.innerWidth >= 768) {
-                    navbar.classList.remove('active');
-                    navbar.style.height = '60px'; // Ensure default height
-                }
-            });
-
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth >= 768) {
-                // Ensure sidebar is open on larger screens
-                sidebar.style.transform = 'translateX(0px)';
-            } else if (window.innerWidth < 768 && sidebar.style.transform === 'translateX(0px)') {
-                // Keep current state if the sidebar is already open
-                return;
-            } else {
-                // Ensure sidebar is closed on smaller screens when not specifically toggled
-                sidebar.style.transform = 'translateX(-100%)';
-            }
-        });
-
-
-
-    </script>
-</body>
-</html> -->
-
-
-
-
-
 
 
 
@@ -192,14 +29,33 @@
 
     <style>
         #searchList {
-          height: 200px;
+          height: 120px;
           overflow-y: auto;
           border: 1px solid #ccc;
-          width: 300px;
+          width: 260px;
           padding: 5px;
+          background-color: white;
+          box-shadow: inset 0 10px 10px -10px rgba(0, 0, 0, 0.5), /* Top shadow */
+                        inset 0 -10px 10px -10px rgba(0, 0, 0, 0.5); /* Bottom shadow */
         }
         .item {
           margin: 5px;
+        }
+
+
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        input[type="datetime-local"]:focus {
+            border-color: #66afe9;
+            outline: none;
         }
 
       </style>
@@ -222,37 +78,45 @@
     </div>
     <button class="sidebar-toggle" onclick="toggleSidebar()">⇒</button>
     <div class="sidebar" id="sidebar">
-
-
-
-        <label>
-            <input type="radio" name="graphType" value="multi-sensor" checked>
-            Multi-Sensor Graph
-        </label>
-        <label>
-            <input type="radio" name="graphType" value="correlation">
-            Correlation Plot
-        </label>
-        <label>
-            <input type="radio" name="graphType" value="heatmap">
-            Heatmap
-        </label>
-        <label>
-            <input type="radio" name="graphType" value="scatter">
-            Scatter Plot
-        </label>
+        <h2>Dashboard</h2><br>
+        <p style="color: red;">Warning for the TRADESHOW. Our systems are running on cheap hardware for the time being to keep costs down. Please be aware that our systems may be being hit harder than expected right now. Be patient with our graphing system, you are in the queue!</p><br>
+        <h4>Select Graph</h4>
+        <div>
+            <label>
+                <input type="radio" name="graphType" value="multi-sensor" checked>
+                Multi-Sensor Graph
+            </label><br>
+            <label>
+                <input type="radio" name="graphType" value="correlation">
+                Correlation Plot
+            </label><br>
+            <label>
+                <input type="radio" name="graphType" value="heatmap">
+                Heatmap
+            </label><br>
+            <label>
+                <input type="radio" name="graphType" value="scatter">
+                Scatter Plot
+            </label><br><br>
+        </div>
+        
 
 
 
         <div>
+            <h4>Start DatTime</h4>
             <input type="datetime-local" id="startTimeInput" value="2024-05-06T04:01">
+            <h4>End DatTime</h4>
             <input type="datetime-local" id="endTimeInput" value="2024-05-06T06:40">
-            <input type="number" id="rangeInput" value="50">
-            <button onclick="refreshIframe()">Refresh</button>
+            <h4>Range (km)</h4>
+            <input style="width: 100%;" type="number" id="rangeInput" value="25">
+            <!-- <button onclick="refreshIframe()">Refresh</button> -->
         </div>
 
-        <input type="text" id="searchInput" onkeyup="filterList()" placeholder="Search for names...">
+        <br><h4>Sensor Type</h4>
+        <input style="width: 100%;" type="text" id="searchInput" onkeyup="filterList()" placeholder="Search for sensor types...">
         <div id="searchList"></div>
+        <br><button class="search-button" onclick="refreshIframe()">Refresh Graph</button>
     </div>
     <div class="content">
         <div class="search-area">
@@ -260,13 +124,6 @@
             <button class="search-button" onclick="geocode()">Search</button>
             
 
-
-            <!-- <input type="text" id="address" placeholder="Enter address" oninput="showSuggestions()">
-            <button onclick="geocode()">Search</button>
-            </br>
-            <div id="suggestions"></div>
-            </br> -->
-            
             
 
         </div>
@@ -279,59 +136,7 @@
         </div>
     </div>
     <script>
-        // function showSuggestions() {
-        //     const address = document.getElementById('address').value;
-        //     if (address.length < 3) {
-        //         document.getElementById('suggestions').innerHTML = '';
-        //         return;
-        //     }
 
-        //     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&addressdetails=1&limit=3`;
-
-        //     fetch(url)
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             const suggestions = document.getElementById('suggestions');
-        //             suggestions.innerHTML = '';
-        //             if (data.length > 0) {
-        //                 data.forEach(item => {
-        //                     const suggestion = document.createElement('div');
-        //                     suggestion.classList.add('suggestion');
-        //                     suggestion.innerText = item.display_name;
-        //                     suggestion.onclick = () => {
-        //                         document.getElementById('address').value = item.display_name;
-        //                         suggestions.innerHTML = '';
-        //                     };
-        //                     suggestions.appendChild(suggestion);
-        //                 });
-        //             } else {
-        //                 suggestions.innerHTML = '<div class="suggestion">No results found</div>';
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error('Error:', error);
-        //         });
-        // }
-
-        // function geocode() {
-        //     const address = document.getElementById('address').value;
-        //     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
-
-        //     fetch(url)
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             if (data.length > 0) {
-        //                 const result = data[0];
-        //                 document.getElementById('result').innerText = `Latitude: ${result.lat}, Longitude: ${result.lon}`;
-        //             } else {
-        //                 document.getElementById('result').innerText = 'No results found';
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error('Error:', error);
-        //             document.getElementById('result').innerText = 'An error occurred';
-        //         });
-        // }
         let debounceTimeout;
         var fullLong = 150.8949804;
         var fullLat = -34.3923891;
@@ -400,31 +205,7 @@
                     document.getElementById('result').innerText = 'An error occurred';
                 });
         }
-        // // Function to fetch sensor types from the API
-        // async function fetchSensorTypes() {
-        //   try {
-        //     const response = await fetch('https://www.eco-sentry.com/api/get-sensor-types');
-        //     const data = await response.json();
-        //     // Sort data by popularity in descending order
-        //     data.sort((a, b) => b.popularity - a.popularity);
-        //     populateList(data);
-        //   } catch (error) {
-        //     console.error('Error fetching sensor types:', error);
-        //   }
-        // }
-        
-        // // Function to populate the list with items
-        // function populateList(sensorTypes) {
-        //   const listDiv = document.getElementById('searchList');
-        //   sensorTypes.forEach(sensor => {
-        //     const itemDiv = document.createElement('div');
-        //     itemDiv.className = 'item';
-        //     itemDiv.style.display = ''; // Make sure all items are visible initially
-        //     itemDiv.innerHTML = `<input type="checkbox" id="${sensor.id}"> ${sensor.sensorType}`;
-        //     itemDiv.dataset.popularity = sensor.popularity; // Store popularity as a data attribute
-        //     listDiv.appendChild(itemDiv);
-        //   });
-        // }
+
         async function fetchSensorTypes() {
             try {
                 const response = await fetch('https://www.eco-sentry.com/api/get-sensor-types');
@@ -575,6 +356,84 @@
             return new Date(datetimeValue).toISOString();
         }
 
+        // function loadIframeContent() {
+        //     const iframe = document.getElementById('dataFrame');
+        //     const startTime = formatDateTimeForAPI(document.getElementById('startTimeInput').value);
+        //     const endTime = formatDateTimeForAPI(document.getElementById('endTimeInput').value);
+        //     const range = document.getElementById('rangeInput').value;
+
+        //     const selectedGraphType = document.querySelector('input[name="graphType"]:checked').value;
+        //     let url = 'https://www.eco-sentry.com/generate-multi-sensor-graph';
+        //     let bodyJSON = JSON.stringify({
+        //             startTime,
+        //             endTime,
+        //             longitude: fullLong,
+        //             latitude: fullLat,
+        //             range,
+        //             sensorTypes: getCheckedSensorIds()
+        //         })
+        //     if (selectedGraphType === 'multi-sensor') {
+        //         url = 'https://www.eco-sentry.com/generate-multi-sensor-graph';
+        //         bodyJSON = JSON.stringify({
+        //             startTime,
+        //             endTime,
+        //             longitude: fullLong,
+        //             latitude: fullLat,
+        //             range,
+        //             sensorTypes: getCheckedSensorIds()
+        //         });
+        //     } else if (selectedGraphType === 'correlation') {
+        //         url = 'https://www.eco-sentry.com/generate-correlation-plot';
+        //         bodyJSON = JSON.stringify({
+        //             startTime,
+        //             endTime,
+        //             longitude: fullLong,
+        //             latitude: fullLat,
+        //             range,
+        //             sensorTypes: getCheckedSensorIds()
+        //         });
+        //     }
+        //     else if (selectedGraphType === 'heatmap') {
+        //         url = 'https://www.eco-sentry.com/generate-heatmap';
+        //         bodyJSON = JSON.stringify({
+        //             startTime,
+        //             endTime,
+        //             longitude: fullLong,
+        //             latitude: fullLat,
+        //             range,
+        //             sensorType: getCheckedSensorIds()
+        //         });
+
+                
+        //     }
+        //     else if (selectedGraphType === 'scatter') {
+        //         url = 'https://www.eco-sentry.com/generate-scatter-plot';
+        //         bodyJSON = JSON.stringify({
+        //             startTime,
+        //             endTime,
+        //             longitude: fullLong,
+        //             latitude: fullLat,
+        //             range,
+        //             sensorA: getCheckedSensorIds()[0],
+        //             sensorB: getCheckedSensorIds()[1]
+        //         });
+        //     }
+
+
+        //     fetch(url, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: bodyJSON
+        //     }).then(response => response.text())
+        //     .then(html => {
+        //         const doc = iframe.contentWindow.document;
+        //         doc.open();
+        //         doc.write(html);
+        //         doc.close();
+        //     }).catch(error => console.error('Error loading the iframe content:', error));
+        // }
         function loadIframeContent() {
             const iframe = document.getElementById('dataFrame');
             const startTime = formatDateTimeForAPI(document.getElementById('startTimeInput').value);
@@ -582,37 +441,21 @@
             const range = document.getElementById('rangeInput').value;
 
             const selectedGraphType = document.querySelector('input[name="graphType"]:checked').value;
-            let url = 'https://www.eco-sentry.com/generate-multi-sensor-graph';
+            let url = '';
             let bodyJSON = JSON.stringify({
-                    startTime,
-                    endTime,
-                    longitude: fullLong,
-                    latitude: fullLat,
-                    range,
-                    sensorTypes: getCheckedSensorIds()
-                })
+                startTime,
+                endTime,
+                longitude: fullLong,
+                latitude: fullLat,
+                range,
+                sensorTypes: getCheckedSensorIds()
+            });
+
             if (selectedGraphType === 'multi-sensor') {
                 url = 'https://www.eco-sentry.com/generate-multi-sensor-graph';
-                bodyJSON = JSON.stringify({
-                    startTime,
-                    endTime,
-                    longitude: fullLong,
-                    latitude: fullLat,
-                    range,
-                    sensorTypes: getCheckedSensorIds()
-                });
             } else if (selectedGraphType === 'correlation') {
                 url = 'https://www.eco-sentry.com/generate-correlation-plot';
-                bodyJSON = JSON.stringify({
-                    startTime,
-                    endTime,
-                    longitude: fullLong,
-                    latitude: fullLat,
-                    range,
-                    sensorTypes: getCheckedSensorIds()
-                });
-            }
-            else if (selectedGraphType === 'heatmap') {
+            } else if (selectedGraphType === 'heatmap') {
                 url = 'https://www.eco-sentry.com/generate-heatmap';
                 bodyJSON = JSON.stringify({
                     startTime,
@@ -622,10 +465,7 @@
                     range,
                     sensorType: getCheckedSensorIds()
                 });
-
-                
-            }
-            else if (selectedGraphType === 'scatter') {
+            } else if (selectedGraphType === 'scatter') {
                 url = 'https://www.eco-sentry.com/generate-scatter-plot';
                 bodyJSON = JSON.stringify({
                     startTime,
@@ -638,23 +478,49 @@
                 });
             }
 
-
             fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: bodyJSON
-            }).then(response => response.text())
-            .then(html => {
-                const doc = iframe.contentWindow.document;
-                doc.open();
-                doc.write(html);
-                doc.close();
+            }).then(response => {
+                if (selectedGraphType === 'heatmap') {
+                    return response.json();
+                } else {
+                    return response.text();
+                }
+            }).then(data => {
+                if (selectedGraphType === 'heatmap') {
+                    const taskId = data.task_id;
+                    checkTaskStatus(taskId, iframe);
+                } else {
+                    const doc = iframe.contentWindow.document;
+                    doc.open();
+                    doc.write(data);
+                    doc.close();
+                }
             }).catch(error => console.error('Error loading the iframe content:', error));
         }
 
-
+        function checkTaskStatus(taskId, iframe) {
+            const statusUrl = `https://www.eco-sentry.com/task-status/${taskId}`;
+            fetch(statusUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.state === 'SUCCESS') {
+                        const doc = iframe.contentWindow.document;
+                        doc.open();
+                        doc.write(data.result);
+                        doc.close();
+                    } else if (data.state === 'PENDING' || data.state === 'PROGRESS') {
+                        setTimeout(() => checkTaskStatus(taskId, iframe), 2000);
+                    } else {
+                        console.error('Task failed or encountered an error:', data);
+                    }
+                })
+                .catch(error => console.error('Error checking task status:', error));
+        }
 
 
 

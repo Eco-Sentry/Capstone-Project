@@ -75,13 +75,14 @@ body {
     background-color: #FFF3E4;
     padding:20px;
     width: 300px;
-    height: 100vh;
+    height: calc(100vh - 60px);
     position: fixed;
     top: 60px;
     left: 0;
     z-index: 500;
     transform: translateX(-300px);
     transition: transform 0.3s ease-in-out;
+    overflow: auto;
 }
 
 /* Sidebar Toggle Button */
